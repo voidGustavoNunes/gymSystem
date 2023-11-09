@@ -4,8 +4,15 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -14,17 +21,28 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 @PrimaryKeyJoinColumn(name="idProfessor")
-public class Professor extends Pessoa{
+public class Professor extends Pessoa implements Serializable{
     
-    public Professor(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, String genero, String cidade, String observacao, Date dtCadastro, String senha) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha);
-    }
     
+    @Column (nullable = false)
     String situacao;
-    int NumeroRegistro;
+    
+    @Column (nullable = false)
+    int numeroRegistro;
+    
     String horarios;
+    
     boolean usuarioMaster;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "idAula")
+    private Aulas aula;
+    
+    
+    @OneToMany(mappedBy = "chavePK.professor", fetch = FetchType.LAZY)
+    private List<AlunoProfessorExercicio> atividades;
+    
+    
     public String getSituacao() {
         return situacao;
     }
@@ -34,11 +52,11 @@ public class Professor extends Pessoa{
     }
 
     public int getNumeroRegistro() {
-        return NumeroRegistro;
+        return numeroRegistro;
     }
 
-    public void setNumeroRegistro(int NumeroRegistro) {
-        this.NumeroRegistro = NumeroRegistro;
+    public void setNumeroRegistro(int numeroRegistro) {
+        this.numeroRegistro = numeroRegistro;
     }
 
     public String getHorarios() {
@@ -56,6 +74,10 @@ public class Professor extends Pessoa{
     public void setUsuarioMaster(boolean usuarioMaster) {
         this.usuarioMaster = usuarioMaster;
     }
+
+    public Professor() {
+    }
+    
     
     
 }

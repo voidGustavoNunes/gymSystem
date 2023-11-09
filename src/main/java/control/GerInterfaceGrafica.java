@@ -45,10 +45,20 @@ public class GerInterfaceGrafica {
     private DialogIntermediarioGerarRelatorios janIntGerRel = null;
     private DialogLogin janLogin = null;
     private DialogAjuda janAjuda = null;
+    private GerenciadorDominio gerDom;
+    
+    //SINGLETON
+    private final static GerInterfaceGrafica unicaInstancia = new GerInterfaceGrafica();    
+
 
     public GerInterfaceGrafica() {
+            gerDom = new GerenciadorDominio();
     }
 
+    public static GerInterfaceGrafica getInstance() {
+            return unicaInstancia;
+    }
+    
     //ABRIR DIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
@@ -134,9 +144,6 @@ public class GerInterfaceGrafica {
         janAjuda = (DialogAjuda) abrirJanela(janPrinc, janAjuda, DialogAjuda.class);
     }
 
-    public static void main(String[] args) {
-
-    }
     
     public void fecharJanela(JDialog dlg1){
         if(dlg1 != null && dlg1.isVisible()){
@@ -169,4 +176,54 @@ public class GerInterfaceGrafica {
             redimensionaFoto(imagem, label);
         }
     }
+    
+    public void abrirJanPrincipal() {
+        if ( janPrinc == null ) {
+            janPrinc = new FrmGerenciador();
+        }
+        janPrinc.setVisible(true);
+    }
+    
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+            
+            /*
+            FlatDarkLaf dark = new FlatDarkLaf();
+            javax.swing.UIManager.setLookAndFeel( dark );
+            */
+            
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        
+        // TRADUÇÃO
+        javax.swing.UIManager.put("OptionPane.yesButtonText", "Sim"); 
+        javax.swing.UIManager.put("OptionPane.noButtonText", "Não");
+        javax.swing.UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+
+        GerInterfaceGrafica gerIG = GerInterfaceGrafica.getInstance();
+        gerIG.abrirJanPrincipal();
+        
+    }
+    
 }

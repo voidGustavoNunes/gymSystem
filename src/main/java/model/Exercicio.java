@@ -5,10 +5,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -16,19 +20,22 @@ import javax.persistence.Id;
  */
 @Entity
 public class Exercicio implements Serializable {
+    
+    @Column (name = "nomeExercicio", nullable = false)
     String nome;
+    
     String funcao;
+    
     int idadeRecomendada;
+    
+    @OneToMany(mappedBy = "chavePK.exercicio", fetch = FetchType.LAZY)
+    private List<AlunoProfessorExercicio> atividades;
     
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @Column(name = "idExercicio")
     int id;
 
-    public Exercicio(String nome, String funcao, int idadeRecomendada) {
-        this.nome = nome;
-        this.funcao = funcao;
-        this.idadeRecomendada = idadeRecomendada;
-    }
 
     public String getNome() {
         return nome;
@@ -60,6 +67,9 @@ public class Exercicio implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Exercicio() {
     }
     
     

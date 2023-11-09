@@ -6,12 +6,18 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -20,23 +26,69 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa implements Serializable{
+    
+    @Column (name="nomePessoa", length = 200, nullable = false)
     String nome;
+    
+    @Column (length = 14 ,nullable = false)
     int cpf;
+    
+    @Temporal (TemporalType.DATE)
+    @Column (nullable = false, updatable = false)
     Date dtNascimento;
+    
+    @Column (nullable = false)
     String endereco;
+    
+    @Column (nullable = false)
     int telefone;
+    
+    @Column (nullable = false)
     String bairro;
-    String genero;
+    
+    @Column (length = 1)
+    char genero;
+    
+    @Column (nullable = false)
     String cidade;
+    
     String observacao;
+    
+    @Lob
+    private byte[] foto;
+    
+    
+    
+    
+    @Column( updatable = false) //nao pode ser alterado
     Date dtCadastro;
+    
+    @Size(min = 6) // Defina o tamanho mínimo da senha
+    @Column (nullable = false)
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()-_+=])[a-zA-Z0-9!@#$%^&*()-_+=]*$", message = "A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial !@#$%^&*()-_+=")
     String senha;
     
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY) //autonumeracao por cada tabela
     int id;
 
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, String genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+
+    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte foto[]) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dtNascimento = dtNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.bairro = bairro;
+        this.genero = genero;
+        this.cidade = cidade;
+        this.observacao = observacao;
+        this.dtCadastro = dtCadastro;
+        this.senha = senha;
+        this.foto = foto;
+    }
+
+    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -50,19 +102,10 @@ public abstract class Pessoa implements Serializable{
         this.senha = senha;
         this.id = id;
     }
+    
+    
 
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, String genero, String cidade, String observacao, Date dtCadastro, String senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dtNascimento = dtNascimento;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.bairro = bairro;
-        this.genero = genero;
-        this.cidade = cidade;
-        this.observacao = observacao;
-        this.dtCadastro = dtCadastro;
-        this.senha = senha;
+    public Pessoa() {
     }
     
 
@@ -114,11 +157,11 @@ public abstract class Pessoa implements Serializable{
         this.bairro = bairro;
     }
 
-    public String getGenero() {
+    public char getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(char genero) {
         this.genero = genero;
     }
 

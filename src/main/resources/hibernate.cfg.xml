@@ -8,7 +8,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/gymSystem</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password"></property>
     <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
@@ -16,6 +16,11 @@
     <mapping class="model.Exercicio"></mapping>
     <mapping class="model.Pessoa"></mapping>
     <mapping class="model.Professor"></mapping>
+    <mapping class="model.Turma"></mapping>
+    <mapping class="model.Aulas"></mapping>
+    <mapping class="model.AlunoProfessorExercicio"></mapping>
+    <mapping class="model.AlunoEProfessorEExercicioPK"></mapping>
+
     
 
   </session-factory>
