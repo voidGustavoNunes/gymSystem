@@ -73,41 +73,6 @@ public abstract class Pessoa implements Serializable{
     int id;
 
 
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte foto[]) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dtNascimento = dtNascimento;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.bairro = bairro;
-        this.genero = genero;
-        this.cidade = cidade;
-        this.observacao = observacao;
-        this.dtCadastro = dtCadastro;
-        this.senha = senha;
-        this.foto = foto;
-    }
-
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dtNascimento = dtNascimento;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.bairro = bairro;
-        this.genero = genero;
-        this.cidade = cidade;
-        this.observacao = observacao;
-        this.dtCadastro = dtCadastro;
-        this.senha = senha;
-        this.id = id;
-    }
-    
-    
-
-    public Pessoa() {
-    }
-    
 
     public String getNome() {
         return nome;
@@ -169,6 +134,14 @@ public abstract class Pessoa implements Serializable{
         return cidade;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
@@ -204,4 +177,41 @@ public abstract class Pessoa implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+    
+    
+    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte foto[]) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dtNascimento = dtNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.bairro = bairro;
+        this.genero = genero;
+        this.cidade = cidade;
+        this.observacao = observacao;
+        this.dtCadastro = dtCadastro;
+        this.senha = senha;
+        this.foto = foto;
+    }
+
+    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dtNascimento = dtNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.bairro = bairro;
+        this.genero = genero;
+        this.cidade = cidade;
+        this.observacao = observacao;
+        this.dtCadastro = dtCadastro;
+        this.senha = senha;
+        this.id = id;
+    }
+    
+    
+
+    public Pessoa() {
+    }
+    
 }

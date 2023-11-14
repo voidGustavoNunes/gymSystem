@@ -30,14 +30,7 @@ public class AlunoEProfessorEExercicioPK implements Serializable{
     @JoinColumn(name = "idExercicio")
     private Exercicio exercicio;
 
-    public AlunoEProfessorEExercicioPK(Aluno aluno, Professor professor, Exercicio exercicio) {
-        this.aluno = aluno;
-        this.professor = professor;
-        this.exercicio = exercicio;
-    }
 
-    public AlunoEProfessorEExercicioPK() {
-    }
 
     public Aluno getAluno() {
         return aluno;
@@ -64,7 +57,14 @@ public class AlunoEProfessorEExercicioPK implements Serializable{
     }
 
     
-    
+    public AlunoEProfessorEExercicioPK(Aluno aluno, Professor professor, Exercicio exercicio) {
+        this.aluno = aluno;
+        this.professor = professor;
+        this.exercicio = exercicio;
+    }
+
+    public AlunoEProfessorEExercicioPK() {
+    }
     
     
 }

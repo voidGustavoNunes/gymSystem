@@ -69,7 +69,23 @@ public class Exercicio implements Serializable {
         this.id = id;
     }
 
+    public List<AlunoProfessorExercicio> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<AlunoProfessorExercicio> atividades) {
+        this.atividades = atividades;
+    }
+
     public Exercicio() {
+    }
+
+    public Exercicio(String nome, String funcao, int idadeRecomendada, List<AlunoProfessorExercicio> atividades, int id) {
+        this.nome = nome;
+        this.funcao = funcao;
+        this.idadeRecomendada = idadeRecomendada;
+        this.atividades = atividades;
+        this.id = id;
     }
     
     

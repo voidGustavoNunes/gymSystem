@@ -5,12 +5,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,27 +23,17 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * @author Gustavo
  */
 @Entity
-@PrimaryKeyJoinColumn(name="idAluno")
+//@PrimaryKeyJoinColumn(name="idAluno")
 public class Aluno extends Pessoa implements Serializable{
 
-    public Aluno(String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
-        this.profissao = profissao;
-        this.diaVencimento = diaVencimento;
-        this.indicacao = indicacao;
-        this.pessoaIndicacao = pessoaIndicacao;
-    }
 
-    public Aluno(String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
-        this.profissao = profissao;
-        this.diaVencimento = diaVencimento;
-        this.indicacao = indicacao;
-    }
     
-    @ManyToOne
-    @JoinColumn(name = "idTurma")
-    private Turma turma;
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(name="Turma_Aluno",
+              joinColumns={@JoinColumn(name="idAluno")},
+              inverseJoinColumns={@JoinColumn(name="idTurma")}
+               )
+    private List<Turma> turmas = new ArrayList();
     
     @OneToMany(mappedBy = "chavePK.aluno", fetch = FetchType.LAZY)
     private List<AlunoProfessorExercicio> atividades;
@@ -88,6 +81,58 @@ public class Aluno extends Pessoa implements Serializable{
     public void setPessoaIndicacao(String pessoaIndicacao) {
         this.pessoaIndicacao = pessoaIndicacao;
     }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
+    public List<AlunoProfessorExercicio> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<AlunoProfessorExercicio> atividades) {
+        this.atividades = atividades;
+    }
+
+    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
+        this.atividades = atividades;
+        this.profissao = profissao;
+        this.diaVencimento = diaVencimento;
+        this.indicacao = indicacao;
+        this.pessoaIndicacao = pessoaIndicacao;
+    }
+
+    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+        this.atividades = atividades;
+        this.profissao = profissao;
+        this.diaVencimento = diaVencimento;
+        this.indicacao = indicacao;
+        this.pessoaIndicacao = pessoaIndicacao;
+    }
+
+    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
+        this.atividades = atividades;
+        this.profissao = profissao;
+        this.diaVencimento = diaVencimento;
+        this.indicacao = indicacao;
+    }
+
+    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+        this.atividades = atividades;
+        this.profissao = profissao;
+        this.diaVencimento = diaVencimento;
+        this.indicacao = indicacao;
+    }
+    
+    
 
     public Aluno() {
     }

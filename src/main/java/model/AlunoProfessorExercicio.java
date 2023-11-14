@@ -22,6 +22,14 @@ public class AlunoProfessorExercicio implements Serializable{
     
     @EmbeddedId
     private AlunoEProfessorEExercicioPK chavePK;
+
+    public AlunoEProfessorEExercicioPK getChavePK() {
+        return chavePK;
+    }
+
+    public void setChavePK(AlunoEProfessorEExercicioPK chavePK) {
+        this.chavePK = chavePK;
+    }
     
     
    

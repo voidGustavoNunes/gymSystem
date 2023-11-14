@@ -5,12 +5,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,7 +23,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * @author Gustavo
  */
 @Entity
-@PrimaryKeyJoinColumn(name="idProfessor")
+//@PrimaryKeyJoinColumn(name="idProfessor")
 public class Professor extends Pessoa implements Serializable{
     
     
@@ -34,9 +37,12 @@ public class Professor extends Pessoa implements Serializable{
     
     boolean usuarioMaster;
     
-    @ManyToOne
-    @JoinColumn(name = "idAula")
-    private Aulas aula;
+    @ManyToMany (fetch = FetchType.LAZY)//TERMINAR
+    @JoinTable(name="Professor_Aulas",
+              joinColumns={@JoinColumn(name="idProfessor")},
+              inverseJoinColumns={@JoinColumn(name="idAula")}
+               )
+    private List<Aulas> aulas = new ArrayList();
     
     
     @OneToMany(mappedBy = "chavePK.professor", fetch = FetchType.LAZY)
@@ -75,7 +81,41 @@ public class Professor extends Pessoa implements Serializable{
         this.usuarioMaster = usuarioMaster;
     }
 
+    public List<Aulas> getAulas() {
+        return aulas;
+    }
+
+    public void setAulas(List<Aulas> aulas) {
+        this.aulas = aulas;
+    }
+
+    public List<AlunoProfessorExercicio> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<AlunoProfessorExercicio> atividades) {
+        this.atividades = atividades;
+    }
+
     public Professor() {
+    }
+
+    public Professor(String situacao, int numeroRegistro, String horarios, boolean usuarioMaster, List<AlunoProfessorExercicio> atividades, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
+        this.situacao = situacao;
+        this.numeroRegistro = numeroRegistro;
+        this.horarios = horarios;
+        this.usuarioMaster = usuarioMaster;
+        this.atividades = atividades;
+    }
+
+    public Professor(String situacao, int numeroRegistro, String horarios, boolean usuarioMaster, List<AlunoProfessorExercicio> atividades, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+        this.situacao = situacao;
+        this.numeroRegistro = numeroRegistro;
+        this.horarios = horarios;
+        this.usuarioMaster = usuarioMaster;
+        this.atividades = atividades;
     }
     
     
