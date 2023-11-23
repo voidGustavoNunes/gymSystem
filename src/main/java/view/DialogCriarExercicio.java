@@ -81,6 +81,12 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
 
         jLabel2.setText("Nome do Exercício:");
 
+        jTextFieldNomeExercício.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeExercícioActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Repetições por Série:");
 
         jLabel4.setText("Tipo: ");
@@ -293,6 +299,11 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
       gerInterGrafica.fecharJanela(this);
       gerInterGrafica.janelaFrmGerenciador();
+      
+      
+      
+      
+      
     }//GEN-LAST:event_jButtonCriarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -306,6 +317,10 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
     private void jComboBoxIdadeRecomendadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIdadeRecomendadaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxIdadeRecomendadaActionPerformed
+
+    private void jTextFieldNomeExercícioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeExercícioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeExercícioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -100,15 +100,6 @@ public class Professor extends Pessoa implements Serializable{
     public Professor() {
     }
 
-    public Professor(String situacao, int numeroRegistro, String horarios, boolean usuarioMaster, List<AlunoProfessorExercicio> atividades, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
-        this.situacao = situacao;
-        this.numeroRegistro = numeroRegistro;
-        this.horarios = horarios;
-        this.usuarioMaster = usuarioMaster;
-        this.atividades = atividades;
-    }
-
     public Professor(String situacao, int numeroRegistro, String horarios, boolean usuarioMaster, List<AlunoProfessorExercicio> atividades, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
         this.situacao = situacao;

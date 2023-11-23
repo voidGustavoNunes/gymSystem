@@ -50,6 +50,8 @@ public class Aluno extends Pessoa implements Serializable{
     
     String pessoaIndicacao;
 
+
+
     public String getProfissao() {
         return profissao;
     }
@@ -98,16 +100,10 @@ public class Aluno extends Pessoa implements Serializable{
         this.atividades = atividades;
     }
 
-    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
-        this.atividades = atividades;
-        this.profissao = profissao;
-        this.diaVencimento = diaVencimento;
-        this.indicacao = indicacao;
-        this.pessoaIndicacao = pessoaIndicacao;
-    }
-
-    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+    
+    
+    //SEM FOTO, COM ID E SEM PESSOA INDICACAO    
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;
@@ -116,23 +112,28 @@ public class Aluno extends Pessoa implements Serializable{
         this.pessoaIndicacao = pessoaIndicacao;
     }
 
-    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, byte[] foto) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, foto);
+    //CONSTRUTOR COM FOTO E COM ID E COM PESSOAINDICACAO
+    public Aluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;
         this.diaVencimento = diaVencimento;
         this.indicacao = indicacao;
+        this.pessoaIndicacao = pessoaIndicacao;
     }
 
-    public Aluno(List<AlunoProfessorExercicio> atividades, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+    // COM FOTO, COM ID, MAS SEM A PESSOAINDICACAO
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;
         this.diaVencimento = diaVencimento;
-        this.indicacao = indicacao;
+        this.indicacao = indicacao; //ESSE AQ E BOOLEANO SO INDICA SE TEM INDICACAO, MAS NAO A PESSOA
     }
+
     
     
+
 
     public Aluno() {
     }

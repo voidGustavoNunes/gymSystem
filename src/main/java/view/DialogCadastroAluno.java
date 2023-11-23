@@ -5,6 +5,9 @@
 package view;
 
 import control.GerInterfaceGrafica;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -19,9 +22,8 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
 
+    GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,14 +61,14 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaObservacao = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        jTextFieldCodigo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextFieldSenha = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jComboBoxSituacao = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
+        jFormattedFieldCodigo = new javax.swing.JFormattedTextField();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldNumero = new javax.swing.JTextField();
@@ -289,17 +291,16 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Sistema"));
 
-        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodigoActionPerformed(evt);
-            }
-        });
-
         jLabel12.setText("Código:");
 
         jLabel13.setText("Senha:");
 
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Desligado", "Inativo" }));
+        jComboBoxSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSituacaoActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Situação:");
 
@@ -310,6 +311,17 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        try {
+            jFormattedFieldCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedFieldCodigoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -325,33 +337,34 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                         .addComponent(jLabel13)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(jTextFieldSenha))
+                    .addComponent(jFormattedFieldCodigo)
+                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jComboBoxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jFormattedFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
@@ -412,7 +425,7 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addContainerGap(48, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,13 +536,24 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCPFActionPerformed
 
-    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Suponha que o formato seja dia/mês/ano
+
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         gerInterGrafica.fecharJanela(this);
         gerInterGrafica.janelaFrmGerenciador();
+
+        String codigo = jFormattedFieldCodigo.getText();
+        char[] senha = jPasswordFieldSenha.getPassword();
+        String dataCadastroText = jFormattedTextFieldDataCadastro.getText();
+        try {
+            Date dataCadastro = formato.parse(dataCadastroText);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("\n======= PROBLEMA NA CONVERSÃO DA DATA =========\n");
+        }
+        
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -546,6 +570,15 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         gerInterGrafica.abrirFoto(this, jLabelFoto);
 
     }//GEN-LAST:event_jLabelFotoMouseClicked
+
+    private void jFormattedFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedFieldCodigoActionPerformed
+
+
+    }//GEN-LAST:event_jFormattedFieldCodigoActionPerformed
+
+    private void jComboBoxSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxSituacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -598,6 +631,7 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxIndicacao;
     private javax.swing.JComboBox<String> jComboBoxPessoaIndicacao;
     private javax.swing.JComboBox<String> jComboBoxSituacao;
+    private javax.swing.JFormattedTextField jFormattedFieldCodigo;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
@@ -627,15 +661,14 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaObservacao;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
-    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldProfissao;
-    private javax.swing.JTextField jTextFieldSenha;
     // End of variables declaration//GEN-END:variables
 }
