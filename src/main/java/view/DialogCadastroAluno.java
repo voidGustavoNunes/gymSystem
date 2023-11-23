@@ -5,9 +5,15 @@
 package view;
 
 import control.GerInterfaceGrafica;
+import control.GerenciadorDominio;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import model.Aluno;
 
 /**
  *
@@ -24,6 +30,7 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     }
 
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
+    GerenciadorDominio gerDom = new GerenciadorDominio();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +78,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jTextFieldNumero = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldEndereco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -79,7 +85,8 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jTextFieldCidade = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldTelefone = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldNumero = new javax.swing.JFormattedTextField();
         jButtonConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -179,7 +186,7 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
         jLabel27.setText("Pessoa que indicou:");
 
-        jComboBoxPessoaIndicacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa 1", " " }));
+        jComboBoxPessoaIndicacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jComboBoxDiaVencimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "5", "10", "20", "30" }));
 
@@ -222,11 +229,11 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxPessoaIndicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addGap(18, 18, 18)
@@ -237,9 +244,9 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                                 .addComponent(jComboBoxIndicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxPessoaIndicacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -389,7 +396,13 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jLabel7.setText("Cidade:");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextFieldNumero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#######")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -404,7 +417,7 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,15 +430,15 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(48, Short.MAX_VALUE))))
+                                .addComponent(jFormattedTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(90, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,13 +446,13 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
-                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,21 +553,58 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        gerInterGrafica.fecharJanela(this);
-        gerInterGrafica.janelaFrmGerenciador();
-
+        Date dataNascimento = null;
+        Date dataCadastro = null;
+        
         String codigo = jFormattedFieldCodigo.getText();
-        char[] senha = jPasswordFieldSenha.getPassword();
+        int codigoInt = Integer.parseInt(codigo);
+        String senha = jPasswordFieldSenha.getText();
         String dataCadastroText = jFormattedTextFieldDataCadastro.getText();
         try {
-            Date dataCadastro = formato.parse(dataCadastroText);
+            dataCadastro = formato.parse(dataCadastroText);
 
         } catch (ParseException e) {
             e.printStackTrace();
-            System.out.println("\n======= PROBLEMA NA CONVERSÃO DA DATA =========\n");
+            System.out.println("\n======= PROBLEMA NA CONVERSÃO DA DATA DE CADASTRO =========\n");
+        }
+        String situacao = jComboBoxSituacao.getSelectedItem().toString();
+        String telefone = jFormattedTextFieldTelefone.getText();
+        
+        
+        String endereco = jTextFieldEndereco.getText();
+        String numero = jFormattedTextFieldNumero.getText();
+        String bairro = jTextFieldBairro.getText();
+        String cidade = jTextFieldCidade.getText();
+        String nome = jTextFieldNome.getText();
+        String generoString = (String) jComboBoxGenero.getSelectedItem();
+        char genero = generoString != null && generoString.length() == 1 ? generoString.charAt(0) : '\0';
+        String dataNascimentoText= jFormattedTextFieldNascimento.getText();
+        try {
+            dataNascimento = formato.parse(dataNascimentoText);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("\n======= PROBLEMA NA CONVERSÃO DA DATA DE NASCIMENTO=========\n");
+        }
+        String cpf = jFormattedTextFieldCPF.getText();
+        String profissao = jTextFieldProfissao.getText();
+        Object selectedItem = jComboBoxDiaVencimento.getSelectedItem();
+        int diaVencimento = selectedItem != null ? Integer.parseInt(selectedItem.toString()) : 0;  //atribui 0 caso for nulo
+        String indicacaoString = (String) jComboBoxIndicacao.getSelectedItem();
+        boolean indicacao = indicacaoString != null && indicacaoString.equalsIgnoreCase("sim");
+        String pessoaIndicacao = jComboBoxPessoaIndicacao.getSelectedItem().toString();
+        String observacao = jTextAreaObservacao.getText();
+        Icon foto = jLabelFoto.getIcon();
+        endereco = endereco + " - " + numero; // QUE GAMBIARRA 
+        
+        try {
+            gerDom.inserirAluno(codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DialogCadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
+        
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jFormattedTextFieldNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNascimentoActionPerformed
@@ -632,10 +682,11 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxPessoaIndicacao;
     private javax.swing.JComboBox<String> jComboBoxSituacao;
     private javax.swing.JFormattedTextField jFormattedFieldCodigo;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldNascimento;
+    private javax.swing.JFormattedTextField jFormattedTextFieldNumero;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -668,7 +719,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldCidade;
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldProfissao;
     // End of variables declaration//GEN-END:variables
 }
