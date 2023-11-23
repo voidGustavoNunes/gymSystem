@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.swing.Icon;
 
 /**
  *
@@ -103,7 +104,7 @@ public class Aluno extends Pessoa implements Serializable{
     
     
     //SEM FOTO, COM ID E SEM PESSOA INDICACAO    
-    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha) {
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;
@@ -113,7 +114,7 @@ public class Aluno extends Pessoa implements Serializable{
     }
 
     //CONSTRUTOR COM FOTO E COM ID E COM PESSOAINDICACAO
-    public Aluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
+    public Aluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;
@@ -123,7 +124,7 @@ public class Aluno extends Pessoa implements Serializable{
     }
 
     // COM FOTO, COM ID, MAS SEM A PESSOAINDICACAO
-    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
         this.atividades = atividades;
         this.profissao = profissao;

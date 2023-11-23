@@ -95,6 +95,7 @@ public class Turma implements Serializable{
         this.aulas = aulas;
         this.horarios = horarios;
         this.nome = nome;
+        
     }
     
     

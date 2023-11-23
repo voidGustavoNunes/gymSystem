@@ -16,6 +16,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.swing.Icon;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -31,7 +32,7 @@ public abstract class Pessoa implements Serializable{
     String nome;
     
     @Column (length = 14 ,nullable = false)
-    int cpf;
+    String cpf;
     
     @Temporal (TemporalType.DATE)
     @Column (nullable = false, updatable = false)
@@ -41,7 +42,7 @@ public abstract class Pessoa implements Serializable{
     String endereco;
     
     @Column (nullable = false)
-    int telefone;
+    String telefone;
     
     @Column (nullable = false)
     String bairro;
@@ -82,13 +83,15 @@ public abstract class Pessoa implements Serializable{
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+
 
     public Date getDtNascimento() {
         return dtNascimento;
@@ -106,13 +109,15 @@ public abstract class Pessoa implements Serializable{
         this.endereco = endereco;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+
 
     public String getBairro() {
         return bairro;
@@ -141,6 +146,8 @@ public abstract class Pessoa implements Serializable{
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
+
+
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
@@ -181,7 +188,7 @@ public abstract class Pessoa implements Serializable{
     
 
 
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -196,7 +203,7 @@ public abstract class Pessoa implements Serializable{
         this.id = id;
     }
 
-    public Pessoa(String nome, int cpf, Date dtNascimento, String endereco, int telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id) {
+    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
