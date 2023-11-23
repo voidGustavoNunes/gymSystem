@@ -59,7 +59,7 @@ public abstract class Pessoa implements Serializable{
     private byte[] foto;
     
     
-    
+    String situacao;
     
     @Column( updatable = false) //nao pode ser alterado
     Date dtCadastro;
@@ -89,6 +89,14 @@ public abstract class Pessoa implements Serializable{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
 
@@ -188,7 +196,7 @@ public abstract class Pessoa implements Serializable{
     
 
 
-    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
+    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id, String situacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -201,9 +209,10 @@ public abstract class Pessoa implements Serializable{
         this.dtCadastro = dtCadastro;
         this.senha = senha;
         this.id = id;
+        this.situacao = situacao;
     }
 
-    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id) {
+    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id, String situacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -217,6 +226,7 @@ public abstract class Pessoa implements Serializable{
         this.dtCadastro = dtCadastro;
         this.senha = senha;
         this.id = id;
+        this.situacao = situacao;
     }
     
     

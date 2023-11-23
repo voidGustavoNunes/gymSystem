@@ -24,31 +24,31 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 //@PrimaryKeyJoinColumn(name="idProfessor")
-public class Professor extends Pessoa implements Serializable{
-    
-    
-    @Column (nullable = false)
+public class Professor extends Pessoa implements Serializable {
+
+    @Column(nullable = false)
     String situacao;
-    
-    @Column (nullable = false)
-    int numeroRegistro;
-    
+
+    @Column(nullable = false)
+    String numeroRegistro;
+
+    @Column(columnDefinition = "TEXT")
     String horarios;
-    
+
     boolean usuarioMaster;
-    
-    @ManyToMany (fetch = FetchType.LAZY)//TERMINAR
-    @JoinTable(name="Professor_Aulas",
-              joinColumns={@JoinColumn(name="idProfessor")},
-              inverseJoinColumns={@JoinColumn(name="idAula")}
-               )
+
+    @ManyToMany(fetch = FetchType.LAZY)//TERMINAR
+    @JoinTable(name = "Professor_Aulas",
+            joinColumns = {
+                @JoinColumn(name = "idProfessor")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idAula")}
+    )
     private List<Aulas> aulas = new ArrayList();
-    
-    
+
     @OneToMany(mappedBy = "chavePK.professor", fetch = FetchType.LAZY)
     private List<AlunoProfessorExercicio> atividades;
-    
-    
+
     public String getSituacao() {
         return situacao;
     }
@@ -57,11 +57,11 @@ public class Professor extends Pessoa implements Serializable{
         this.situacao = situacao;
     }
 
-    public int getNumeroRegistro() {
+    public String getNumeroRegistro() {
         return numeroRegistro;
     }
 
-    public void setNumeroRegistro(int numeroRegistro) {
+    public void setNumeroRegistro(String numeroRegistro) {
         this.numeroRegistro = numeroRegistro;
     }
 
@@ -100,15 +100,16 @@ public class Professor extends Pessoa implements Serializable{
     public Professor() {
     }
 
-    public Professor(String situacao, int numeroRegistro, String horarios, boolean usuarioMaster, List<AlunoProfessorExercicio> atividades, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, int id) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+    public Professor(String situacao, String numeroRegistro, String horarios, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id, situacao);
         this.situacao = situacao;
         this.numeroRegistro = numeroRegistro;
         this.horarios = horarios;
         this.usuarioMaster = usuarioMaster;
         this.atividades = atividades;
     }
+
+
     
-    
-    
+
 }

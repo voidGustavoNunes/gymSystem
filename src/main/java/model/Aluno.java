@@ -104,8 +104,8 @@ public class Aluno extends Pessoa implements Serializable{
     
     
     //SEM FOTO, COM ID E SEM PESSOA INDICACAO    
-    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id);
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Date dtCadastro, String senha, String situacao) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, dtCadastro, senha, id, situacao);
         this.atividades = atividades;
         this.profissao = profissao;
         this.diaVencimento = diaVencimento;
@@ -114,8 +114,8 @@ public class Aluno extends Pessoa implements Serializable{
     }
 
     //CONSTRUTOR COM FOTO E COM ID E COM PESSOAINDICACAO
-    public Aluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
+    public Aluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, String situacao) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id, situacao);
         this.atividades = atividades;
         this.profissao = profissao;
         this.diaVencimento = diaVencimento;
@@ -124,8 +124,8 @@ public class Aluno extends Pessoa implements Serializable{
     }
 
     // COM FOTO, COM ID, MAS SEM A PESSOAINDICACAO
-    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha) {
-        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id);
+    public Aluno(int id, String profissao, int diaVencimento, boolean indicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, String situacao) {
+        super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id, situacao);
         this.atividades = atividades;
         this.profissao = profissao;
         this.diaVencimento = diaVencimento;

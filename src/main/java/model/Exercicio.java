@@ -5,6 +5,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -24,9 +26,22 @@ public class Exercicio implements Serializable {
     @Column (name = "nomeExercicio", nullable = false)
     String nome;
     
+    @Column(columnDefinition = "TEXT")
     String funcao;
     
-    int idadeRecomendada;
+    @Column
+    int series;
+    
+    @Column
+    int repeticoesPorSerie;
+    
+    @Column
+    String idadeRecomendada;
+    
+    
+    @Column
+    String tipo;
+    
     
     @OneToMany(mappedBy = "chavePK.exercicio", fetch = FetchType.LAZY)
     private List<AlunoProfessorExercicio> atividades;
@@ -49,24 +64,46 @@ public class Exercicio implements Serializable {
         return funcao;
     }
 
-    public void setFuncao(String funcao) {
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    public int getRepeticoesPorSerie() {
+        return repeticoesPorSerie;
+    }
+
+    public void setRepeticoesPorSerie(int repeticoesPorSerie) {
+        this.repeticoesPorSerie = repeticoesPorSerie;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+
+    public void setFuncao(String  funcao) {
         this.funcao = funcao;
     }
 
-    public int getIdadeRecomendada() {
+    public String getIdadeRecomendada() {
         return idadeRecomendada;
     }
 
-    public void setIdadeRecomendada(int idadeRecomendada) {
+    public void setIdadeRecomendada(String idadeRecomendada) {
         this.idadeRecomendada = idadeRecomendada;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<AlunoProfessorExercicio> getAtividades() {
@@ -80,12 +117,14 @@ public class Exercicio implements Serializable {
     public Exercicio() {
     }
 
-    public Exercicio(String nome, String funcao, int idadeRecomendada, List<AlunoProfessorExercicio> atividades, int id) {
+    public Exercicio(String nome, String funcao, int series, int repeticoesPorSerie, String idadeRecomendada, String tipo) {
         this.nome = nome;
         this.funcao = funcao;
         this.idadeRecomendada = idadeRecomendada;
         this.atividades = atividades;
-        this.id = id;
+        this.series = series;
+        this.repeticoesPorSerie = repeticoesPorSerie;
+        this.tipo = tipo;
     }
     
     
