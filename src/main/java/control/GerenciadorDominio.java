@@ -32,8 +32,8 @@ public class GerenciadorDominio {
         ConexaoHibernate.getSessionFactory();
     }
     
-    public int inserirAula(String tipo, List<Professor> professores){
-        Aulas aulas = new Aulas(tipo, professores);
+    public int inserirAula(String tipo, int id){
+        Aulas aulas = new Aulas(tipo, id);
         
         genDao.inserir(aulas);
         

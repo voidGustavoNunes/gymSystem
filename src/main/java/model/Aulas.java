@@ -56,10 +56,6 @@ public class Aulas implements Serializable{
         this.tipo = tipo;
     }
 
-    public Aulas(String tipo) {
-        this.tipo = tipo;
-    }
-
     public List<Professor> getProfessores() {
         return professores;
     }

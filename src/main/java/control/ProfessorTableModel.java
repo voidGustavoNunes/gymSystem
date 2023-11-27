@@ -15,6 +15,10 @@ import model.Professor;
  */
 public class ProfessorTableModel extends AbstractTableModel{
 
+    public ProfessorTableModel() {
+    }
+
+    
     List<Professor> lista = new ArrayList();
 
     @Override

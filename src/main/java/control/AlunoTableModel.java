@@ -28,7 +28,7 @@ public class AlunoTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 5;
     }
 
     @Override

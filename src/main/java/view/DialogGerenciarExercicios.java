@@ -143,6 +143,11 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquise o aluno para gerenciar"));
 
         jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Pesquisar por:");
 
@@ -278,6 +283,14 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
+        String pesquisa = (String) jComboBoxPesquisarItens.getSelectedItem();
+
+
+
+
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
