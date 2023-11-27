@@ -7,11 +7,13 @@ package control;
 import dao.AlunoDao;
 import dao.ConexaoHibernate;
 import dao.GenericDao;
+import dao.ProfessorDao;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Icon;
 import model.Aluno;
 import model.AlunoProfessorExercicio;
+import model.Aulas;
 import model.Exercicio;
 import model.Professor;
 import org.hibernate.HibernateException;
@@ -23,13 +25,20 @@ import org.hibernate.HibernateException;
 public class GerenciadorDominio {
 
     private AlunoDao alunoDao;
-
+    private ProfessorDao professorDao;
+    
     GenericDao genDao = new GenericDao();
     public GerenciadorDominio() {
         ConexaoHibernate.getSessionFactory();
     }
     
-    
+    public int inserirAula(String tipo, List<Professor> professores){
+        Aulas aulas = new Aulas(tipo, professores);
+        
+        genDao.inserir(aulas);
+        
+        return aulas.getIdAula();
+    }
     //COM FOTO, ID E PESSOA INDICACAO
     public int inserirAluno(int id,String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, String situacao)  throws HibernateException{
         Aluno aluno = new Aluno(id, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dtNascimento, endereco, telefone, bairro,  genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro,  senha, situacao);
@@ -79,4 +88,47 @@ public class GerenciadorDominio {
         }
         return lista;        
     }
+    
+    public List<Professor> pesquisarProfessor(String pesq, int tipo) throws HibernateException{
+        List<Professor> lista = null;
+        switch (tipo) {
+            case 1: lista = professorDao.pesquisarCPF(pesq); break;
+            case 2: lista = professorDao.pesquisarNome(pesq); break;
+            case 3: lista = professorDao.pesquisarNumeroRegistro(pesq); break;
+            case 4: lista = professorDao.pesquisarPorAulas(pesq); break;
+            case 5: lista = professorDao.pesquisarPorAtividades(pesq); break;
+
+        }
+        return lista;  
+    
+    }
+    
+    
+    
+    public void pesquisarAulas(){
+    
+    }
+    
+    public void pesquisarTurma(){
+    
+    
+    
+    }
+    
+    public void cadastrarAula(){
+        
+    
+    }
+    
+    public void pesquisarExercicio(){
+    
+    
+    }
+    
+    public void cadastrarTurma(){
+    
+    
+    
+    }
+    
 }

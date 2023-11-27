@@ -38,6 +38,10 @@ public class Aulas implements Serializable{
     @OneToMany(mappedBy="aulas", fetch = FetchType.LAZY)
     List<Turma> turmas = new ArrayList();
     
+    public Aulas(String tipo, List<Professor> professores) {
+        this.tipo = tipo;
+        this.professores = professores;
+    }
 
         
     @Id

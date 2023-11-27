@@ -58,6 +58,12 @@ public class GerInterfaceGrafica {
     public static GerInterfaceGrafica getInstance() {
             return unicaInstancia;
     }
+
+    public GerenciadorDominio getGerDom() {
+        return gerDom;
+    }
+    
+    
     
     //ABRIR DIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
