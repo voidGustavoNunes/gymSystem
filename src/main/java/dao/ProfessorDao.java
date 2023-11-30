@@ -24,10 +24,23 @@ public class ProfessorDao extends GenericDao {
         return listar(Professor.class);
     }
 
+    
+    private List<Professor> pesquisar() {
+        //List<Cliente> lista = new ArrayList();
+
+        //return lista;
+        // TESTE
+        return listar(Professor.class);
+    }
+
     public List<Professor> pesquisarNome(String pesq) {
         return pesquisar(pesq, 1);
     }
-
+    
+    public List<Professor> pesquisarNome() {
+        return pesquisar();
+    }
+    
     public List<Professor> pesquisarCPF(String pesq) {
         return pesquisar(pesq, 2);
     }

@@ -7,18 +7,18 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Aulas;
 import model.Professor;
 
 /**
  *
  * @author Gustavo
  */
-public class ProfessorTableModel extends AbstractTableModel{
+public class ProfessorAlunoTableModel extends AbstractTableModel {
 
-    public ProfessorTableModel() {
+    public ProfessorAlunoTableModel() {
     }
 
-    
     List<Professor> lista = new ArrayList();
 
     @Override
@@ -28,24 +28,30 @@ public class ProfessorTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 8;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Professor pro = lista.get(rowIndex);
+        Aulas aulas = new Aulas();
+
         return switch (columnIndex) {
             case 0 ->
-                pro.getNome();
+                aulas.getIdAula();
             case 1 ->
-                pro.getCpf();
+                pro.getId();
             case 2 ->
-                pro.getNumeroRegistro();
+                pro.getNome();
             case 3 ->
-                pro.getSituacao();
+                pro.getCpf();
             case 4 ->
-                pro.getTelefone();
+                pro.getNumeroRegistro();
             case 5 ->
+                pro.getSituacao();
+            case 6 ->
+                pro.getTelefone();
+            case 7 ->
                 pro.getFoto();
             default ->
                 "";
@@ -54,7 +60,7 @@ public class ProfessorTableModel extends AbstractTableModel{
 
     @Override
     public String getColumnName(int columnIndex) {
-        String colunas[] = {"Nome", "Cpf", "Numero de Registro", "Situacao", "Telefone", "Foto"};
+        String colunas[] = {"Id Aula", "Id Professor", "Nome", "Cpf", "Numero de Registro", "Situacao", "Telefone", "Foto"};
         return colunas[columnIndex];
     }
 

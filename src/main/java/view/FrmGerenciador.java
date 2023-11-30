@@ -46,8 +46,12 @@ public class FrmGerenciador extends javax.swing.JFrame {
         itemProfessorCadastros = new javax.swing.JMenuItem();
         itemAlunoCadastros = new javax.swing.JMenuItem();
         itemAtividadeCadastros = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        atribuirAulasJMenuItem8 = new javax.swing.JMenuItem();
+        AtribuirTurmasJMenuItem9 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -242,6 +246,14 @@ public class FrmGerenciador extends javax.swing.JFrame {
         });
         menuCadastros.add(itemAtividadeCadastros);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem2.setText("Cadastrar Aulas");
+        menuCadastros.add(jMenuItem2);
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem6.setText("Cadastrar Turmas");
+        menuCadastros.add(jMenuItem6);
+
         jMenuBar1.add(menuCadastros);
 
         jMenu5.setMnemonic('g');
@@ -257,6 +269,26 @@ public class FrmGerenciador extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem1);
+
+        atribuirAulasJMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        atribuirAulasJMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
+        atribuirAulasJMenuItem8.setText("Atribuir Aulas");
+        atribuirAulasJMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atribuirAulasJMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(atribuirAulasJMenuItem8);
+
+        AtribuirTurmasJMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        AtribuirTurmasJMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
+        AtribuirTurmasJMenuItem9.setText("Atribuir Turmas");
+        AtribuirTurmasJMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtribuirTurmasJMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(AtribuirTurmasJMenuItem9);
 
         jMenuBar1.add(jMenu5);
 
@@ -414,6 +446,19 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AjudaActionPerformed
 
+    private void atribuirAulasJMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atribuirAulasJMenuItem8ActionPerformed
+        gerInterGrafica.janelaDialogAtribuirAulas();
+
+
+    }//GEN-LAST:event_atribuirAulasJMenuItem8ActionPerformed
+
+    private void AtribuirTurmasJMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtribuirTurmasJMenuItem9ActionPerformed
+        gerInterGrafica.janelaDialogAtribuirTurma();
+
+
+
+    }//GEN-LAST:event_AtribuirTurmasJMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -452,7 +497,9 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Ajuda;
+    private javax.swing.JMenuItem AtribuirTurmasJMenuItem9;
     private javax.swing.JButton JButtonCadastrarAtividade;
+    private javax.swing.JMenuItem atribuirAulasJMenuItem8;
     private javax.swing.JMenuItem itemAlunoCadastros;
     private javax.swing.JMenuItem itemAlunoConsulta;
     private javax.swing.JMenuItem itemAtividadeCadastros;
@@ -469,9 +516,11 @@ public class FrmGerenciador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

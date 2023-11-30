@@ -166,13 +166,8 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTableAluno">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Nome" type="java.lang.Object"/>
-                    <Column editable="true" title="Nascimento" type="java.lang.Object"/>
-                    <Column editable="true" title="G&#xea;nero" type="java.lang.Object"/>
-                    <Column editable="true" title="Cidade" type="java.lang.Object"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="alunoTable" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -219,13 +214,8 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTableCronogramaExercicios">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Atividade" type="java.lang.Object"/>
-                    <Column editable="true" title="Professor" type="java.lang.Object"/>
-                    <Column editable="true" title="Dia da semana" type="java.lang.Object"/>
-                    <Column editable="true" title="Repeti&#xe7;&#xf5;es" type="java.lang.Object"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="exTable" type="code"/>
                 </Property>
               </Properties>
             </Component>

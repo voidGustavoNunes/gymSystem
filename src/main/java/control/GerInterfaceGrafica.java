@@ -26,6 +26,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import view.DialogAjuda;
+import view.DialogAtribuirAulas;
+import view.DialogAtribuirTurmas;
+import view.DialogAulas;
 
 /**
  *
@@ -45,26 +48,26 @@ public class GerInterfaceGrafica {
     private DialogIntermediarioGerarRelatorios janIntGerRel = null;
     private DialogLogin janLogin = null;
     private DialogAjuda janAjuda = null;
+    private DialogAtribuirAulas janAtrAulas = null;
+    private DialogAulas janAulas = null;
+    private DialogAtribuirTurmas janAtrTurmas = null;
     private GerenciadorDominio gerDom;
-    
-    //SINGLETON
-    private final static GerInterfaceGrafica unicaInstancia = new GerInterfaceGrafica();    
 
+    //SINGLETON
+    private final static GerInterfaceGrafica unicaInstancia = new GerInterfaceGrafica();
 
     public GerInterfaceGrafica() {
-            gerDom = new GerenciadorDominio();
+        gerDom = new GerenciadorDominio();
     }
 
     public static GerInterfaceGrafica getInstance() {
-            return unicaInstancia;
+        return unicaInstancia;
     }
 
     public GerenciadorDominio getGerDom() {
         return gerDom;
     }
-    
-    
-    
+
     //ABRIR DIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
@@ -79,6 +82,23 @@ public class GerInterfaceGrafica {
         dlg.setVisible(true);
         return dlg;
 
+    }
+
+    private JDialog abrirJanela(JDialog dlg, Class classe) {
+        if (dlg == null) {
+            try {
+                dlg = (JDialog) classe.getConstructor().newInstance();
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                    | IllegalArgumentException | InvocationTargetException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao abrir a janela " + classe.getName());
+            }
+        }
+
+        if (dlg != null) {
+            dlg.setVisible(true);
+        }
+
+        return dlg;
     }
 
     // ABRIR DIALOG
@@ -145,52 +165,59 @@ public class GerInterfaceGrafica {
         janPrinc = (FrmGerenciador) abrirJanela(janLogin, janPrinc, FrmGerenciador.class);
 
     }
-    
-    public void janelaDialogAjuda(){
+
+    public void janelaDialogAjuda() {
         janAjuda = (DialogAjuda) abrirJanela(janPrinc, janAjuda, DialogAjuda.class);
     }
 
-    
-    public void fecharJanela(JDialog dlg1){
-        if(dlg1 != null && dlg1.isVisible()){
+    public void janelaDialogAtribuirAulas() {
+        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc, janAtrAulas, DialogAtribuirAulas.class);
+
+    }
+
+    public void janelaDialogAtribuirTurma() {
+        janAtrTurmas = (DialogAtribuirTurmas) abrirJanela(janPrinc, janAtrTurmas, DialogAtribuirTurmas.class);
+
+    }
+
+    public void fecharJanela(JDialog dlg1) {
+        if (dlg1 != null && dlg1.isVisible()) {
             dlg1.dispose();
-        }  
+        }
     }
-    
-    
-    public void fecharJanela(JFrame frm1){
-        if(frm1 != null && frm1.isVisible()){
+
+    public void fecharJanela(JFrame frm1) {
+        if (frm1 != null && frm1.isVisible()) {
             frm1.dispose();
-        }  
+        }
     }
-    
-    private void redimensionaFoto(ImageIcon imagem, JLabel label){
+
+    private void redimensionaFoto(ImageIcon imagem, JLabel label) {
         imagem.setImage(imagem.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
         label.setText("");
         label.setIcon(imagem);
     }
 
-    public void abrirFoto(JDialog janela, JLabel label){
+    public void abrirFoto(JDialog janela, JLabel label) {
         JFileChooser janArq = new JFileChooser();
-        
+
         janArq.setAcceptAllFileFilterUsed(false);
         janArq.setFileFilter(new FileNameExtensionFilter("Arquivos de imagem", "png", "bmp", "jpg", "gif"));
-        
-        if(janArq.showOpenDialog(janela) == JFileChooser.APPROVE_OPTION){
+
+        if (janArq.showOpenDialog(janela) == JFileChooser.APPROVE_OPTION) {
             File arq = janArq.getSelectedFile();
             ImageIcon imagem = new ImageIcon(arq.getAbsolutePath());
             redimensionaFoto(imagem, label);
         }
     }
-    
+
     public void abrirJanPrincipal() {
-        if ( janPrinc == null ) {
+        if (janPrinc == null) {
             janPrinc = new FrmGerenciador();
         }
         janPrinc.setVisible(true);
     }
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -204,12 +231,11 @@ public class GerInterfaceGrafica {
                     break;
                 }
             }
-            
+
             /*
             FlatDarkLaf dark = new FlatDarkLaf();
             javax.swing.UIManager.setLookAndFeel( dark );
-            */
-            
+             */
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -220,16 +246,15 @@ public class GerInterfaceGrafica {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
+
         // TRADUÇÃO
-        javax.swing.UIManager.put("OptionPane.yesButtonText", "Sim"); 
+        javax.swing.UIManager.put("OptionPane.yesButtonText", "Sim");
         javax.swing.UIManager.put("OptionPane.noButtonText", "Não");
         javax.swing.UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 
         GerInterfaceGrafica gerIG = GerInterfaceGrafica.getInstance();
         gerIG.abrirJanPrincipal();
-        
+
     }
-    
+
 }

@@ -25,6 +25,18 @@ public class AlunoDao extends GenericDao{
         // TESTE
         return listar(Aluno.class);
     }
+    private List<Aluno> pesquisar()  {        
+        //List<Cliente> lista = new ArrayList();
+        
+        //return lista;
+        
+        // TESTE
+        return listar(Aluno.class);
+    }
+    
+    public List<Aluno> pesquisarNome()  {        
+        return pesquisar();
+    }
     
     public List<Aluno> pesquisarNome(String pesq)  {        
         return pesquisar(pesq,1);

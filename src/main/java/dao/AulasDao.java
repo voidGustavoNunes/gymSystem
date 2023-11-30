@@ -4,20 +4,21 @@
  */
 package dao;
 
+
 import java.util.List;
-import model.Aluno;
 import model.Aulas;
+
 
 /**
  *
  * @author Gustavo
  */
-public class AulasDao extends GenericDao{
+public class AulasDao extends GenericDao {
 
     public AulasDao() {
     }
     
-    private List<Aulas> pesquisar(String pesq, int tipo)  {        
+    private List<Aulas> pesquisar()  {        
         //List<Cliente> lista = new ArrayList();
         
         //return lista;
@@ -26,4 +27,9 @@ public class AulasDao extends GenericDao{
         return listar(Aulas.class);
     }
     
+    public List<Aulas> pesquisarNome()  {        
+        return pesquisar();
+    }
+    
+
 }

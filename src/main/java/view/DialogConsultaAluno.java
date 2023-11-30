@@ -226,7 +226,7 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            List<Aluno> lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno(jTextFieldPesquisa.getText(), jComboBoxPesquisaItens.getSelectedIndex());
+            List<Aluno> lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno();
             alunoTableModel.setList(lista);
         } catch (HibernateException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);

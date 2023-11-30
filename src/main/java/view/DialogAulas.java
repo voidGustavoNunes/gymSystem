@@ -6,7 +6,7 @@ package view;
 
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
-import control.ProfessorTableModel;
+import control.ProfessorAlunoTableModel;
 import dao.ProfessorDao;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class DialogAulas extends javax.swing.JDialog {
      */
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
     GerenciadorDominio gerDom = new GerenciadorDominio();
-    ProfessorTableModel proTableModel = new ProfessorTableModel();
+    ProfessorAlunoTableModel proTableModel = new ProfessorAlunoTableModel();
 
     public DialogAulas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,6 +55,7 @@ public class DialogAulas extends javax.swing.JDialog {
         jTextFieldId = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -128,6 +129,15 @@ public class DialogAulas extends javax.swing.JDialog {
         jLabel3.setText("Id:");
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Atribuir Aulas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -195,6 +205,10 @@ public class DialogAulas extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        gerInter.janelaDialogAtribuirAulas();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +260,7 @@ public class DialogAulas extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;

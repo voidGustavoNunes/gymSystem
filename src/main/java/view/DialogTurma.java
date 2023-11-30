@@ -4,8 +4,22 @@
  */
 package view;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import control.GerInterfaceGrafica;
+import control.GerenciadorDominio;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import model.Aluno;
 import model.Aulas;
+import model.Turma;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -21,6 +35,10 @@ public class DialogTurma extends javax.swing.JDialog {
         initComponents();
     }
 
+    GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
+    GerenciadorDominio gerDom = new GerenciadorDominio();
+    Aulas aulas = new Aulas();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,16 +53,17 @@ public class DialogTurma extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNomeTurma = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxAula = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableHorarios = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -76,10 +95,14 @@ public class DialogTurma extends javax.swing.JDialog {
 
         jLabel4.setText("Aula:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxAula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxAulaMouseClicked(evt);
+            }
+        });
+        jComboBoxAula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jComboBoxAulaActionPerformed(evt);
             }
         });
 
@@ -94,8 +117,8 @@ public class DialogTurma extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(jComboBoxAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNomeTurma))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -104,28 +127,28 @@ public class DialogTurma extends javax.swing.JDialog {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Horários"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
+                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableHorarios);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -158,6 +181,15 @@ public class DialogTurma extends javax.swing.JDialog {
         });
 
         jMenu1.setText("File");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Atribuir Turma");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -174,15 +206,14 @@ public class DialogTurma extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -212,17 +243,76 @@ public class DialogTurma extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        String nome = jTextFieldNomeTurma.getText();
+
+        TableModel horarioTable = jTableHorarios.getModel();
+        // Criar uma estrutura para armazenar os horários
+        Map<String, Map<String, String>> horarios = new LinkedHashMap<>();
+
+        for (int i = 0; i < horarioTable.getRowCount(); i++) {
+            String horario = Objects.toString(horarioTable.getValueAt(i, 0), ""); // Supondo que a primeira coluna é o horário
+            Map<String, String> horariosPorDia = new LinkedHashMap<>();
+
+            for (int j = 1; j < horarioTable.getColumnCount(); j++) {
+                String dia = horarioTable.getColumnName(j);
+                Object valorCelulaObj = horarioTable.getValueAt(i, j);
+
+                String valorCelula = Objects.toString(valorCelulaObj, ""); // Tratando o valor nulo
+                horariosPorDia.put(dia, valorCelula);
+            }
+            horarios.put(horario, horariosPorDia);
+        }
+        // Converter para JSON usando Jackson ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        String horariosJSON = null;
+        try {
+            horariosJSON = objectMapper.writeValueAsString(horarios);
+
+            //gerDominio.inserirProfessor(, );
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(DialogCadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            int id = gerDom.inserirTurma(aulas, horariosJSON, nome);
+            JOptionPane.showMessageDialog(this, "Turma " + id + " inserida com sucesso.");
+
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jComboBoxAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAulaActionPerformed
         Aulas aula = new Aulas();
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+
+    }//GEN-LAST:event_jComboBoxAulaActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        gerInter.janelaDialogAtribuirTurma();
+
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    public List<Aulas> retornaListaAula() {
+        Aulas aula = new Aulas();
+
+        List<Aulas> lista = gerInter.getInstance().getGerDom().pesquisarAulas();
+
+        return lista;
+    }
+
+
+    private void jComboBoxAulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAulaMouseClicked
+        List<Aulas> lista = retornaListaAula();
+        for (Aulas aula : lista) {
+            jComboBoxAula.addItem(aula.getTipo()); // Adiciona apenas o nome da aula
+        }
+        aulas = (Aulas) jComboBoxAula.getSelectedItem();
+
+
+    }//GEN-LAST:event_jComboBoxAulaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -269,19 +359,20 @@ public class DialogTurma extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxAula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableHorarios;
+    private javax.swing.JTextField jTextFieldNomeTurma;
     // End of variables declaration//GEN-END:variables
 }

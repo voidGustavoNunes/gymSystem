@@ -4,7 +4,14 @@
  */
 package view;
 
+import control.AlunoTableModel;
+import control.ExercicioTableModel;
 import control.GerInterfaceGrafica;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Aluno;
+import model.Exercicio;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -21,7 +28,8 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
     }
     
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
-
+    AlunoTableModel alunoTable = new AlunoTableModel();
+    ExercicioTableModel exTable = new ExercicioTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,17 +84,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Aluno"));
 
-        jTableAluno.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nome", "Nascimento", "Gênero", "Cidade"
-            }
-        ));
+        jTableAluno.setModel(alunoTable);
         jScrollPane1.setViewportView(jTableAluno);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -108,17 +106,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cronograma de Exercícios"));
 
-        jTableCronogramaExercicios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Atividade", "Professor", "Dia da semana", "Repetições"
-            }
-        ));
+        jTableCronogramaExercicios.setModel(exTable);
         jScrollPane2.setViewportView(jTableCronogramaExercicios);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -286,9 +274,24 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         String pesquisa = (String) jComboBoxPesquisarItens.getSelectedItem();
-
-
-
+        
+        
+        try {
+            List<Aluno> lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno();
+            alunoTable.setList(lista);
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //CONSERTAR, DEVE APARECER SO OS EXERCICIOS DO ALUNO SELECIONADO
+        
+        try {
+            List<Exercicio> lista2 = gerInterGrafica.getInstance().getGerDom().pesquisarExercicio();
+            exTable.setList(lista2);
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+        }
+        
 
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 

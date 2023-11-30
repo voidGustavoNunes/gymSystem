@@ -97,6 +97,12 @@ public class Turma implements Serializable{
         this.nome = nome;
         
     }
+
+    public Turma(Aulas aulas, String horarios, String nome) {
+        this.aulas = aulas;
+        this.horarios = horarios;
+        this.nome = nome;
+    }
     
     
 

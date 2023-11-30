@@ -5,7 +5,7 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import control.ProfessorTableModel;
+import control.ProfessorAlunoTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Aluno;
@@ -26,7 +26,7 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
         initComponents();
     }
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
-    ProfessorTableModel professor = new ProfessorTableModel();
+    ProfessorAlunoTableModel professor = new ProfessorAlunoTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,7 +200,7 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         try {
-            List<Professor> lista = gerInterGrafica.getInstance().getGerDom().pesquisarProfessor(jTextFieldPesquisa.getText(), jComboBoxPesquisaItens.getSelectedIndex());
+            List<Professor> lista = gerInterGrafica.getInstance().getGerDom().pesquisarProfessor();
             professor.setList(lista);
         } catch (HibernateException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
