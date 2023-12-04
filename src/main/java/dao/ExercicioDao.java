@@ -6,7 +6,6 @@ package dao;
 
 import java.util.List;
 import model.Exercicio;
-import model.Turma;
 
 /**
  *
@@ -16,7 +15,6 @@ public class ExercicioDao extends GenericDao{
 
     public ExercicioDao() {
     }
-       
         
     private List<Exercicio> pesquisar()  {        
         //List<Cliente> lista = new ArrayList();

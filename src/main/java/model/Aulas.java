@@ -84,6 +84,7 @@ public class Aulas implements Serializable{
     public Aulas(String tipo, int idAula) {
         this.tipo = tipo;
         this.idAula = idAula;
+        this.turmas = turmas;
     }
 
     

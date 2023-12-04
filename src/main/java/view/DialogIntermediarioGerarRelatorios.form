@@ -195,18 +195,18 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -224,20 +224,20 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButtonAlunos" min="-2" pref="138" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                          <Component id="jButtonProfessores" min="-2" pref="133" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButtonAtividades" min="-2" pref="179" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jButtonAtividades" alignment="1" pref="138" max="32767" attributes="0"/>
+                      <Component id="jButtonAlunos" alignment="1" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <Component id="jButtonAtividades1" min="-2" pref="133" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jButtonProfessores" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                      <Component id="jButtonAtividades2" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -249,9 +249,22 @@
                       <Component id="jButtonAlunos" alignment="3" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="jButtonProfessores" alignment="3" min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="52" max="32767" attributes="0"/>
-                  <Component id="jButtonAtividades" min="-2" pref="122" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="jButtonAtividades" min="-2" pref="122" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="jButtonAtividades2" min="-2" pref="121" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButtonAtividades1" min="-2" pref="122" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -259,7 +272,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonAtividades">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Atividades"/>
+            <Property name="text" type="java.lang.String" value="Exerc&#xed;cios"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonProfessores">
@@ -274,6 +287,16 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAlunosActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonAtividades1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Aulas"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonAtividades2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Turmas"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

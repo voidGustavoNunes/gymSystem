@@ -14,9 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -106,7 +104,6 @@ public class Professor extends Pessoa implements Serializable {
         this.numeroRegistro = numeroRegistro;
         this.horarios = horarios;
         this.usuarioMaster = usuarioMaster;
-        this.atividades = atividades;
     }
 
 

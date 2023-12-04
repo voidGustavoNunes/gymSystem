@@ -6,6 +6,7 @@ package control;
 
 import dao.AlunoDao;
 import dao.AulasDao;
+import dao.ConexaoAjuda;
 import dao.ConexaoHibernate;
 import dao.ExercicioDao;
 import dao.GenericDao;
@@ -34,6 +35,8 @@ public class GerenciadorDominio {
     private AulasDao aulasDao;
     private TurmaDao turmaDao;
     private ExercicioDao exDao;
+    private ConexaoAjuda conAj;
+    
 
     GenericDao genDao = new GenericDao();
 
@@ -44,8 +47,16 @@ public class GerenciadorDominio {
         alunoDao = new AlunoDao();
         turmaDao = new TurmaDao();
         exDao = new ExercicioDao();
+        conAj = new ConexaoAjuda();
+        genDao = new GenericDao();
     }
 
+    public GenericDao getGenDao() {
+        return genDao;
+    }
+
+    
+    
     public int inserirAula(String tipo, int id) {
         Aulas aulas = new Aulas(tipo, id);
 
@@ -53,6 +64,12 @@ public class GerenciadorDominio {
 
         return aulas.getIdAula();
     }
+
+    public ConexaoAjuda getConAj() {
+        return conAj;
+    }
+    
+    
 
     //COM FOTO, ID E PESSOA INDICACAO
     public int inserirAluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, String situacao) throws HibernateException {
@@ -126,6 +143,19 @@ public class GerenciadorDominio {
                 break;
             case 5:
                 lista = professorDao.pesquisarPorAtividades(pesq);
+                break;
+
+        }
+        return lista;
+
+    }
+    
+    
+    public List<Aulas> pesquisarAulas(String pesq, int tipo) throws HibernateException {
+        List<Aulas> lista = null;
+        switch (tipo) {
+            case 1:
+                lista = aulasDao.pesquisarNome(pesq);
                 break;
 
         }

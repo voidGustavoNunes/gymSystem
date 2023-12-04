@@ -31,20 +31,36 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
+        jButtonProfessores3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButtonProfessores = new javax.swing.JButton();
         jButtonAlunos = new javax.swing.JButton();
+        jButtonProfessores1 = new javax.swing.JButton();
+        jButtonProfessores2 = new javax.swing.JButton();
+        jButtonProfessores4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jButton2.setText("jButton1");
+
+        jButtonProfessores3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores3.setText("Professores");
+        jButtonProfessores3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfessores3ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
-        jButtonProfessores.setText("Professores");
+        jButtonProfessores.setText("Aulas");
         jButtonProfessores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProfessoresActionPerformed(evt);
@@ -59,25 +75,66 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             }
         });
 
+        jButtonProfessores1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores1.setText("Turmas");
+        jButtonProfessores1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfessores1ActionPerformed(evt);
+            }
+        });
+
+        jButtonProfessores2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores2.setText("Atividades");
+        jButtonProfessores2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfessores2ActionPerformed(evt);
+            }
+        });
+
+        jButtonProfessores4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores4.setText("Professores");
+        jButtonProfessores4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfessores4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
+                .addComponent(jButtonProfessores2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonProfessores1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonProfessores4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonProfessores4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jButtonProfessores1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonProfessores2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -89,37 +146,48 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(230, 230, 230)
+                .addGap(297, 297, 297)
                 .addComponent(jLabel3)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("Cadastro");
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Consulta");
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Configurações");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,6 +202,22 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         gerInterGrafica.janelaConsultaAluno();
 
     }//GEN-LAST:event_jButtonAlunosActionPerformed
+
+    private void jButtonProfessores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProfessores1ActionPerformed
+
+    private void jButtonProfessores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProfessores2ActionPerformed
+
+    private void jButtonProfessores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProfessores3ActionPerformed
+
+    private void jButtonProfessores4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProfessores4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +246,12 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -182,7 +272,15 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAlunos;
     private javax.swing.JButton jButtonProfessores;
+    private javax.swing.JButton jButtonProfessores1;
+    private javax.swing.JButton jButtonProfessores2;
+    private javax.swing.JButton jButtonProfessores3;
+    private javax.swing.JButton jButtonProfessores4;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

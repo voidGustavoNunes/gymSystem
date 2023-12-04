@@ -29,6 +29,7 @@ import view.DialogAjuda;
 import view.DialogAtribuirAulas;
 import view.DialogAtribuirTurmas;
 import view.DialogAulas;
+import view.DialogTurma;
 
 /**
  *
@@ -41,6 +42,7 @@ public class GerInterfaceGrafica {
     private DialogCadastroProfessor janCadProf = null;
     private DialogCadastroAluno janCadAluno = null;
     private DialogConsultaAluno janConsAluno = null;
+    private DialogTurma janCadastroTurma = null;
     private DialogConsultaIntermediario janConsInter = null;
     private DialogConsultaProfessor janConsProf = null;
     private DialogCriarExercicio janCriaEx = null;
@@ -180,6 +182,16 @@ public class GerInterfaceGrafica {
 
     }
 
+    public void janelaDialogCadastrarAula() {
+        janAulas = (DialogAulas) abrirJanela(janPrinc, janAulas, DialogAulas.class);
+
+    }
+
+    public void janelaDialogCadastrarTurma() {
+        janCadastroTurma = (DialogTurma) abrirJanela(janPrinc, janCadastroTurma, DialogTurma.class);
+
+    }
+
     public void fecharJanela(JDialog dlg1) {
         if (dlg1 != null && dlg1.isVisible()) {
             dlg1.dispose();
@@ -237,13 +249,13 @@ public class GerInterfaceGrafica {
             javax.swing.UIManager.setLookAndFeel( dark );
              */
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGerenciador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGerenciador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGerenciador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGerenciador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

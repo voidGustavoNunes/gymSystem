@@ -9,6 +9,7 @@ import control.GerenciadorDominio;
 import control.ProfessorAlunoTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Aluno;
 import model.Aulas;
@@ -50,7 +51,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         jComboBoxProfessor = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAulasProfessor = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButtonAtribuir = new javax.swing.JButton();
         jButtonAdicionar = new javax.swing.JButton();
@@ -111,10 +112,10 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores:"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores da Aula:"));
 
-        jTable1.setModel(professorTable);
-        jScrollPane1.setViewportView(jTable1);
+        jTableAulasProfessor.setModel(professorTable);
+        jScrollPane1.setViewportView(jTableAulasProfessor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -237,7 +238,8 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
             aulaSelecionada = lista.get(selectedIndex);
             professorSelecionado = listaProfessor.get(selectedIndexProfessor);
 
-          
+        } else {
+            JOptionPane.showMessageDialog(this, "Inclua todos os campos!");
 
         }
 
@@ -291,13 +293,38 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxProfessorActionPerformed
 
     private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed
-        List<Aulas> lista = retornaListaAula();
-        Aulas aulaSelecionada = null;
-        int selectedIndex = jComboBoxAulas.getSelectedIndex();
+        int tamanhoTabela = jTableAulasProfessor.getRowCount();
+        //Aulas aula = new Aulas();
+        int idAula;
+        int idProfessor;
+        Aulas aula = null;
+        Professor professor = null;
+        List<Professor> professoresLista = new ArrayList();
+        List<Aulas> aulasLista = new ArrayList();
 
-        if (selectedIndex != -1) {
+        if (tamanhoTabela > 0) {
+            for (int linha = 0; linha < tamanhoTabela; linha++) {
+                int coluna = 0;
+                idAula = (int) jTableAulasProfessor.getValueAt(linha, coluna++);
+                idProfessor = (int) jTableAulasProfessor.getValueAt(linha, coluna++);
 
-            aulaSelecionada = lista.get(selectedIndex);
+                //pesquisa no banco e retorna o objeto de acordo com o id
+                aula = (Aulas) gerInter.getGerDom().getGenDao().buscarPorId(idAula, Aulas.class);
+                professor = (Professor) gerInter.getGerDom().getGenDao().buscarPorId(idProfessor, Professor.class);
+
+                //adiciona na lista
+                aulasLista.add(aula);
+                professoresLista.add(professor);
+
+            }
+            aula.setProfessores(professoresLista);
+            professor.setAulas(aulasLista);
+
+            gerInter.getGerDom().getGenDao().alterar(aula);
+            gerInter.getGerDom().getGenDao().alterar(professor);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Insira aulas e professores para atribuir!");
 
         }
 
@@ -362,7 +389,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAulasProfessor;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
