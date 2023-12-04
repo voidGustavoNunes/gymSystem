@@ -82,6 +82,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="122" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonExcluir" min="-2" pref="117" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jButtonAtribuir" min="-2" pref="122" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -115,6 +117,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton1" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonAtribuir" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="jButtonExcluir" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
@@ -231,10 +234,22 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTableAulasProfessor">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="professorTable" type="code"/>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="true" title="Id da Aula" type="java.lang.String"/>
+                    <Column editable="true" title="Id do professor" type="java.lang.String"/>
+                    <Column editable="true" title="Nome da aula" type="java.lang.Object"/>
+                    <Column editable="true" title="Nome do Professor" type="java.lang.Object"/>
+                    <Column editable="true" title="Cpf" type="java.lang.Object"/>
+                    <Column editable="true" title="Situa&#xe7;&#xe3;o" type="java.lang.Object"/>
+                    <Column editable="true" title="Numero de Registro" type="java.lang.Object"/>
+                    <Column editable="true" title="Telefone" type="java.lang.Object"/>
+                  </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTableAulasProfessorInputMethodTextChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -262,6 +277,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAdicionarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonExcluir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Excluir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

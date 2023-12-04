@@ -70,6 +70,7 @@ public class GerInterfaceGrafica {
         return gerDom;
     }
 
+    
     //ABRIR DIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {

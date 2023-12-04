@@ -109,6 +109,8 @@ public class GenericDao {
     public Object buscarPorId(int id, Class classe) throws HibernateException {
         Object obj = null;
         Session sessao = null;
+        
+
         try {
             sessao = ConexaoHibernate.getSessionFactory().openSession();
             sessao.beginTransaction();

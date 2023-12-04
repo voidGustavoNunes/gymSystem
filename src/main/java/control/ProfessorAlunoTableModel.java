@@ -20,6 +20,7 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
     }
 
     List<Professor> lista = new ArrayList();
+    Aulas aulas;
 
     @Override
     public int getRowCount() {
@@ -30,11 +31,17 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return 8;
     }
+    
+    public Aulas setAulas(Aulas aulasPassadas){
+        this.aulas = aulasPassadas;
+        
+        return aulas;
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Professor pro = lista.get(rowIndex);
-        Aulas aulas = new Aulas();
+        
 
         return switch (columnIndex) {
             case 0 ->

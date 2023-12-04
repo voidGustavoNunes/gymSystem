@@ -10,6 +10,7 @@ import control.ProfessorAlunoTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Aluno;
 import model.Aulas;
@@ -31,6 +32,8 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
     ProfessorAlunoTableModel professorTable = new ProfessorAlunoTableModel();
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +58,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButtonAtribuir = new javax.swing.JButton();
         jButtonAdicionar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -114,7 +118,29 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores da Aula:"));
 
-        jTableAulasProfessor.setModel(professorTable);
+        jTableAulasProfessor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id da Aula", "Id do professor", "Nome da aula", "Nome do Professor", "Cpf", "Situação", "Numero de Registro", "Telefone"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTableAulasProfessor.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTableAulasProfessorInputMethodTextChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableAulasProfessor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -155,6 +181,13 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
             }
         });
 
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -187,6 +220,8 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -214,7 +249,8 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -229,21 +265,34 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
         List<Aulas> lista = retornaListaAula();
         List<Professor> listaProfessor = retornaListaProfessor();
+
         int selectedIndex = jComboBoxAulas.getSelectedIndex();
         int selectedIndexProfessor = jComboBoxProfessor.getSelectedIndex();
+
         Aulas aulaSelecionada = null;
         Professor professorSelecionado = null;
-        if (selectedIndex != -1 && selectedIndexProfessor != -1) {
 
-            aulaSelecionada = lista.get(selectedIndex);
-            professorSelecionado = listaProfessor.get(selectedIndexProfessor);
+        aulaSelecionada = lista.get(selectedIndex);
+        professorSelecionado = listaProfessor.get(selectedIndexProfessor);
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Inclua todos os campos!");
+        DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
+        int numRows = model.getRowCount();
+        int numColumns = model.getColumnCount();
 
-        }
+        // Criando um array de objetos para representar os dados da nova linha
+        Object[] rowData = {
+            aulaSelecionada.getIdAula(),
+            professorSelecionado.getId(),
+            aulaSelecionada.getTipo(),
+            professorSelecionado.getNome(),
+            professorSelecionado.getCpf(),
+            professorSelecionado.getSituacao(),
+            professorSelecionado.getNumeroRegistro(),
+            professorSelecionado.getTelefone()
+        };
 
-        professorTable.adicionar(professorSelecionado);
+        // Adicionando uma nova linha com os dados ao modelo da tabela
+        model.addRow(rowData);
 
 
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
@@ -271,7 +320,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
 
     private void jComboBoxAulasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAulasMouseClicked
-
+        jComboBoxAulas.removeAllItems();
         List<Aulas> lista = retornaListaAula();
         for (Aulas aula : lista) {
             jComboBoxAulas.addItem(aula.getTipo()); // Adiciona apenas o nome da aula
@@ -280,9 +329,11 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxAulasMouseClicked
 
     private void jComboBoxProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxProfessorMouseClicked
+        jComboBoxProfessor.removeAllItems();
+
         List<Professor> lista = retornaListaProfessor();
         for (Professor professor : lista) {
-            jComboBoxAulas.addItem(professor.getNome()); // Adiciona apenas o nome do professor
+            jComboBoxProfessor.addItem(professor.getNome()); // Adiciona apenas o nome do professor
         }
 
 
@@ -293,20 +344,26 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxProfessorActionPerformed
 
     private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed
-        int tamanhoTabela = jTableAulasProfessor.getRowCount();
+        int qntdeLinhas = jTableAulasProfessor.getRowCount();
         //Aulas aula = new Aulas();
         int idAula;
+        Object idAulaOb;
         int idProfessor;
+        Object idProfessorOb;
         Aulas aula = null;
         Professor professor = null;
         List<Professor> professoresLista = new ArrayList();
         List<Aulas> aulasLista = new ArrayList();
 
-        if (tamanhoTabela > 0) {
-            for (int linha = 0; linha < tamanhoTabela; linha++) {
+        if (qntdeLinhas > 0) {
+            for (int linha = 0; linha < qntdeLinhas; linha++) {
                 int coluna = 0;
-                idAula = (int) jTableAulasProfessor.getValueAt(linha, coluna++);
-                idProfessor = (int) jTableAulasProfessor.getValueAt(linha, coluna++);
+
+                idAulaOb = jTableAulasProfessor.getValueAt(linha, coluna++);
+
+                idProfessorOb = jTableAulasProfessor.getValueAt(linha, coluna++);
+                idAula = (Integer) idAulaOb;
+                idProfessor = (Integer) idProfessorOb;
 
                 //pesquisa no banco e retorna o objeto de acordo com o id
                 aula = (Aulas) gerInter.getGerDom().getGenDao().buscarPorId(idAula, Aulas.class);
@@ -330,6 +387,18 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_jButtonAtribuirActionPerformed
+
+    private void jTableAulasProfessorInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTableAulasProfessorInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableAulasProfessorInputMethodTextChanged
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
+
+        int linha = jTableAulasProfessor.getSelectedRow();
+        
+        model.removeRow(linha);
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,6 +446,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonAtribuir;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JComboBox<String> jComboBoxAulas;
     private javax.swing.JComboBox<String> jComboBoxProfessor;
     private javax.swing.JLabel jLabel1;

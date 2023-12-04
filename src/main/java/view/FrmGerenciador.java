@@ -457,7 +457,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
     }//GEN-LAST:event_AjudaActionPerformed
 
     private void atribuirAulasJMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atribuirAulasJMenuItem8ActionPerformed
-        gerInterGrafica.janelaDialogAtribuirAulas();
+       gerInterGrafica.janelaDialogAtribuirAulas();
 
 
     }//GEN-LAST:event_atribuirAulasJMenuItem8ActionPerformed
