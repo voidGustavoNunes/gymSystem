@@ -69,6 +69,9 @@ public class GerenciadorDominio {
         return conAj;
     }
     
+    public List listar(Class classe) throws HibernateException {        
+        return genDao.listar(classe);
+    }
     
 
     //COM FOTO, ID E PESSOA INDICACAO

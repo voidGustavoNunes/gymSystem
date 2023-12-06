@@ -18,13 +18,17 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.hibernate.HibernateException;
 import view.DialogAjuda;
 import view.DialogAtribuirAulas;
 import view.DialogAtribuirTurmas;
@@ -174,7 +178,8 @@ public class GerInterfaceGrafica {
     }
 
     public void janelaDialogAtribuirAulas() {
-        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc, janAtrAulas, DialogAtribuirAulas.class);
+        
+        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc,janAtrAulas, DialogAtribuirAulas.class);
 
     }
 
@@ -230,6 +235,17 @@ public class GerInterfaceGrafica {
         }
         janPrinc.setVisible(true);
     }
+    
+    public void carregarCombo( Class classe, JComboBox combo) {
+        List lista;
+        try {
+            lista = gerDom.listar(classe);
+            combo.setModel( new DefaultComboBoxModel( lista.toArray() )  );
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(janPrinc, ex.getMessage() );
+        }        
+    }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

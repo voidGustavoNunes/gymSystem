@@ -63,6 +63,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         jButtonCriarExercício = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -233,6 +234,10 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
+
+        jMenu5.setText("Atribuição");
+        jMenu5.setToolTipText("");
+        jMenuBar1.add(jMenu5);
 
         jMenu3.setText("Consulta");
         jMenuBar1.add(jMenu3);
@@ -410,6 +415,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

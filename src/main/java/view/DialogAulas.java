@@ -6,7 +6,7 @@ package view;
 
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
-import control.ProfessorAlunoTableModel;
+import control.ProfessorAulaTableModel;
 import dao.ProfessorDao;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class DialogAulas extends javax.swing.JDialog {
      */
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
     GerenciadorDominio gerDom = new GerenciadorDominio();
-    ProfessorAlunoTableModel proTableModel = new ProfessorAlunoTableModel();
+    ProfessorAulaTableModel proTableModel = new ProfessorAulaTableModel();
 
     public DialogAulas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,6 +55,7 @@ public class DialogAulas extends javax.swing.JDialog {
         jTextFieldId = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -130,6 +131,9 @@ public class DialogAulas extends javax.swing.JDialog {
 
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Atribuição");
+        jMenuBar1.add(jMenu4);
 
         jMenu3.setText("Consulta");
         jMenuBar1.add(jMenu3);
@@ -250,6 +254,7 @@ public class DialogAulas extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

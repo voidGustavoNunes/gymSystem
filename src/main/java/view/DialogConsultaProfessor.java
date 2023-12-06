@@ -5,7 +5,7 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import control.ProfessorAlunoTableModel;
+import control.ProfessorAulaTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Aluno;
@@ -26,7 +26,7 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
         initComponents();
     }
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
-    ProfessorAlunoTableModel professor = new ProfessorAlunoTableModel();
+    ProfessorAulaTableModel professor = new ProfessorAulaTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,7 +166,7 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Consulta");
+        jMenu3.setText("Atribuição");
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Configurações");
@@ -184,9 +184,9 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
                         .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

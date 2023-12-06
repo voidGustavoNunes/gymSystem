@@ -42,6 +42,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
         itemAlunoConsulta = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         menuCadastros = new javax.swing.JMenu();
         itemProfessorCadastros = new javax.swing.JMenuItem();
         itemAlunoCadastros = new javax.swing.JMenuItem();
@@ -184,7 +185,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         });
 
         itemProfessorConsulta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        itemProfessorConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        itemProfessorConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
         itemProfessorConsulta.setMnemonic('p');
         itemProfessorConsulta.setText("Professor");
         itemProfessorConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +208,9 @@ public class FrmGerenciador extends javax.swing.JFrame {
         menuConsultas.add(itemAlunoConsulta);
 
         jMenuBar1.add(menuConsultas);
+
+        jMenu2.setText("Atribuição");
+        jMenuBar1.add(jMenu2);
 
         menuCadastros.setMnemonic('d');
         menuCadastros.setText("Cadastros");
@@ -247,6 +251,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         menuCadastros.add(itemAtividadeCadastros);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
         jMenuItem2.setText("Cadastrar Aulas");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,6 +261,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         menuCadastros.add(jMenuItem2);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
         jMenuItem6.setText("Cadastrar Turmas");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,7 +383,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -534,6 +540,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGerenciarAtividades;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;

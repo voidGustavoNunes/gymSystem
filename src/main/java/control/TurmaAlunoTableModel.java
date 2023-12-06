@@ -7,20 +7,19 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Professor;
+import model.Aluno;
 import model.Turma;
 
 /**
  *
  * @author Gustavo
  */
-public class TurmaTableModel extends AbstractTableModel{
-    List<Turma> lista = new ArrayList();
+public class TurmaAlunoTableModel extends AbstractTableModel {
 
-    public TurmaTableModel() {
+    List<Aluno> lista = new ArrayList();
+
+    public TurmaAlunoTableModel() {
     }
-    
-    
 
     @Override
     public int getRowCount() {
@@ -29,17 +28,25 @@ public class TurmaTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Turma turma = lista.get(rowIndex);
+        Aluno aluno = lista.get(rowIndex);
         return switch (columnIndex) {
             case 0 ->
-                turma.getNome();
+                aluno.getId();
             case 1 ->
-                turma.getIdTurma();
+                aluno.getNome();
+            case 2 ->
+                aluno.getCpf();
+            case 3 ->
+                aluno.getGenero();
+            case 4->
+                aluno.getSituacao();
+            case 5->
+                aluno.getProfissao();
             default ->
                 "";
         };
@@ -47,16 +54,16 @@ public class TurmaTableModel extends AbstractTableModel{
 
     @Override
     public String getColumnName(int columnIndex) {
-        String colunas[] = {"Nome", "id"};
+        String colunas[] = {"id", "Nome", "Cpf", "Gênero", "Situção", "Profissão"};
         return colunas[columnIndex];
     }
 
-    public void adicionar(Turma turma) {
-        lista.add(turma);
+    public void adicionar(Aluno aluno) {
+        lista.add(aluno);
         fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
-    public Turma getTurma(int row) {
+    public Aluno getAluno(int row) {
         return lista.get(row);
     }
 
@@ -65,7 +72,7 @@ public class TurmaTableModel extends AbstractTableModel{
         fireTableRowsDeleted(lista.size() - 1, lista.size() - 1);
     }
 
-    public void setList(List<Turma> novaLista) {
+    public void setList(List<Aluno> novaLista) {
         lista = novaLista;
         fireTableRowsInserted(0, lista.size() - 1);
     }

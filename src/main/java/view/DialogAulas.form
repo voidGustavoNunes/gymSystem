@@ -11,6 +11,11 @@
             <Property name="text" type="java.lang.String" value="Cadastro"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atribui&#xe7;&#xe3;o"/>
+          </Properties>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>

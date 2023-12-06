@@ -7,20 +7,15 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Aulas;
 import model.Professor;
 
 /**
  *
  * @author Gustavo
  */
-public class ProfessorAlunoTableModel extends AbstractTableModel {
-
-    public ProfessorAlunoTableModel() {
-    }
+public class ProfessorAulaTableModel extends AbstractTableModel {
 
     List<Professor> lista = new ArrayList();
-    Aulas aulas;
 
     @Override
     public int getRowCount() {
@@ -29,36 +24,27 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
-    }
-    
-    public Aulas setAulas(Aulas aulasPassadas){
-        this.aulas = aulasPassadas;
-        
-        return aulas;
+        return 7;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Professor pro = lista.get(rowIndex);
-        
 
         return switch (columnIndex) {
             case 0 ->
-                aulas.getIdAula();
-            case 1 ->
                 pro.getId();
-            case 2 ->
+            case 1 ->
                 pro.getNome();
-            case 3 ->
+            case 2 ->
                 pro.getCpf();
-            case 4 ->
+            case 3 ->
                 pro.getNumeroRegistro();
-            case 5 ->
+            case 4 ->
                 pro.getSituacao();
-            case 6 ->
+            case 5 ->
                 pro.getTelefone();
-            case 7 ->
+            case 6 ->
                 pro.getFoto();
             default ->
                 "";
@@ -67,7 +53,7 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int columnIndex) {
-        String colunas[] = {"Id Aula", "Id Professor", "Nome", "Cpf", "Numero de Registro", "Situacao", "Telefone", "Foto"};
+        String colunas[] = {"IdProfessor", "Nome", "Cpf", "NumerodeRegistro", "Situacao", "Telefone", "Foto"};
         return colunas[columnIndex];
     }
 
@@ -80,6 +66,13 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
         return lista.get(row);
     }
 
+    public void limpar() {
+        int rowCount = getRowCount();
+        lista.clear(); // Supondo que 'professores' seja sua lista de dados
+
+        fireTableRowsDeleted(0, rowCount - 1);
+    }
+
     public void remover(int row) {
         lista.remove(row);
         fireTableRowsDeleted(lista.size() - 1, lista.size() - 1);
@@ -89,4 +82,8 @@ public class ProfessorAlunoTableModel extends AbstractTableModel {
         lista = novaLista;
         fireTableRowsInserted(0, lista.size() - 1);
     }
+
+    public ProfessorAulaTableModel() {
+    }
+
 }

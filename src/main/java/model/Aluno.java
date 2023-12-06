@@ -129,6 +129,11 @@ public class Aluno extends Pessoa implements Serializable{
         this.indicacao = indicacao; //ESSE AQ E BOOLEANO SO INDICA SE TEM INDICACAO, MAS NAO A PESSOA
     }
 
+    @Override
+    public String toString() {
+        return "Aluno{" + "profissao=" + profissao + '}';
+    }
+
     
     
 

@@ -5,9 +5,13 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import control.TurmaTableModel;
+import control.ProfessorAulaTableModel;
+import control.TurmaAlunoTableModel;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Aluno;
+import model.Professor;
 import model.Turma;
 
 /**
@@ -24,9 +28,9 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         initComponents();
     }
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
-    
-    
-    TurmaTableModel turma = new TurmaTableModel();
+
+    TurmaAlunoTableModel turma = new TurmaAlunoTableModel();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,19 +43,20 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonAtribuir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAlunos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jComboBoxTurma = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jComboBoxAlunos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonAdicionar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -85,17 +90,17 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Atribuir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtribuir.setText("Atribuir");
+        jButtonAtribuir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAtribuirActionPerformed(evt);
             }
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos da Turma:"));
 
-        jTable1.setModel(turma);
-        jScrollPane1.setViewportView(jTable1);
+        jTableAlunos.setModel(turma);
+        jScrollPane1.setViewportView(jTableAlunos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,6 +121,11 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a turma:"));
 
+        jComboBoxTurma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTurmaItemStateChanged(evt);
+            }
+        });
         jComboBoxTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxTurmaMouseClicked(evt);
@@ -146,6 +156,12 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Adicione os alunos:"));
 
+        jComboBoxAlunos.setEnabled(false);
+        jComboBoxAlunos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxAlunosItemStateChanged(evt);
+            }
+        });
         jComboBoxAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxAlunosMouseClicked(evt);
@@ -175,15 +191,18 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Adicionar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonAdicionarActionPerformed(evt);
             }
         });
 
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Atribuição");
+        jMenuBar1.add(jMenu4);
 
         jMenu3.setText("Consulta");
         jMenuBar1.add(jMenu3);
@@ -211,7 +230,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 438, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -219,7 +238,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(383, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(17, 17, 17)))
         );
         layout.setVerticalGroup(
@@ -232,7 +251,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -241,7 +260,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(563, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)))
         );
 
@@ -253,30 +272,104 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTurmaMouseClicked
-        List<Turma> lista = gerInter.getInstance().getGerDom().pesquisarTurma();
-        for (Turma turmas : lista) {
-            jComboBoxTurma.addItem(turmas.getNome()); // Adiciona apenas o nome da turma
-        }
 
 
     }//GEN-LAST:event_jComboBoxTurmaMouseClicked
 
     private void jComboBoxAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAlunosMouseClicked
-        List<Aluno> lista = gerInter.getInstance().getGerDom().pesquisarAluno();
-        for (Aluno alunos : lista) {
-            jComboBoxTurma.addItem(alunos.getNome()); // Adiciona apenas o nome do aluno
-        }
 
 
     }//GEN-LAST:event_jComboBoxAlunosMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Turma turmaSelecionada = null;
+        Aluno alunoSelecionado = null;
+
+        turmaSelecionada = (Turma) jComboBoxTurma.getSelectedItem();
+        alunoSelecionado = (Aluno) jComboBoxAlunos.getSelectedItem();
+
+
+
+        TurmaAlunoTableModel model = (TurmaAlunoTableModel) jTableAlunos.getModel();
+        int tamanho = model.getRowCount();
+        for (int i = 0; i < tamanho; i++) {
+            Aluno aluno = model.getAluno(i);
+            if(aluno.equals(alunoSelecionado)){
+                JOptionPane.showMessageDialog(this, "O aluno já existe na tabela! Selecione outro.");
+                jComboBoxAlunos.setSelectedItem(null);
+            }
+        
+        }
+
+        model.adicionar(alunoSelecionado);
+
+
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed
+
+        TurmaAlunoTableModel model = (TurmaAlunoTableModel) jTableAlunos.getModel();
+        Turma turmaSelecionada = (Turma) jComboBoxTurma.getSelectedItem();
+
+        List<Aluno> listaAlunosTable = new ArrayList();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            listaAlunosTable.add(model.getAluno(i));
+
+        }
+        turmaSelecionada.setAlunos(listaAlunosTable);
+        gerInter.getGerDom().getGenDao().alterar(turmaSelecionada);
+
+
+
+    }//GEN-LAST:event_jButtonAtribuirActionPerformed
+
+    private void jComboBoxTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurmaItemStateChanged
+        Turma turmas = (Turma) jComboBoxTurma.getSelectedItem();
+        List<Aluno> alunosLista = turmas.getAlunos();
+
+        TurmaAlunoTableModel model = (TurmaAlunoTableModel) jTableAlunos.getModel();
+        int tamanho = model.getRowCount();
+
+        for (Aluno aluno : alunosLista) {
+            model.adicionar(aluno);
+        }
+        jComboBoxAlunos.setEnabled(true);
+
+
+    }//GEN-LAST:event_jComboBoxTurmaItemStateChanged
+
+    private void jComboBoxAlunosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAlunosItemStateChanged
+        Turma turmaSelecionada = null;
+        List<Aluno> alunosNaTable = new ArrayList();
+        List<Aluno> todosOsAlunos = gerInter.getGerDom().pesquisarAluno(); //pega todos os professores
+        TurmaAlunoTableModel tableModel = (TurmaAlunoTableModel) jTableAlunos.getModel();
+
+        //todos os alunos das turmas inseridos
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            Aluno aluno = tableModel.getAluno(i);
+            alunosNaTable.add(aluno);
+        }
+
+        // lista para armazenar os alunos não adicionados na table
+        List<Aluno> alunosNaoAdicionados = new ArrayList<>();
+
+        // Percorre todos os aunos disponíveis e verifica se estão na tabela, coloca quem nao esta numa lista
+        for (Aluno aluno : todosOsAlunos) {
+            if (!alunosNaTable.contains(aluno)) {
+                alunosNaoAdicionados.add(aluno);
+            }
+        }
+
+        jComboBoxAlunos.removeAllItems();
+
+        for (Aluno aluno : alunosNaoAdicionados) {
+            jComboBoxAlunos.addItem(aluno.getNome()); // Adiciona apenas o nome do professor
+        }
+
+
+    }//GEN-LAST:event_jComboBoxAlunosItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -322,8 +415,8 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JButton jButtonAtribuir;
     private javax.swing.JComboBox<String> jComboBoxAlunos;
     private javax.swing.JComboBox<String> jComboBoxTurma;
     private javax.swing.JLabel jLabel1;
@@ -332,12 +425,13 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAlunos;
     // End of variables declaration//GEN-END:variables
 }

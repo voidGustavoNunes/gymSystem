@@ -19,7 +19,7 @@
                   <KeyStroke key="Shift+Alt+P"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons16px/gymnast.png"/>
+                  <Image iconType="3" name="/icons16px/gym (2).png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="112"/>
                 <Property name="text" type="java.lang.String" value="Professor"/>
@@ -45,6 +45,11 @@
               </Events>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atribui&#xe7;&#xe3;o"/>
+          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuCadastros">
           <Properties>
@@ -102,6 +107,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Alt+G"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons16px/trainer.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Aulas"/>
               </Properties>
               <Events>
@@ -112,6 +120,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Shift+Alt+Y"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons16px/employees.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Turmas"/>
               </Properties>
@@ -310,7 +321,7 @@
               <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

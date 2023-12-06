@@ -5,14 +5,11 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import control.GerenciadorDominio;
-import control.ProfessorAlunoTableModel;
+import control.ProfessorAulaTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.Aluno;
 import model.Aulas;
 import model.Professor;
 
@@ -25,15 +22,14 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     /**
      * Creates new form DialogAtribuirAulas
      */
+    GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
+    ProfessorAulaTableModel professorTable = new ProfessorAulaTableModel();
+    //ProfessorAulaTableModel professorTable = null;
+
     public DialogAtribuirAulas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
-    GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
-    ProfessorAlunoTableModel professorTable = new ProfessorAlunoTableModel();
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,12 +58,19 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -92,22 +95,18 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
         jLabel2.setText("Aula:");
 
-        jComboBoxAulas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxAulasMouseClicked(evt);
-            }
-        });
-        jComboBoxAulas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAulasActionPerformed(evt);
+        jComboBoxAulas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxAulasItemStateChanged(evt);
             }
         });
 
         jLabel3.setText("Professor:");
 
-        jComboBoxProfessor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxProfessorMouseClicked(evt);
+        jComboBoxProfessor.setEnabled(false);
+        jComboBoxProfessor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxProfessorItemStateChanged(evt);
             }
         });
         jComboBoxProfessor.addActionListener(new java.awt.event.ActionListener() {
@@ -118,29 +117,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores da Aula:"));
 
-        jTableAulasProfessor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id da Aula", "Id do professor", "Nome da aula", "Nome do Professor", "Cpf", "Situação", "Numero de Registro", "Telefone"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTableAulasProfessor.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTableAulasProfessorInputMethodTextChanged(evt);
-            }
-        });
+        jTableAulasProfessor.setModel(professorTable);
         jScrollPane1.setViewportView(jTableAulasProfessor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -154,10 +131,9 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jButton1.setText("Cancelar");
@@ -188,11 +164,17 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
             }
         });
 
-        jMenu1.setText("File");
+        jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Atribuição");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Consulta");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Configurações");
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -245,7 +227,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,45 +245,26 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
 
-        List<Aulas> lista = retornaListaAula();
-        List<Professor> listaProfessor = retornaListaProfessor();
-
-        int selectedIndex = jComboBoxAulas.getSelectedIndex();
-        int selectedIndexProfessor = jComboBoxProfessor.getSelectedIndex();
-
-        Aulas aulaSelecionada = null;
         Professor professorSelecionado = null;
+        ProfessorAulaTableModel professorTable = new ProfessorAulaTableModel();
 
-        aulaSelecionada = lista.get(selectedIndex);
-        professorSelecionado = listaProfessor.get(selectedIndexProfessor);
+        professorSelecionado = (Professor) jComboBoxProfessor.getSelectedItem();
 
-        DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
-        int numRows = model.getRowCount();
-        int numColumns = model.getColumnCount();
+        ProfessorAulaTableModel model = (ProfessorAulaTableModel) jTableAulasProfessor.getModel();
+        int tamanho = model.getRowCount();
+        for (int i = 0; i < tamanho; i++) {
+            Professor professor = model.getProfessor(i);
+            if (professor.equals(professorSelecionado)) {
+                JOptionPane.showMessageDialog(this, "O professor já existe na tabela! Selecione outro.");
+                jComboBoxProfessor.setSelectedItem(null);
+            }
 
-        // Criando um array de objetos para representar os dados da nova linha
-        Object[] rowData = {
-            aulaSelecionada.getIdAula(),
-            professorSelecionado.getId(),
-            aulaSelecionada.getTipo(),
-            professorSelecionado.getNome(),
-            professorSelecionado.getCpf(),
-            professorSelecionado.getSituacao(),
-            professorSelecionado.getNumeroRegistro(),
-            professorSelecionado.getTelefone()
-        };
+        }
 
-        // Adicionando uma nova linha com os dados ao modelo da tabela
-        model.addRow(rowData);
-
+        model.adicionar(professorSelecionado);
 
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
-
-    private void jComboBoxAulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAulasActionPerformed
-
-
-    }//GEN-LAST:event_jComboBoxAulasActionPerformed
     public List<Aulas> retornaListaAula() {
         Aulas aula = new Aulas();
 
@@ -319,32 +282,13 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     }
 
 
-    private void jComboBoxAulasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAulasMouseClicked
-        jComboBoxAulas.removeAllItems();
-        List<Aulas> lista = retornaListaAula();
-        for (Aulas aula : lista) {
-            jComboBoxAulas.addItem(aula.getTipo()); // Adiciona apenas o nome da aula
-        }
-
-    }//GEN-LAST:event_jComboBoxAulasMouseClicked
-
-    private void jComboBoxProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxProfessorMouseClicked
-        jComboBoxProfessor.removeAllItems();
-
-        List<Professor> lista = retornaListaProfessor();
-        for (Professor professor : lista) {
-            jComboBoxProfessor.addItem(professor.getNome()); // Adiciona apenas o nome do professor
-        }
-
-
-    }//GEN-LAST:event_jComboBoxProfessorMouseClicked
-
     private void jComboBoxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProfessorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxProfessorActionPerformed
 
+
     private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed
-        int qntdeLinhas = jTableAulasProfessor.getRowCount();
+        /*int qntdeLinhas = jTableAulasProfessor.getRowCount();
         //Aulas aula = new Aulas();
         int idAula;
         Object idAulaOb;
@@ -375,6 +319,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
             }
             aula.setProfessores(professoresLista);
+
             professor.setAulas(aulasLista);
 
             gerInter.getGerDom().getGenDao().alterar(aula);
@@ -383,64 +328,92 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Insira aulas e professores para atribuir!");
 
-        }
+        }*/
 
+        ProfessorAulaTableModel model = (ProfessorAulaTableModel) jTableAulasProfessor.getModel();
+        Aulas aulaSelecionada = (Aulas) jComboBoxAulas.getSelectedItem();
+
+        List<Professor> listaProfessoresTable = new ArrayList();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            listaProfessoresTable.add(model.getProfessor(i));
+
+        }
+        aulaSelecionada.setProfessores(listaProfessoresTable);
+        gerInter.getGerDom().getGenDao().alterar(aulaSelecionada);
 
     }//GEN-LAST:event_jButtonAtribuirActionPerformed
-
-    private void jTableAulasProfessorInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTableAulasProfessorInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableAulasProfessorInputMethodTextChanged
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
 
         int linha = jTableAulasProfessor.getSelectedRow();
-        
+
         model.removeRow(linha);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jComboBoxAulasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAulasItemStateChanged
+        // Ao trocar a aula
+        // Pegar a aula
+
+        // Mostrar os professores daquela aula
+        Aulas aula = (Aulas) jComboBoxAulas.getSelectedItem();
+        List<Professor> professoresLista = aula.getProfessores();
+
+        ProfessorAulaTableModel model = (ProfessorAulaTableModel) jTableAulasProfessor.getModel();
+        //model.limpar(); // Limpa a tabela antes de adicionar novos dados
+
+        if (!professoresLista.isEmpty()) {
+            for (Professor professor : professoresLista) {
+                model.adicionar(professor);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há professores associados a esta aula.");
+        }
+        jComboBoxProfessor.setEnabled(true);
+
+    }//GEN-LAST:event_jComboBoxAulasItemStateChanged
+
+    private void jComboBoxProfessorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProfessorItemStateChanged
+
+//        Aulas aulaSelecionada = null;
+//        List<Professor> professoresNaTable = new ArrayList();
+//        List<Professor> todosOsProfessores = gerInter.getGerDom().pesquisarProfessor(); //pega todos os professores
+//        ProfessorAulaTableModel tableModel = (ProfessorAulaTableModel) jTableAulasProfessor.getModel();
+//
+//        //todos os professores das aulas inseridos
+//        for (int i = 0; i < tableModel.getRowCount(); i++) {
+//            Professor professor = tableModel.getProfessor(i);
+//            professoresNaTable.add(professor);
+//        }
+//
+//        // lista para armazenar os professores não adicionados na table
+//        List<Professor> professoresNaoAdicionados = new ArrayList<>();
+//
+//        // Percorre todos os professores disponíveis e verifica se estão na tabela, coloca quem nao esta numa lista
+//        for (Professor professor : todosOsProfessores) {
+//            if (!professoresNaTable.contains(professor)) {
+//                professoresNaoAdicionados.add(professor);
+//            }
+//        }
+//
+//        jComboBoxProfessor.removeAllItems();
+//
+//        for (Professor professor : professoresNaoAdicionados) {
+//            jComboBoxProfessor.addItem(professor.getNome()); // Adiciona apenas o nome do professor
+//        }
+        gerInter.carregarCombo(Professor.class, jComboBoxProfessor);
+    }//GEN-LAST:event_jComboBoxProfessorItemStateChanged
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        gerInter.getInstance().carregarCombo(Aulas.class, jComboBoxAulas);
+        gerInter.getInstance().carregarCombo(Professor.class, jComboBoxProfessor);
+
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogAtribuirAulas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogAtribuirAulas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogAtribuirAulas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogAtribuirAulas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DialogAtribuirAulas dialog = new DialogAtribuirAulas(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -454,6 +427,8 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

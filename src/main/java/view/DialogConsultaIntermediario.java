@@ -59,7 +59,7 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButtonProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
         jButtonProfessores.setText("Aulas");
         jButtonProfessores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +75,7 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             }
         });
 
-        jButtonProfessores1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
         jButtonProfessores1.setText("Turmas");
         jButtonProfessores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +83,7 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             }
         });
 
-        jButtonProfessores2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness (1).png"))); // NOI18N
         jButtonProfessores2.setText("Atividades");
         jButtonProfessores2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +91,7 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             }
         });
 
-        jButtonProfessores4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gymnast.png"))); // NOI18N
+        jButtonProfessores4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
         jButtonProfessores4.setText("Professores");
         jButtonProfessores4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Consulta");
+        jMenu3.setText("Atribuição");
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Configurações");

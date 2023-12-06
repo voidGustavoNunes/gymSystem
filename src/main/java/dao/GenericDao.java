@@ -106,39 +106,61 @@ public class GenericDao {
         return lista;
     }
 
-    public Object buscarPorId(int id, Class classe) throws HibernateException {
-        Object obj = null;
+    // -----------------------------------------------
+    // Se não existir no banco retorna NULL
+    // -----------------------------------------------
+    public Object get(Class classe, int id) throws HibernateException {
         Session sessao = null;
-        
-
+        Object objReturn = null;
         try {
             sessao = ConexaoHibernate.getSessionFactory().openSession();
-            sessao.beginTransaction();
+            sessao.getTransaction().begin();
 
-            obj = sessao.get(classe, id); // Obtém o objeto pelo ID usando o método get
+            objReturn = sessao.get(classe, id);
 
             sessao.getTransaction().commit();
-        } catch (HibernateException erro) {
+            sessao.close();
+        } catch (HibernateException ex) {
             if (sessao != null) {
                 sessao.getTransaction().rollback();
-            }
-            throw new HibernateException(erro);
-        } finally {
-            if (sessao != null) {
                 sessao.close();
             }
+            throw new HibernateException(ex);
         }
-        return obj;
+        return objReturn;
+
     }
 
-    private Object pesquisarPorId(int id, Class classe) {
+    // -----------------------------------------------------
+    //  Se não existir no banco, retorna uma EXCEÇÃO
+    // ----------------------------------------------------
+    // Sempre retorna um PROXY e não o objeto em si.
+    // PROXY é apenas uma referência ao objeto. 
+    // Ele será realmente carregado quando o primeiro acesso
+    // for feito ao objeto
+    // ENTÃO, por isso que colocamos um primeiro acesso ao objeto 
+    // dentro dessa função, como o método toString (somente para teste)
+    public Object load(Class classe, int id) throws HibernateException {
+        Session sessao = null;
+        Object objReturn = null;
         try {
-            // Chama a função buscarPorId passando o ID e a classe
-            return buscarPorId(id, classe);
-        } catch (HibernateException erro) {
-            // Lida com a exceção, pode tratar ou relançar conforme necessário
-            throw new HibernateException(erro);
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.getTransaction().begin();
+
+            objReturn = sessao.load(classe, id);
+            objReturn.toString();
+
+            sessao.getTransaction().commit();
+            sessao.close();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+                sessao.close();
+            }
+            throw new HibernateException(ex);
         }
+        return objReturn;
+
     }
 
 }

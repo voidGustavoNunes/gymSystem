@@ -27,7 +27,7 @@ public class Aulas implements Serializable{
     String tipo;
     
 
-    @ManyToMany (fetch = FetchType.LAZY)
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name="Professor_Aulas",
               joinColumns={@JoinColumn(name="idAula")},
               inverseJoinColumns={@JoinColumn(name="idProfessor")}
@@ -89,6 +89,11 @@ public class Aulas implements Serializable{
 
     
     public Aulas() {
+    }
+
+    @Override
+    public String toString() {
+        return this.getTipo();
     }
     
     

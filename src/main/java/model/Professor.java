@@ -106,6 +106,11 @@ public class Professor extends Pessoa implements Serializable {
         this.usuarioMaster = usuarioMaster;
     }
 
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
+
 
     
 

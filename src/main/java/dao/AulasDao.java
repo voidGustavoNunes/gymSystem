@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import model.Aulas;
+import model.Professor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -38,6 +40,7 @@ public class AulasDao extends GenericDao {
             // TABELAS
             Root tabela = consulta.from(Aulas.class);
 
+
             //RESTRIÇÕES
             Predicate restricoes = null;
             switch (tipo) {
@@ -60,16 +63,11 @@ public class AulasDao extends GenericDao {
         }
         return listar(Aulas.class);
     }
-    
-    
-    
 
     public List<Aulas> pesquisarNome(String pesq) {
 
         return pesquisar(pesq, 1);
     }
-
-
 
     private List<Aulas> pesquisar() {
         //List<Cliente> lista = new ArrayList();

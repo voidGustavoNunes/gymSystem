@@ -27,7 +27,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Consulta"/>
+            <Property name="text" type="java.lang.String" value="Atribui&#xe7;&#xe3;o"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
@@ -145,7 +145,7 @@
         <Component class="javax.swing.JButton" name="jButtonProfessores">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons16px/gymnast.png"/>
+              <Image iconType="3" name="/icons16px/trainer.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Aulas"/>
           </Properties>
@@ -167,7 +167,7 @@
         <Component class="javax.swing.JButton" name="jButtonProfessores1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons16px/gymnast.png"/>
+              <Image iconType="3" name="/icons16px/employees.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Turmas"/>
           </Properties>
@@ -178,7 +178,7 @@
         <Component class="javax.swing.JButton" name="jButtonProfessores2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons16px/gymnast.png"/>
+              <Image iconType="3" name="/icons16px/fitness (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Atividades"/>
           </Properties>
@@ -189,7 +189,7 @@
         <Component class="javax.swing.JButton" name="jButtonProfessores4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons16px/gymnast.png"/>
+              <Image iconType="3" name="/icons16px/gym (2).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Professores"/>
           </Properties>
