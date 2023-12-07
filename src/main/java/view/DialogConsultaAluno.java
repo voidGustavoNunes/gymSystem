@@ -119,7 +119,7 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
             }
         });
 
-        jComboBoxPesquisaItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPF", "Nome", "Id", "Dia de vencimento", "Aulas" }));
+        jComboBoxPesquisaItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "\t", "CPF", "Nome", "Id", "Dia de vencimento", "Aulas" }));
 
         jLabel1.setText("Pesquisar por:");
 
@@ -236,18 +236,24 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
-        // TODO add your handling code here:
+        gerInterGrafica.fecharJanela(this);
+
+
     }//GEN-LAST:event_jButtonCancelar2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            List<Aluno> lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno();
-            alunoTableModel.setList(lista);
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+        if (jComboBoxPesquisaItens.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar, selecione novamente");
+
+        } else {
+            try {
+                List<Aluno> lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno(jTextFieldPesquisa.getText(), jComboBoxPesquisaItens.getSelectedIndex());
+                alunoTableModel.setList(lista);
+            } catch (HibernateException | NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
-        
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

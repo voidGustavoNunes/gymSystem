@@ -89,7 +89,7 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
             }
         });
 
-        jComboBoxPesquisaItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPF", "Nome", "Numero de Registro", "Aula", "Atividade", " " }));
+        jComboBoxPesquisaItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "\t", "Nome", "Cpf", "Numero de Registro", "Aula", "Atividade", " " }));
 
         jLabel1.setText("Pesquisar por:");
 
@@ -208,21 +208,24 @@ public class DialogConsultaProfessor extends javax.swing.JDialog {
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        try {
-            List<Professor> lista = gerInterGrafica.getInstance().getGerDom().pesquisarProfessor();
-            professor.setList(lista);
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+        if (jComboBoxPesquisaItens.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar, selecione novamente");
+
+        } else {
+            try {
+                List<Professor> lista = gerInterGrafica.getInstance().getGerDom().pesquisarProfessor(jTextFieldPesquisa.getText(), jComboBoxPesquisaItens.getSelectedIndex());
+                professor.setList(lista);
+            } catch (HibernateException | NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
-        
 
 
     }//GEN-LAST:event_jButtonPesquisarActionPerformed

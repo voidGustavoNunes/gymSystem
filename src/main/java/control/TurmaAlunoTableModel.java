@@ -54,7 +54,7 @@ public class TurmaAlunoTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int columnIndex) {
-        String colunas[] = {"id", "Nome", "Cpf", "Gênero", "Situção", "Profissão"};
+        String colunas[] = {"Codigo", "Nome", "Cpf", "Gênero", "Situção", "Profissão"};
         return colunas[columnIndex];
     }
 

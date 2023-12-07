@@ -36,7 +36,6 @@ public class GerenciadorDominio {
     private TurmaDao turmaDao;
     private ExercicioDao exDao;
     private ConexaoAjuda conAj;
-    
 
     GenericDao genDao = new GenericDao();
 
@@ -55,8 +54,6 @@ public class GerenciadorDominio {
         return genDao;
     }
 
-    
-    
     public int inserirAula(String tipo, int id) {
         Aulas aulas = new Aulas(tipo, id);
 
@@ -68,11 +65,10 @@ public class GerenciadorDominio {
     public ConexaoAjuda getConAj() {
         return conAj;
     }
-    
-    public List listar(Class classe) throws HibernateException {        
+
+    public List listar(Class classe) throws HibernateException {
         return genDao.listar(classe);
     }
-    
 
     //COM FOTO, ID E PESSOA INDICACAO
     public int inserirAluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, String situacao) throws HibernateException {
@@ -100,6 +96,8 @@ public class GerenciadorDominio {
         return exercicio.getId();
 
     }
+   
+    
 
     public void excluir(Object obj) throws HibernateException {
         genDao.excluir(obj);
@@ -116,7 +114,8 @@ public class GerenciadorDominio {
                 lista = alunoDao.pesquisarNome(pesq);
                 break;
             case 3:
-                lista = alunoDao.pesquisarCodigo(pesq);
+                int id = Integer.parseInt(pesq);
+                lista = alunoDao.pesquisarID(id);
                 break;
             case 4:
                 lista = alunoDao.pesquisarDiaVencimento(pesq);
@@ -133,10 +132,10 @@ public class GerenciadorDominio {
         List<Professor> lista = null;
         switch (tipo) {
             case 1:
-                lista = professorDao.pesquisarCPF(pesq);
+                lista = professorDao.pesquisarNome(pesq);
                 break;
             case 2:
-                lista = professorDao.pesquisarNome(pesq);
+                lista = professorDao.pesquisarCPF(pesq);
                 break;
             case 3:
                 lista = professorDao.pesquisarNumeroRegistro(pesq);
@@ -152,8 +151,7 @@ public class GerenciadorDominio {
         return lista;
 
     }
-    
-    
+
     public List<Aulas> pesquisarAulas(String pesq, int tipo) throws HibernateException {
         List<Aulas> lista = null;
         switch (tipo) {
@@ -190,7 +188,7 @@ public class GerenciadorDominio {
         return lista;
 
     }
-    
+
     public List<Aluno> pesquisarAluno() {
         List<Aluno> lista = null;
 
@@ -199,29 +197,23 @@ public class GerenciadorDominio {
         return lista;
 
     }
-    
-    
 
-    public void cadastrarAula() {
-
-    }
 
     public List<Exercicio> pesquisarExercicio() {
         List<Exercicio> lista = null;
-        
+
         lista = exDao.pesquisarNome();
-         
-        
+
         return lista;
-        
+
     }
 
     public int inserirTurma(Aulas aulas, String horarios, String nome) {
-        
+
         Turma turma = new Turma(aulas, horarios, nome);
-        
+
         genDao.inserir(turma);
-        
+
         return turma.getIdTurma();
     }
 

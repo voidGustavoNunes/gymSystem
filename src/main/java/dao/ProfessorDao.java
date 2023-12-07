@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import model.Aulas;
+import model.Exercicio;
+import model.Pessoa;
 import model.Professor;
+import model.Turma;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -51,10 +56,12 @@ public class ProfessorDao extends GenericDao {
                     restricoes = builder.like(tabela.get("numeroRegistro"), pesq + "%");
                     break;
                 case 4:
-                    restricoes = builder.like(tabela.get("aulas"), pesq + "%");
+                    Join<Aulas, Professor> aulasJoin = tabela.join("aulas");
+                    restricoes = builder.like(aulasJoin.get("tipo"), pesq + "%");
                     break;
                 case 5:
-                    restricoes = builder.like(tabela.get("atividades"), pesq + "%");
+                    Join<Exercicio, Professor> exercicioJoin = tabela.join("atividades");
+                    restricoes = builder.like(exercicioJoin.get("nome"), pesq + "%");
                     break;
             }
 
@@ -70,7 +77,7 @@ public class ProfessorDao extends GenericDao {
             }
             throw new HibernateException(erro);
         }
-        return listar(Professor.class);
+        return lista;
     }
 
     private List<Professor> pesquisar() {

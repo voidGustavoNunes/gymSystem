@@ -7,8 +7,6 @@ package model;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,9 +14,7 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class AlunoProfessorExercicio implements Serializable{
-    int series;
-    int repeticoes;
-    
+
     
     @EmbeddedId
     private AlunoEProfessorEExercicioPK chavePK;
@@ -30,33 +26,20 @@ public class AlunoProfessorExercicio implements Serializable{
     public void setChavePK(AlunoEProfessorEExercicioPK chavePK) {
         this.chavePK = chavePK;
     }
+
+    public AlunoProfessorExercicio(Professor prof, Aluno aluno, Exercicio ex) {
+        this.chavePK = new AlunoEProfessorEExercicioPK(aluno, prof, ex);
+    }    
     
-    
-   
-    public int getSeries() {
-        return series;
-    }
 
-    public void setSeries(int series) {
-        this.series = series;
-    }
+    public AlunoProfessorExercicio(AlunoEProfessorEExercicioPK chavePK) {
 
-    public int getRepeticoes() {
-        return repeticoes;
-    }
-
-    public void setRepeticoes(int repeticoes) {
-        this.repeticoes = repeticoes;
-    }
-
-    public AlunoProfessorExercicio(int series, int repeticoes, AlunoEProfessorEExercicioPK chavePK) {
-        this.series = series;
-        this.repeticoes = repeticoes;
         this.chavePK = chavePK;
     }
 
     public AlunoProfessorExercicio() {
     }
+    
     
     
 }

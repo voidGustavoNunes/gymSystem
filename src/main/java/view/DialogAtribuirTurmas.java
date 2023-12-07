@@ -10,7 +10,9 @@ import control.TurmaAlunoTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Aluno;
+import model.Aulas;
 import model.Professor;
 import model.Turma;
 
@@ -42,7 +44,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jButtonAtribuir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -54,6 +56,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jComboBoxAlunos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jButtonAdicionar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -61,6 +64,11 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -83,10 +91,10 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -198,6 +206,13 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             }
         });
 
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Cadastro");
         jMenuBar1.add(jMenu1);
 
@@ -220,8 +235,12 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,11 +254,6 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(383, Short.MAX_VALUE)
-                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(17, 17, 17)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,22 +268,22 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(563, Short.MAX_VALUE)
-                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        gerInter.fecharJanela(this);
+
+
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboBoxTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTurmaMouseClicked
 
@@ -283,28 +297,23 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
 
-        Turma turmaSelecionada = null;
         Aluno alunoSelecionado = null;
+        TurmaAlunoTableModel alunoTurmaTable = new TurmaAlunoTableModel();
 
-        turmaSelecionada = (Turma) jComboBoxTurma.getSelectedItem();
         alunoSelecionado = (Aluno) jComboBoxAlunos.getSelectedItem();
-
-
 
         TurmaAlunoTableModel model = (TurmaAlunoTableModel) jTableAlunos.getModel();
         int tamanho = model.getRowCount();
         for (int i = 0; i < tamanho; i++) {
             Aluno aluno = model.getAluno(i);
-            if(aluno.equals(alunoSelecionado)){
+            if (aluno.equals(alunoSelecionado)) {
                 JOptionPane.showMessageDialog(this, "O aluno já existe na tabela! Selecione outro.");
                 jComboBoxAlunos.setSelectedItem(null);
             }
-        
+
         }
 
         model.adicionar(alunoSelecionado);
-
-
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed
@@ -322,54 +331,73 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         gerInter.getGerDom().getGenDao().alterar(turmaSelecionada);
 
 
-
     }//GEN-LAST:event_jButtonAtribuirActionPerformed
 
     private void jComboBoxTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurmaItemStateChanged
-        Turma turmas = (Turma) jComboBoxTurma.getSelectedItem();
-        List<Aluno> alunosLista = turmas.getAlunos();
+
+        Turma turma = (Turma) jComboBoxTurma.getSelectedItem();
+        List<Aluno> alunosLista = turma.getAlunos();
 
         TurmaAlunoTableModel model = (TurmaAlunoTableModel) jTableAlunos.getModel();
-        int tamanho = model.getRowCount();
+        //model.limpar(); // Limpa a tabela antes de adicionar novos dados
 
-        for (Aluno aluno : alunosLista) {
-            model.adicionar(aluno);
+        if (!alunosLista.isEmpty()) {
+            for (Aluno aluno : alunosLista) {
+                model.adicionar(aluno);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há alunos associados a esta turma.");
         }
         jComboBoxAlunos.setEnabled(true);
-
 
     }//GEN-LAST:event_jComboBoxTurmaItemStateChanged
 
     private void jComboBoxAlunosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAlunosItemStateChanged
-        Turma turmaSelecionada = null;
-        List<Aluno> alunosNaTable = new ArrayList();
-        List<Aluno> todosOsAlunos = gerInter.getGerDom().pesquisarAluno(); //pega todos os professores
-        TurmaAlunoTableModel tableModel = (TurmaAlunoTableModel) jTableAlunos.getModel();
+//        Turma turmaSelecionada = null;
+//        List<Aluno> alunosNaTable = new ArrayList();
+//        List<Aluno> todosOsAlunos = gerInter.getGerDom().pesquisarAluno(); //pega todos os professores
+//        TurmaAlunoTableModel tableModel = (TurmaAlunoTableModel) jTableAlunos.getModel();
+//
+//        //todos os alunos das turmas inseridos
+//        for (int i = 0; i < tableModel.getRowCount(); i++) {
+//            Aluno aluno = tableModel.getAluno(i);
+//            alunosNaTable.add(aluno);
+//        }
+//
+//        // lista para armazenar os alunos não adicionados na table
+//        List<Aluno> alunosNaoAdicionados = new ArrayList<>();
+//
+//        // Percorre todos os aunos disponíveis e verifica se estão na tabela, coloca quem nao esta numa lista
+//        for (Aluno aluno : todosOsAlunos) {
+//            if (!alunosNaTable.contains(aluno)) {
+//                alunosNaoAdicionados.add(aluno);
+//            }
+//        }
+//
+//        jComboBoxAlunos.removeAllItems();
+//
+//        for (Aluno aluno : alunosNaoAdicionados) {
+//            jComboBoxAlunos.addItem(aluno.getNome()); // Adiciona apenas o nome do professor
+//        }
 
-        //todos os alunos das turmas inseridos
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            Aluno aluno = tableModel.getAluno(i);
-            alunosNaTable.add(aluno);
-        }
-
-        // lista para armazenar os alunos não adicionados na table
-        List<Aluno> alunosNaoAdicionados = new ArrayList<>();
-
-        // Percorre todos os aunos disponíveis e verifica se estão na tabela, coloca quem nao esta numa lista
-        for (Aluno aluno : todosOsAlunos) {
-            if (!alunosNaTable.contains(aluno)) {
-                alunosNaoAdicionados.add(aluno);
-            }
-        }
-
-        jComboBoxAlunos.removeAllItems();
-
-        for (Aluno aluno : alunosNaoAdicionados) {
-            jComboBoxAlunos.addItem(aluno.getNome()); // Adiciona apenas o nome do professor
-        }
+        gerInter.carregarCombo(Aluno.class, jComboBoxAlunos);
 
 
     }//GEN-LAST:event_jComboBoxAlunosItemStateChanged
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTableAlunos.getModel();
+
+        int linha = jTableAlunos.getSelectedRow();
+
+        model.removeRow(linha);
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
+        gerInter.getInstance().carregarCombo(Turma.class, jComboBoxTurma);
+        gerInter.getInstance().carregarCombo(Aluno.class, jComboBoxAlunos);
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -414,9 +442,10 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonAtribuir;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JComboBox<String> jComboBoxAlunos;
     private javax.swing.JComboBox<String> jComboBoxTurma;
     private javax.swing.JLabel jLabel1;
