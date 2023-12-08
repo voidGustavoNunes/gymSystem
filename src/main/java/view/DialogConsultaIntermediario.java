@@ -33,17 +33,35 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jButtonProfessores3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButtonProfessores = new javax.swing.JButton();
+        jButtonAulas = new javax.swing.JButton();
         jButtonAlunos = new javax.swing.JButton();
-        jButtonProfessores1 = new javax.swing.JButton();
-        jButtonProfessores2 = new javax.swing.JButton();
-        jButtonProfessores4 = new javax.swing.JButton();
+        jButtonTurmas = new javax.swing.JButton();
+        jButtonAtividades = new javax.swing.JButton();
+        jButtonProfessores = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        menuConsultas = new javax.swing.JMenu();
+        itemProfessorConsulta = new javax.swing.JMenuItem();
+        itemAlunoConsulta = new javax.swing.JMenuItem();
+        menuCadastros = new javax.swing.JMenu();
+        itemProfessorCadastros = new javax.swing.JMenuItem();
+        itemAlunoCadastros = new javax.swing.JMenuItem();
+        itemAtividadeCadastros = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        atribuirAulasJMenuItem8 = new javax.swing.JMenuItem();
+        AtribuirTurmasJMenuItem9 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        Ajuda = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         jButton2.setText("jButton1");
 
@@ -59,11 +77,11 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButtonProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
-        jButtonProfessores.setText("Aulas");
-        jButtonProfessores.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAulas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
+        jButtonAulas.setText("Aulas");
+        jButtonAulas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProfessoresActionPerformed(evt);
+                jButtonAulasActionPerformed(evt);
             }
         });
 
@@ -75,27 +93,27 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             }
         });
 
-        jButtonProfessores1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
-        jButtonProfessores1.setText("Turmas");
-        jButtonProfessores1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTurmas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
+        jButtonTurmas.setText("Turmas");
+        jButtonTurmas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProfessores1ActionPerformed(evt);
+                jButtonTurmasActionPerformed(evt);
             }
         });
 
-        jButtonProfessores2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness (1).png"))); // NOI18N
-        jButtonProfessores2.setText("Atividades");
-        jButtonProfessores2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness (1).png"))); // NOI18N
+        jButtonAtividades.setText("Atividades");
+        jButtonAtividades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProfessores2ActionPerformed(evt);
+                jButtonAtividadesActionPerformed(evt);
             }
         });
 
-        jButtonProfessores4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
-        jButtonProfessores4.setText("Professores");
-        jButtonProfessores4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
+        jButtonProfessores.setText("Professores");
+        jButtonProfessores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProfessores4ActionPerformed(evt);
+                jButtonProfessoresActionPerformed(evt);
             }
         });
 
@@ -106,14 +124,14 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAulas, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80)
-                .addComponent(jButtonProfessores2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonProfessores1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonProfessores4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonTurmas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonProfessores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,15 +143,15 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
                         .addComponent(jButtonAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonProfessores4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonProfessores1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAulas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonProfessores2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106))
         );
 
@@ -158,14 +176,187 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Cadastro");
-        jMenuBar1.add(jMenu1);
+        menuConsultas.setMnemonic('c');
+        menuConsultas.setText("Consultas");
+        menuConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuConsultasActionPerformed(evt);
+            }
+        });
 
-        jMenu3.setText("Atribuição");
-        jMenuBar1.add(jMenu3);
+        itemProfessorConsulta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        itemProfessorConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
+        itemProfessorConsulta.setMnemonic('p');
+        itemProfessorConsulta.setText("Professor");
+        itemProfessorConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemProfessorConsultaActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemProfessorConsulta);
 
-        jMenu2.setText("Configurações");
-        jMenuBar1.add(jMenu2);
+        itemAlunoConsulta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        itemAlunoConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/excercise.png"))); // NOI18N
+        itemAlunoConsulta.setMnemonic('a');
+        itemAlunoConsulta.setText("Aluno");
+        itemAlunoConsulta.setToolTipText("");
+        itemAlunoConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAlunoConsultaActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemAlunoConsulta);
+
+        jMenuBar1.add(menuConsultas);
+
+        menuCadastros.setMnemonic('d');
+        menuCadastros.setText("Cadastros");
+        menuCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastrosActionPerformed(evt);
+            }
+        });
+
+        itemProfessorCadastros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        itemProfessorCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
+        itemProfessorCadastros.setText("Professor");
+        itemProfessorCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemProfessorCadastrosActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(itemProfessorCadastros);
+
+        itemAlunoCadastros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        itemAlunoCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/excercise.png"))); // NOI18N
+        itemAlunoCadastros.setText("Aluno");
+        itemAlunoCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAlunoCadastrosActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(itemAlunoCadastros);
+
+        itemAtividadeCadastros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        itemAtividadeCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness (1).png"))); // NOI18N
+        itemAtividadeCadastros.setText("Atividade");
+        itemAtividadeCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAtividadeCadastrosActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(itemAtividadeCadastros);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
+        jMenuItem2.setText("Aulas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(jMenuItem2);
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
+        jMenuItem6.setText(" Turmas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(jMenuItem6);
+
+        jMenuBar1.add(menuCadastros);
+
+        jMenu5.setMnemonic('g');
+        jMenu5.setText("Gerenciar");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/contract.png"))); // NOI18N
+        jMenuItem1.setMnemonic('a');
+        jMenuItem1.setText("Atividades");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem1);
+
+        atribuirAulasJMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        atribuirAulasJMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
+        atribuirAulasJMenuItem8.setText("Atribuir Aulas");
+        atribuirAulasJMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atribuirAulasJMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(atribuirAulasJMenuItem8);
+
+        AtribuirTurmasJMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        AtribuirTurmasJMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
+        AtribuirTurmasJMenuItem9.setText("Atribuir Turmas");
+        AtribuirTurmasJMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtribuirTurmasJMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(AtribuirTurmasJMenuItem9);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu4.setMnemonic('n');
+        jMenu4.setText("Configurações");
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness.png"))); // NOI18N
+        jMenu1.setMnemonic('g');
+        jMenu1.setText("Gerar Relatórios");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/excercise.png"))); // NOI18N
+        jMenuItem3.setMnemonic('l');
+        jMenuItem3.setText("Alunos");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
+        jMenuItem4.setMnemonic('p');
+        jMenuItem4.setText("Professores");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/fitness (1).png"))); // NOI18N
+        jMenuItem5.setMnemonic('t');
+        jMenuItem5.setText("Atividades");
+        jMenu1.add(jMenuItem5);
+
+        jMenu4.add(jMenu1);
+
+        Ajuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Ajuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/icons8-help-5022.png"))); // NOI18N
+        Ajuda.setMnemonic('a');
+        Ajuda.setText("Ajuda");
+        Ajuda.setToolTipText("");
+        Ajuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjudaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(Ajuda);
+        jMenu4.add(jSeparator1);
+
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/icons8-exit-50 (1).png"))); // NOI18N
+        jMenuItem7.setMnemonic('s');
+        jMenuItem7.setText("Sair");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -193,31 +384,96 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessoresActionPerformed
-        gerInterGrafica.janelaConsultaProfessor();
+    private void jButtonAulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulasActionPerformed
+        gerInterGrafica.janelaDialogAtribuirAulas();
 
-    }//GEN-LAST:event_jButtonProfessoresActionPerformed
+    }//GEN-LAST:event_jButtonAulasActionPerformed
 
     private void jButtonAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunosActionPerformed
         gerInterGrafica.janelaConsultaAluno();
 
     }//GEN-LAST:event_jButtonAlunosActionPerformed
 
-    private void jButtonProfessores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonProfessores1ActionPerformed
+    private void jButtonTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTurmasActionPerformed
+        gerInterGrafica.janelaDialogAtribuirTurma();
 
-    private void jButtonProfessores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonProfessores2ActionPerformed
+    }//GEN-LAST:event_jButtonTurmasActionPerformed
+
+    private void jButtonAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtividadesActionPerformed
+
+        gerInterGrafica.janelaGerenciarExercicios();
+
+    }//GEN-LAST:event_jButtonAtividadesActionPerformed
 
     private void jButtonProfessores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonProfessores3ActionPerformed
 
-    private void jButtonProfessores4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessores4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonProfessores4ActionPerformed
+    private void jButtonProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessoresActionPerformed
+        gerInterGrafica.janelaConsultaProfessor();
+
+    }//GEN-LAST:event_jButtonProfessoresActionPerformed
+
+    private void itemProfessorConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProfessorConsultaActionPerformed
+        gerInterGrafica.janelaConsultaProfessor();
+    }//GEN-LAST:event_itemProfessorConsultaActionPerformed
+
+    private void itemAlunoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlunoConsultaActionPerformed
+        gerInterGrafica.janelaConsultaAluno();
+    }//GEN-LAST:event_itemAlunoConsultaActionPerformed
+
+    private void menuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConsultasActionPerformed
+        gerInterGrafica.janelaConsultaProfessor();
+    }//GEN-LAST:event_menuConsultasActionPerformed
+
+    private void itemProfessorCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProfessorCadastrosActionPerformed
+        gerInterGrafica.janelaCadastroProfessor();
+
+    }//GEN-LAST:event_itemProfessorCadastrosActionPerformed
+
+    private void itemAlunoCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlunoCadastrosActionPerformed
+        gerInterGrafica.janelaCadastroAluno();
+    }//GEN-LAST:event_itemAlunoCadastrosActionPerformed
+
+    private void itemAtividadeCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAtividadeCadastrosActionPerformed
+        gerInterGrafica.janelaCriarExercicio();
+    }//GEN-LAST:event_itemAtividadeCadastrosActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        gerInterGrafica.janelaDialogCadastrarAula();
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        gerInterGrafica.janelaDialogCadastrarTurma();
+
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void menuCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrosActionPerformed
+        gerInterGrafica.janelaCadastroProfessor();
+    }//GEN-LAST:event_menuCadastrosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        gerInterGrafica.janelaGerenciarExercicios();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void atribuirAulasJMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atribuirAulasJMenuItem8ActionPerformed
+        gerInterGrafica.janelaDialogAtribuirAulas();
+
+    }//GEN-LAST:event_atribuirAulasJMenuItem8ActionPerformed
+
+    private void AtribuirTurmasJMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtribuirTurmasJMenuItem9ActionPerformed
+        gerInterGrafica.janelaDialogAtribuirTurma();
+
+    }//GEN-LAST:event_AtribuirTurmasJMenuItem9ActionPerformed
+
+    private void AjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjudaActionPerformed
+        gerInterGrafica.janelaDialogAjuda();
+    }//GEN-LAST:event_AjudaActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        gerInterGrafica.fecharJanela(this);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,19 +525,37 @@ public class DialogConsultaIntermediario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Ajuda;
+    private javax.swing.JMenuItem AtribuirTurmasJMenuItem9;
+    private javax.swing.JMenuItem atribuirAulasJMenuItem8;
+    private javax.swing.JMenuItem itemAlunoCadastros;
+    private javax.swing.JMenuItem itemAlunoConsulta;
+    private javax.swing.JMenuItem itemAtividadeCadastros;
+    private javax.swing.JMenuItem itemProfessorCadastros;
+    private javax.swing.JMenuItem itemProfessorConsulta;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAlunos;
+    private javax.swing.JButton jButtonAtividades;
+    private javax.swing.JButton jButtonAulas;
     private javax.swing.JButton jButtonProfessores;
-    private javax.swing.JButton jButtonProfessores1;
-    private javax.swing.JButton jButtonProfessores2;
     private javax.swing.JButton jButtonProfessores3;
-    private javax.swing.JButton jButtonProfessores4;
+    private javax.swing.JButton jButtonTurmas;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu menuCadastros;
+    private javax.swing.JMenu menuConsultas;
     // End of variables declaration//GEN-END:variables
 }

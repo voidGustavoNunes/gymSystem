@@ -72,9 +72,18 @@ public abstract class Pessoa implements Serializable{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY) //autonumeracao por cada tabela
     int id;
+    
+    int numero;
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 
+    public int getNumero() {
+        return numero;
+    }
 
+    
     public String getNome() {
         return nome;
     }
@@ -212,7 +221,7 @@ public abstract class Pessoa implements Serializable{
         this.situacao = situacao;
     }
 
-    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id, String situacao) {
+    public Pessoa(String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id, String situacao, int numero) {
         this.nome = nome;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -227,6 +236,7 @@ public abstract class Pessoa implements Serializable{
         this.senha = senha;
         this.id = id;
         this.situacao = situacao;
+        this.numero = numero;
     }
     
     

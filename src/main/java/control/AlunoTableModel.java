@@ -57,6 +57,10 @@ public class AlunoTableModel extends AbstractTableModel{
         lista.add(aluno);
         fireTableRowsInserted( lista.size() - 1 , lista.size() - 1);
     }
+    public Aluno getAluno(int row) {
+        return lista.get(row);
+    }
+
     
     public void remover(int row) {
         lista.remove(row);

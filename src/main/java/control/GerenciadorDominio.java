@@ -71,16 +71,16 @@ public class GerenciadorDominio {
     }
 
     //COM FOTO, ID E PESSOA INDICACAO
-    public int inserirAluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, String situacao) throws HibernateException {
-        Aluno aluno = new Aluno(id, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, situacao);
+    public int inserirAluno(int id, String profissao, int diaVencimento, boolean indicacao, String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, String situacao, int numero) throws HibernateException {
+        Aluno aluno = new Aluno(id, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, situacao, numero);
 
         genDao.inserir(aluno);
 
         return aluno.getId();
     }
 
-    public int inserirProfessor(String situacao, String numeroRegistro, String horarios, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, int id) throws HibernateException {
-        Professor professor = new Professor(situacao, numeroRegistro, horarios, usuarioMaster, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, id);
+    public int inserirProfessor(String situacao, String numeroRegistro, String horarios, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, int id, int numero) throws HibernateException {
+        Professor professor = new Professor(situacao, numeroRegistro, horarios, usuarioMaster, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, id, numero);
 
         genDao.inserir(professor);
 
@@ -96,8 +96,6 @@ public class GerenciadorDominio {
         return exercicio.getId();
 
     }
-   
-    
 
     public void excluir(Object obj) throws HibernateException {
         genDao.excluir(obj);
@@ -198,7 +196,6 @@ public class GerenciadorDominio {
 
     }
 
-
     public List<Exercicio> pesquisarExercicio() {
         List<Exercicio> lista = null;
 
@@ -216,5 +213,8 @@ public class GerenciadorDominio {
 
         return turma.getIdTurma();
     }
+
+
+
 
 }

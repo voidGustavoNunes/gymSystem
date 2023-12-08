@@ -4,6 +4,7 @@
  */
 package view;
 
+import control.FuncoesUteis;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import model.Aluno;
 import model.Aulas;
@@ -49,7 +51,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonEditar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
@@ -103,13 +104,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
-            }
-        });
-
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
             }
         });
 
@@ -189,6 +183,11 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         jLabel26.setText("Indicação:");
 
         jComboBoxIndicacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+        jComboBoxIndicacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxIndicacaoActionPerformed(evt);
+            }
+        });
 
         jLabel27.setText("Pessoa que indicou:");
 
@@ -515,8 +514,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -538,7 +535,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -546,10 +542,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -582,7 +574,6 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         String telefone = jFormattedTextFieldTelefone.getText();
 
         String endereco = jTextFieldEndereco.getText();
-        String numero = jTextFieldNumero.getText();
         String bairro = jTextFieldBairro.getText();
         String cidade = jTextFieldCidade.getText();
         String nome = jTextFieldNome.getText();
@@ -605,10 +596,10 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         String pessoaIndicacao = jComboBoxPessoaIndicacao.getSelectedItem().toString();
         String observacao = jTextAreaObservacao.getText();
         Icon foto = jLabelFoto.getIcon();
-        endereco = endereco + " - " + numero; // QUE GAMBIARRA 
+        int numeroA =  Integer.parseInt(jTextFieldNumero.getText());
 
         try {
-            id = gerDom.inserirAluno(codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha, situacao);
+            id = gerDom.inserirAluno(codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha, situacao, numeroA);
             JOptionPane.showMessageDialog(this, "Aluno " + id + " inserido com sucesso.");
 
         } catch (HibernateException ex) {
@@ -678,6 +669,79 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jComboBoxPessoaIndicacaoMouseClicked
 
+    private void jComboBoxIndicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIndicacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxIndicacaoActionPerformed
+
+    
+    public void preencherCampos( Aluno aluno){
+        jFormattedFieldCodigo.setValue(Integer.valueOf(aluno.getId()));
+        jTextFieldSenha.setText(aluno.getSenha());
+        jFormattedTextFieldDataCadastro.setValue(aluno.getDtCadastro()); //vai dar problema
+        
+        String situacao = aluno.getSituacao();
+        if(situacao == "Desligado"){
+            jComboBoxSituacao.setSelectedIndex(1);
+        
+        }else if(situacao == "Inativo"){
+            jComboBoxSituacao.setSelectedIndex(2);
+        
+        }
+        jFormattedTextFieldTelefone.setText(aluno.getTelefone());
+        jTextFieldEndereco.setText(aluno.getEndereco());
+        
+        int numero = aluno.getNumero();
+        jTextFieldNumero.setText(String.valueOf(numero));
+        jTextFieldBairro.setText(aluno.getBairro());
+        jTextFieldCidade.setText(aluno.getCidade());
+        jTextFieldNome.setText(aluno.getNome());
+        char genero = aluno.getGenero();
+        
+        if(genero == 'M'){
+            jComboBoxGenero.setSelectedIndex(0);
+        }else if(genero == 'F'){
+            jComboBoxGenero.setSelectedIndex(1);
+        }else{
+            jComboBoxGenero.setSelectedIndex(2);
+        }
+        
+        jFormattedTextFieldNascimento.setValue(aluno.getDtNascimento()); //vai dar problema
+        jFormattedTextFieldCPF.setText(aluno.getCpf());
+        jTextFieldProfissao.setText(aluno.getProfissao());
+        
+        int diaVencimento = aluno.getDiaVencimento();
+        if(diaVencimento == 1){
+            jComboBoxDiaVencimento.setSelectedIndex(0);
+        
+        }else if(diaVencimento == 5){
+            jComboBoxDiaVencimento.setSelectedIndex(1);
+        
+        }else if(diaVencimento == 10){
+            jComboBoxDiaVencimento.setSelectedIndex(2);
+
+        
+        }else if(diaVencimento == 20){
+            jComboBoxDiaVencimento.setSelectedIndex(3);
+        
+        }else{
+            jComboBoxDiaVencimento.setSelectedIndex(4);
+        
+        }
+        boolean indicacao = aluno.isIndicacao();
+        
+        if(indicacao == true){
+            jComboBoxIndicacao.setSelectedIndex(0);
+
+        }else{
+            jComboBoxIndicacao.setSelectedIndex(1);
+        }
+        jTextAreaObservacao.setText(aluno.getObservacao());
+        byte[] foto = aluno.getFoto();
+        Icon fotoIcon;
+        fotoIcon = gerInterGrafica.getFun().bytesToIcon(foto);
+        
+        jLabelFoto.setIcon(fotoIcon);
+    }
     /**
      * @param args the command line arguments
      */
@@ -719,11 +783,16 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
             }
         });
     }
+    
+    protected void abrirJanela(Aluno aluno){
+        gerInterGrafica.abreJanelaPreencheCampos(aluno);
+        
+        setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonEditar;
     private javax.swing.JComboBox<String> jComboBoxDiaVencimento;
     private javax.swing.JComboBox<String> jComboBoxGenero;
     private javax.swing.JComboBox<String> jComboBoxIndicacao;

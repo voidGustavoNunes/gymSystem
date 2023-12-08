@@ -28,11 +28,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.Aluno;
+import model.Aulas;
+import model.Exercicio;
+import model.Professor;
+import model.Turma;
 import org.hibernate.HibernateException;
 import view.DialogAjuda;
 import view.DialogAtribuirAulas;
 import view.DialogAtribuirTurmas;
 import view.DialogAulas;
+import view.DialogEdicao;
 import view.DialogTurma;
 
 /**
@@ -57,7 +63,40 @@ public class GerInterfaceGrafica {
     private DialogAtribuirAulas janAtrAulas = null;
     private DialogAulas janAulas = null;
     private DialogAtribuirTurmas janAtrTurmas = null;
+    private DialogEdicao janEdicao = null;
     private GerenciadorDominio gerDom;
+
+    FuncoesUteis fun = new FuncoesUteis();
+
+    Aluno aluno = null;
+    Professor professor = null;
+    Exercicio ex = null;
+    Aulas aula = null;
+    Turma turma = null;
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public FuncoesUteis getFun() {
+        return fun;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public Exercicio getEx() {
+        return ex;
+    }
+
+    public Aulas getAula() {
+        return aula;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
 
     //SINGLETON
     private final static GerInterfaceGrafica unicaInstancia = new GerInterfaceGrafica();
@@ -74,7 +113,6 @@ public class GerInterfaceGrafica {
         return gerDom;
     }
 
-    
     //ABRIR DIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
@@ -91,6 +129,24 @@ public class GerInterfaceGrafica {
 
     }
 
+    
+    
+    //ABRIR DIALOG
+    private JDialog abrirJanelaDiferente(java.awt.Frame parent, JDialog dlg, Class classe) {
+        if (dlg == null) {
+            try {
+                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class).newInstance(parent, true);
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                    | IllegalArgumentException | InvocationTargetException ex) {
+                JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela" + classe.getName());
+            }
+
+        }
+        dlg.setVisible(false);
+        return dlg;
+
+    }
+    
     private JDialog abrirJanela(JDialog dlg, Class classe) {
         if (dlg == null) {
             try {
@@ -108,7 +164,7 @@ public class GerInterfaceGrafica {
         return dlg;
     }
 
-    // ABRIR DIALOG
+    // ABRIR FRAME
     private JFrame abrirJanela(JDialog parent, JFrame frame, Class classe) {
         if (frame == null) {
             try {
@@ -178,8 +234,8 @@ public class GerInterfaceGrafica {
     }
 
     public void janelaDialogAtribuirAulas() {
-        
-        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc,janAtrAulas, DialogAtribuirAulas.class);
+
+        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc, janAtrAulas, DialogAtribuirAulas.class);
 
     }
 
@@ -195,6 +251,16 @@ public class GerInterfaceGrafica {
 
     public void janelaDialogCadastrarTurma() {
         janCadastroTurma = (DialogTurma) abrirJanela(janPrinc, janCadastroTurma, DialogTurma.class);
+
+    }
+
+    public void janelaDialogEdicao() {
+        janEdicao = (DialogEdicao) abrirJanela(janPrinc, janEdicao, DialogEdicao.class);
+
+    }
+
+    public void preencherCamposAulas(Aulas aula) {
+        janAtrAulas = (DialogAtribuirAulas) abrirJanela(janPrinc, janAtrAulas, DialogAtribuirAulas.class);
 
     }
 
@@ -235,17 +301,41 @@ public class GerInterfaceGrafica {
         }
         janPrinc.setVisible(true);
     }
-    
-    public void carregarCombo( Class classe, JComboBox combo) {
+
+    public void carregarCombo(Class classe, JComboBox combo) {
         List lista;
         try {
             lista = gerDom.listar(classe);
-            combo.setModel( new DefaultComboBoxModel( lista.toArray() )  );
+            combo.setModel(new DefaultComboBoxModel(lista.toArray()));
         } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(janPrinc, ex.getMessage() );
-        }        
+            JOptionPane.showMessageDialog(janPrinc, ex.getMessage());
+        }
     }
-    
+
+    public void abreJanelaPreencheCampos(Object ob) {
+        DialogCadastroAluno dialogAluno = null;
+        if (ob != null) {
+            if (ob.getClass() == Aluno.class) {
+                aluno = (Aluno) ob;
+                dialogAluno = (DialogCadastroAluno) abrirJanelaDiferente(janPrinc,janCadAluno,  DialogCadastroAluno.class);
+                dialogAluno.preencherCampos(aluno);
+                dialogAluno.setVisible(true);
+
+            } else if (ob.getClass() == Professor.class) {
+                professor = (Professor) ob;
+
+            } else if (ob.getClass() == Aulas.class) {
+                aula = (Aulas) ob;
+
+            } else if (ob.getClass() == Turma.class) {
+                turma = (Turma) ob;
+            } else if (ob.getClass() == Exercicio.class) {
+                ex = (Exercicio) ob;
+            }
+
+        }
+
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

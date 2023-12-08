@@ -44,7 +44,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonEditar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTextFieldNome = new javax.swing.JTextField();
@@ -92,13 +91,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -502,8 +494,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                 .addGap(32, 32, 32)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -524,7 +514,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -532,10 +521,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -575,8 +560,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
 
         String telefone = jFormattedTextFieldTelefone.getText();
         String endereco = jTextFieldEndereco.getText();
-        String numero = jTextFieldNumero.getText();
-        endereco = endereco + " - " + numero;
+        int numero = Integer.parseInt(jTextFieldNumero.getText());
         String bairro = jTextFieldBairro.getText();
         String cidade = jTextFieldCidade.getText();
         String nome = jTextFieldNome.getText();
@@ -625,7 +609,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
             Logger.getLogger(DialogCadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        gerDominio.inserirProfessor(situacao, numeroRegistro, horariosJSON, usuarioMaster, nome, cpf, dataNascimento, endereco, telefone, bairro, generoChar, cidade, observacoes, foto, dataCadastro, senha, codigo);
+        gerDominio.inserirProfessor(situacao, numeroRegistro, horariosJSON, usuarioMaster, nome, cpf, dataNascimento, endereco, telefone, bairro, generoChar, cidade, observacoes, foto, dataCadastro, senha, codigo, numero);
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -687,7 +671,6 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonEditar;
     private javax.swing.JComboBox<String> jComboBoxGenero;
     private javax.swing.JComboBox<String> jComboBoxSituacao;
     private javax.swing.JComboBox<String> jComboBoxUsuarioMaster;

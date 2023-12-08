@@ -42,7 +42,6 @@ public class FrmGerenciador extends javax.swing.JFrame {
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
         itemAlunoConsulta = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
         menuCadastros = new javax.swing.JMenu();
         itemProfessorCadastros = new javax.swing.JMenuItem();
         itemAlunoCadastros = new javax.swing.JMenuItem();
@@ -53,6 +52,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         atribuirAulasJMenuItem8 = new javax.swing.JMenuItem();
         AtribuirTurmasJMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItemEdicao = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -209,9 +209,6 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
         jMenuBar1.add(menuConsultas);
 
-        jMenu2.setText("Atribuição");
-        jMenuBar1.add(jMenu2);
-
         menuCadastros.setMnemonic('d');
         menuCadastros.setText("Cadastros");
         menuCadastros.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +249,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
-        jMenuItem2.setText("Cadastrar Aulas");
+        jMenuItem2.setText("Aulas");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -262,7 +259,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
-        jMenuItem6.setText("Cadastrar Turmas");
+        jMenuItem6.setText(" Turmas");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -288,6 +285,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
         atribuirAulasJMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         atribuirAulasJMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/trainer.png"))); // NOI18N
+        atribuirAulasJMenuItem8.setMnemonic('t');
         atribuirAulasJMenuItem8.setText("Atribuir Aulas");
         atribuirAulasJMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,6 +296,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
         AtribuirTurmasJMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         AtribuirTurmasJMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/employees.png"))); // NOI18N
+        AtribuirTurmasJMenuItem9.setMnemonic('u');
         AtribuirTurmasJMenuItem9.setText("Atribuir Turmas");
         AtribuirTurmasJMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +304,17 @@ public class FrmGerenciador extends javax.swing.JFrame {
             }
         });
         jMenu5.add(AtribuirTurmasJMenuItem9);
+
+        jMenuItemEdicao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemEdicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/configuration.png"))); // NOI18N
+        jMenuItemEdicao.setMnemonic('e');
+        jMenuItemEdicao.setText("Editar");
+        jMenuItemEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEdicaoActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItemEdicao);
 
         jMenuBar1.add(jMenu5);
 
@@ -487,6 +497,11 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItemEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEdicaoActionPerformed
+        gerInterGrafica.janelaDialogEdicao();
+
+    }//GEN-LAST:event_jMenuItemEdicaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -540,7 +555,6 @@ public class FrmGerenciador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGerenciarAtividades;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
@@ -551,6 +565,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItemEdicao;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu.Separator jSeparator1;

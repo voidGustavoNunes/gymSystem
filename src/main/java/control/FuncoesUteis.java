@@ -6,11 +6,13 @@ package control;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -47,5 +49,22 @@ public class FuncoesUteis {
             return bFile;
         }
 
+    }
+
+    public  Icon bytesToIcon(byte[] bytes) {
+        if (bytes == null || bytes.length == 0) {
+            return null;
+        }
+
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes)) {
+            BufferedImage img = ImageIO.read(bais);
+            if (img != null) {
+                return new ImageIcon(img);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
+        return null;
     }
 }
