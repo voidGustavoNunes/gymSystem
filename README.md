@@ -1,45 +1,101 @@
-Sistema de Gestão de Academia - Projeto CRUD em Java Swing
-Bem-vindo ao README do projeto de Programação Orientada a Objetos II - Sistema de Gestão de Academia. Este projeto foi desenvolvido ao longo de seis meses e utiliza Java Swing para criar uma interface gráfica que simula as operações CRUD (Create, Read, Update, Delete) em um ambiente de academia e ginástica.
+# Sistema de Gestão de Academia - Projeto CRUD em Java Swing
 
-Descrição do Projeto
+Este projeto foi desenvolvido ao longo de seis meses e utiliza Java Swing para criar uma interface gráfica que simula as operações CRUD (Create, Read, Update, Delete) em um ambiente de academia e ginástica. Sendo implementado na disciplina de Programação Orientada a Objetos II do professor do Ifes Campus Colatina - Jean Glazar.
+
 O objetivo principal deste projeto é fornecer uma aplicação de gerenciamento para uma academia, permitindo a manipulação de informações sobre alunos, professores, modalidades de exercícios, aulas e turmas. O sistema busca oferecer uma interface amigável e eficiente, utilizando os princípios da Programação Orientada a Objetos.
 
-Funcionalidades
-Cadastro de Alunos: Permite adicionar, visualizar, atualizar e excluir informações sobre os alunos da academia, incluindo nome, idade, endereço, etc.
+## 🚀 Começando
 
-Cadastro de Instrutores: Gerencia as informações dos instrutores, como nome, especialidade, horários de aula, etc.
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Modalidades de Exercícios: Possibilita o cadastro e a gestão das modalidades oferecidas pela academia, associando-as aos instrutores responsáveis.
+Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
-Controle de Pagamentos: Registra informações relacionadas aos pagamentos dos alunos, como mensalidades, planos de pagamento, entre outros.
+### 📋 Pré-requisitos
 
-Requisitos do Sistema
-Certifique-se de ter os seguintes requisitos instalados antes de executar o projeto:
+De que coisas você precisa para instalar o software e como instalá-lo?
 
-Java Development Kit (JDK) - versão 8 ou superior
-Ambiente de desenvolvimento integrado (IDE) compatível com Java, como Eclipse ou IntelliJ
-Conexão à internet para obtenção de bibliotecas externas (se necessário)
-Instruções de Execução
-Clone o repositório para o seu ambiente de desenvolvimento local.
+```
+Dar exemplos
+```
 
-bash
-Copy code
-git clone https://github.com/seu-usuario/sistema-academia.git
-Abra o projeto na sua IDE Java.
+### 🔧 Instalação
 
-Execute o arquivo principal Main.java para iniciar a aplicação.
+Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
 
-A interface gráfica será exibida, permitindo a interação com as funcionalidades do sistema.
+Diga como essa etapa será:
 
-Contribuições
-Contribuições são bem-vindas! Se você identificar problemas, bugs ou tiver sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+```
+Dar exemplos
+```
 
-Autor
-[Seu Nome]
-[Seu E-mail]
-[Link para o seu perfil no GitHub]
+E repita:
 
-Obrigado por escolher o Sistema de Gestão de Academia! Esperamos que este projeto seja útil e atenda às suas necessidades. Se precisar de ajuda ou tiver alguma dúvida, não hesite em entrar em contato.
+```
+Até finalizar
+```
 
-Equipe de Desenvolvimento
-[Nome da Sua Equipe]
+Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
+
+## ⚙️ Executando os testes
+
+Explicar como executar os testes automatizados para este sistema.
+
+### 🔩 Analise os testes de ponta a ponta
+
+Explique que eles verificam esses testes e porquê.
+
+```
+Dar exemplos
+```
+
+### ⌨️ E testes de estilo de codificação
+
+Explique que eles verificam esses testes e porquê.
+
+```
+Dar exemplos
+```
+
+## 📦 Implantação
+
+Adicione notas adicionais sobre como implantar isso em um sistema ativo
+
+## 🛠️ Construído com
+
+Mencione as ferramentas que você usou para criar seu projeto
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
+* [Maven](https://maven.apache.org/) - Gerente de Dependência
+* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
+
+## 🖇️ Colaborando
+
+Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+
+## 📌 Versão
+
+Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
+
+## ✒️ Autores
+
+Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
+
+* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
+* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
+
+Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
+
+## 📄 Licença
+
+Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+
+## 🎁 Expressões de gratidão
+
+* Conte a outras pessoas sobre este projeto 📢;
+* Convide alguém da equipe para uma cerveja 🍺;
+* Um agradecimento publicamente 🫂;
+* etc.
+
+
+---
+⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
