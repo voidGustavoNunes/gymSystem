@@ -4,24 +4,18 @@
  */
 package view;
 
-import control.FuncoesUteis;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import model.Aluno;
-import model.Aulas;
+import model.Turma;
 import org.hibernate.HibernateException;
-import static org.hibernate.criterion.Projections.id;
 
 /**
  *
@@ -557,6 +551,9 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         Date dataNascimento = null;
         Date dataCadastro = null;
+        int existente = 0;
+        Aluno aluno = null;
+
         int id = 0;
 
         String codigo = jFormattedFieldCodigo.getText();
@@ -596,25 +593,83 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         String pessoaIndicacao = jComboBoxPessoaIndicacao.getSelectedItem().toString();
         String observacao = jTextAreaObservacao.getText();
         Icon foto = jLabelFoto.getIcon();
-        int numeroA =  Integer.parseInt(jTextFieldNumero.getText());
+        int numeroA = Integer.parseInt(jTextFieldNumero.getText());
 
-        try {
-            id = gerDom.inserirAluno(codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha, situacao, numeroA);
-            JOptionPane.showMessageDialog(this, "Aluno " + id + " inserido com sucesso.");
-
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-
+        List<Aluno> alunos = new ArrayList();
+        List<Object> alunosGeneric = gerInterGrafica.getGerDom().listar(Aluno.class);
+        for (Object obj : alunosGeneric) {
+            if (obj instanceof Aluno) {
+                alunos.add((Aluno) obj);
+            }
+        }
+        for (Aluno alunoSel : alunos) {
+            if (codigoInt == alunoSel.getId()) {
+                aluno = alunoSel;
+                existente = 1;
+            }
         }
 
+        if (existente == 0) {
+            if (codigo == null || codigo.equals("")) {
+                JOptionPane.showMessageDialog(this, "INSIRA UM CODIGO! ");
+
+            } else {
+                try {
+
+                    id = gerDom.inserirAluno(codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha, situacao, numeroA);
+
+                    setaNull();
+                    JOptionPane.showMessageDialog(this, "Aluno " + id + " inserido com sucesso.");
+
+                } catch (HibernateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+
+                }
+            }
+        } else {
+            if (codigo == null || codigo.equals("")) {
+                JOptionPane.showMessageDialog(this, "INSIRA UM CODIGO! ");
+            } else {
+                try {
+                    id = gerDom.alterarAluno(aluno, codigoInt, profissao, diaVencimento, indicacao, pessoaIndicacao, nome, cpf, dataNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dataCadastro, senha, situacao, numeroA);
+
+                    setaNull();
+                    JOptionPane.showMessageDialog(this, "Aluno " + id + " alterado com sucesso.");
+                } catch (HibernateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+
+                }
+            }
+        }
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    public void setaNull() {
+
+        jFormattedFieldCodigo.setText("");
+        jTextFieldSenha.setText("");
+        jFormattedTextFieldDataCadastro.setText("");
+        jFormattedTextFieldTelefone.setText("");
+        jTextFieldEndereco.setText("");
+        jTextFieldNumero.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldNome.setText("");
+        jFormattedTextFieldNascimento.setText("");
+        jFormattedTextFieldCPF.setText("");
+        jTextFieldProfissao.setText("");
+        jComboBoxPessoaIndicacao.setSelectedItem(ABORT);
+        jTextAreaObservacao.setText("");
+        jLabelFoto.setIcon(null);
+    }
 
     private void jFormattedTextFieldNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldNascimentoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        setaNull();
+
         gerInterGrafica.fecharJanela(this);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -673,75 +728,74 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxIndicacaoActionPerformed
 
-    
-    public void preencherCampos( Aluno aluno){
+    public void preencherCampos(Aluno aluno) {
         jFormattedFieldCodigo.setValue(Integer.valueOf(aluno.getId()));
         jTextFieldSenha.setText(aluno.getSenha());
         jFormattedTextFieldDataCadastro.setValue(aluno.getDtCadastro()); //vai dar problema
-        
+
         String situacao = aluno.getSituacao();
-        if(situacao == "Desligado"){
+        if (situacao == "Desligado") {
             jComboBoxSituacao.setSelectedIndex(1);
-        
-        }else if(situacao == "Inativo"){
+
+        } else if (situacao == "Inativo") {
             jComboBoxSituacao.setSelectedIndex(2);
-        
+
         }
         jFormattedTextFieldTelefone.setText(aluno.getTelefone());
         jTextFieldEndereco.setText(aluno.getEndereco());
-        
+
         int numero = aluno.getNumero();
         jTextFieldNumero.setText(String.valueOf(numero));
         jTextFieldBairro.setText(aluno.getBairro());
         jTextFieldCidade.setText(aluno.getCidade());
         jTextFieldNome.setText(aluno.getNome());
         char genero = aluno.getGenero();
-        
-        if(genero == 'M'){
+
+        if (genero == 'M') {
             jComboBoxGenero.setSelectedIndex(0);
-        }else if(genero == 'F'){
+        } else if (genero == 'F') {
             jComboBoxGenero.setSelectedIndex(1);
-        }else{
+        } else {
             jComboBoxGenero.setSelectedIndex(2);
         }
-        
+
         jFormattedTextFieldNascimento.setValue(aluno.getDtNascimento()); //vai dar problema
         jFormattedTextFieldCPF.setText(aluno.getCpf());
         jTextFieldProfissao.setText(aluno.getProfissao());
-        
+
         int diaVencimento = aluno.getDiaVencimento();
-        if(diaVencimento == 1){
+        if (diaVencimento == 1) {
             jComboBoxDiaVencimento.setSelectedIndex(0);
-        
-        }else if(diaVencimento == 5){
+
+        } else if (diaVencimento == 5) {
             jComboBoxDiaVencimento.setSelectedIndex(1);
-        
-        }else if(diaVencimento == 10){
+
+        } else if (diaVencimento == 10) {
             jComboBoxDiaVencimento.setSelectedIndex(2);
 
-        
-        }else if(diaVencimento == 20){
+        } else if (diaVencimento == 20) {
             jComboBoxDiaVencimento.setSelectedIndex(3);
-        
-        }else{
+
+        } else {
             jComboBoxDiaVencimento.setSelectedIndex(4);
-        
+
         }
         boolean indicacao = aluno.isIndicacao();
-        
-        if(indicacao == true){
+
+        if (indicacao == true) {
             jComboBoxIndicacao.setSelectedIndex(0);
 
-        }else{
+        } else {
             jComboBoxIndicacao.setSelectedIndex(1);
         }
         jTextAreaObservacao.setText(aluno.getObservacao());
         byte[] foto = aluno.getFoto();
         Icon fotoIcon;
         fotoIcon = gerInterGrafica.getFun().bytesToIcon(foto);
-        
+
         jLabelFoto.setIcon(fotoIcon);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -783,10 +837,10 @@ public class DialogCadastroAluno extends javax.swing.JDialog {
             }
         });
     }
-    
-    protected void abrirJanela(Aluno aluno){
+
+    protected void abrirJanela(Aluno aluno) {
         gerInterGrafica.abreJanelaPreencheCampos(aluno);
-        
+
         setVisible(true);
     }
 

@@ -43,9 +43,9 @@ public class TurmaAlunoTableModel extends AbstractTableModel {
                 aluno.getCpf();
             case 3 ->
                 aluno.getGenero();
-            case 4->
+            case 4 ->
                 aluno.getSituacao();
-            case 5->
+            case 5 ->
                 aluno.getProfissao();
             default ->
                 "";
@@ -75,5 +75,14 @@ public class TurmaAlunoTableModel extends AbstractTableModel {
     public void setList(List<Aluno> novaLista) {
         lista = novaLista;
         fireTableRowsInserted(0, lista.size() - 1);
+    }
+
+    public void limparValoresDasCelulas() {
+        List<Aluno> aluno = new ArrayList();
+        for (int row = 0; row < getRowCount(); row++) {
+            for (int col = 0; col < getColumnCount(); col++) {
+                setList(aluno);
+            }
+        }
     }
 }

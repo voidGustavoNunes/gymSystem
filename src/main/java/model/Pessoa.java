@@ -70,7 +70,7 @@ public abstract class Pessoa implements Serializable{
     String senha;
     
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY) //autonumeracao por cada tabela
+    //@GeneratedValue( strategy = GenerationType.) //autonumeracao por cada tabela
     int id;
     
     int numero;

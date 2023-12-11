@@ -14,6 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import org.hibernate.HibernateException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Exercicio;
+import model.Turma;
 
 /**
  *
@@ -67,6 +71,7 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         jCheckBoxEquilibrio = new javax.swing.JCheckBox();
         jCheckBoxFlexibilidade = new javax.swing.JCheckBox();
         jSpinnerRepeticoes = new javax.swing.JSpinner();
+        jButtonExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
@@ -167,11 +172,6 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Função"));
 
         jCheckBoxEmagrecer.setText("Emagrecer");
-        jCheckBoxEmagrecer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxEmagrecerActionPerformed(evt);
-            }
-        });
 
         jCheckBoxMassaMuscular.setText("Ganhar Massa Muscular");
         jCheckBoxMassaMuscular.setToolTipText("");
@@ -300,6 +300,14 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setEnabled(false);
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         menuConsultas.setMnemonic('c');
         menuConsultas.setText("Consultas");
@@ -489,6 +497,8 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -503,16 +513,13 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBoxEmagrecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEmagrecerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxEmagrecerActionPerformed
 
     private void jCheckBoxMassaMuscularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMassaMuscularActionPerformed
         // TODO add your handling code here:
@@ -532,7 +539,7 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             // Lidar com a situação em que a conversão falha (se a String não for um número válido)
             e.printStackTrace(); // Ou faça outro tratamento de erro adequado
-        }        
+        }
         //funcao    
         ArrayList<JCheckBox> checkBoxList = new ArrayList<>(); // Lista para armazenar checkboxes
         ArrayList<String> checkBoxMarcado = new ArrayList<>(); // Lista para armazenar checkboxes marcados
@@ -560,13 +567,38 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
 
         try {
             int id = gerDom.inserirExercicio(nome, jsonCheckboxMarcado, series, repeticoes, idadeRecomendada, tipo);
+            JOptionPane.showMessageDialog(this, "Exercicio " + id + " inserido com sucesso.");
+            setaNull();
         } catch (HibernateException ex) {
             Logger.getLogger(DialogCriarExercicio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButtonCriarActionPerformed
+    public void setaEnable() {
+        jButtonExcluir.setEnabled(true);
+
+    }
+
+    public void setaNull() {
+
+        jTextFieldNomeExercício.setText("");
+        jComboBoxSeries.setSelectedIndex(0);
+        jSpinnerRepeticoes.setValue(0);
+        jComboBoxTipo.setSelectedIndex(0);
+        jComboBoxIdadeRecomendada.setSelectedIndex(0);
+        jCheckBoxEmagrecer.setSelected(false);
+        jCheckBoxMassaMuscular.setSelected(false);
+        jCheckBoxIntroducao.setSelected(false);
+        jCheckBoxEquilibrio.setSelected(false);
+        jCheckBoxAerobico.setSelected(false);
+        jCheckBoxCardio.setSelected(false);
+        jCheckBoxResistencia.setSelected(false);
+        jCheckBoxFlexibilidade.setSelected(false);
+
+    }
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        setaNull();
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -639,6 +671,187 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        String nome = jTextFieldNomeExercício.getText();
+
+        List<Exercicio> exercicio = gerInterGrafica.getGerDom().pesquisar();
+        int encontrado = 0;
+        Exercicio exercicioSelecionado = null;
+
+        for (Exercicio ex : exercicio) {
+            if (ex.getNome().equals(nome)) {
+                encontrado = 1;
+                exercicioSelecionado = ex;
+            }
+
+        }
+        if (encontrado == 1) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja excluir o exercicio de id " + exercicioSelecionado.getId() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                try {
+                    gerInterGrafica.getGerDom().excluir(exercicioSelecionado);
+                    setaNull();
+                } catch (HibernateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi encontrado nenhum exercicio relacionado a esse nome!");
+
+        }
+
+
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    public void preencherCampos(Exercicio ex) {
+        jTextFieldNomeExercício.setText(ex.getNome());
+        switch (ex.getSeries()) {
+            case 1:
+                jComboBoxSeries.setSelectedIndex(0);
+                break;
+            case 2:
+                jComboBoxSeries.setSelectedIndex(1);
+                break;
+            case 3:
+                jComboBoxSeries.setSelectedIndex(2);
+                break;
+            case 4:
+                jComboBoxSeries.setSelectedIndex(3);
+                break;
+            case 5:
+                jComboBoxSeries.setSelectedIndex(4);
+                break;
+            case 6:
+                jComboBoxSeries.setSelectedIndex(5);
+                break;
+            case 7:
+                jComboBoxSeries.setSelectedIndex(6);
+                break;
+            case 8:
+                jComboBoxSeries.setSelectedIndex(7);
+                break;
+            case 9:
+                jComboBoxSeries.setSelectedIndex(8);
+                break;
+            case 10:
+                jComboBoxSeries.setSelectedIndex(9);
+                break;
+        }
+        jSpinnerRepeticoes.setValue(ex.getRepeticoesPorSerie());
+        switch (ex.getTipo()) {
+            case "Braço":
+                jComboBoxTipo.setSelectedIndex(0);
+                break;
+            case "Pernas":
+                jComboBoxTipo.setSelectedIndex(1);
+                break;
+            case "Glúteos":
+                jComboBoxTipo.setSelectedIndex(2);
+                break;
+            case "Panturrilha":
+                jComboBoxTipo.setSelectedIndex(3);
+                break;
+            case "Antebraço":
+                jComboBoxTipo.setSelectedIndex(4);
+                break;
+            case "Posterior":
+                jComboBoxTipo.setSelectedIndex(5);
+                break;
+            case "Abdômem":
+                jComboBoxTipo.setSelectedIndex(6);
+                break;
+            case "Peitoral":
+                jComboBoxTipo.setSelectedIndex(7);
+                break;
+            case "Calcanhar":
+                jComboBoxTipo.setSelectedIndex(8);
+                break;
+
+        }
+
+        switch (ex.getIdadeRecomendada()) {
+            case "De 14 a 18 anos":
+                jComboBoxIdadeRecomendada.setSelectedIndex(0);
+                break;
+            case "De 18 a 40 anos":
+                jComboBoxIdadeRecomendada.setSelectedIndex(1);
+                break;
+            case "De 40 a 60 anos":
+                jComboBoxIdadeRecomendada.setSelectedIndex(2);
+                break;
+            case "60 +":
+                jComboBoxIdadeRecomendada.setSelectedIndex(3);
+                break;
+            case "Todas":
+                jComboBoxIdadeRecomendada.setSelectedIndex(4);
+                break;
+
+        }
+//        switch (ex.getFuncao()) {
+//            case "Emagrecer":
+//                jCheckBoxEmagrecer.setSelected(true);
+//                break;
+//            case "Ganhar Massa Muscular":
+//                jCheckBoxMassaMuscular.setSelected(true);
+//                break;
+//            case "Introdução":
+//                jCheckBoxIntroducao.setSelected(true);
+//                break;
+//            case "Equilíbrio":
+//                jCheckBoxEquilibrio.setSelected(true);
+//                break;
+//            case "Aeróbico":
+//                jCheckBoxAerobico.setSelected(true);
+//                break;
+//            case "Cardio":
+//                jCheckBoxCardio.setSelected(true);
+//                break;
+//            case "Gerar Resistência":
+//                jCheckBoxResistencia.setSelected(true);
+//                break;
+//            case "Flexibilidade":
+//                jCheckBoxFlexibilidade.setSelected(true);
+//                break;
+//
+//        }
+
+        String funcaoDoEx = ex.getFuncao(); // Obtém a string dos valores do banco
+
+        // Remove os colchetes e espaços em branco e divide a string em partes
+        String[] valoresDoBanco = funcaoDoEx.replaceAll("\\[|\\]", "").split(",");
+
+        for (String valor : valoresDoBanco) {
+            switch (valor) {
+                case "Emagrecer":
+                    jCheckBoxEmagrecer.setSelected(true);
+                    break;
+                case "Ganhar Massa Muscular":
+                    jCheckBoxMassaMuscular.setSelected(true);
+                    break;
+                case "Introdução":
+                    jCheckBoxIntroducao.setSelected(true);
+                    break;
+                case "Equilíbrio":
+                    jCheckBoxEquilibrio.setSelected(true);
+                    break;
+                case "Aeróbico":
+                    jCheckBoxAerobico.setSelected(true);
+                    break;
+                case "Cardio":
+                    jCheckBoxCardio.setSelected(true);
+                    break;
+                case "Gerar Resistência":
+                    jCheckBoxResistencia.setSelected(true);
+                    break;
+                case "Flexibilidade":
+                    jCheckBoxFlexibilidade.setSelected(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -692,6 +905,7 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
     private javax.swing.JMenuItem itemProfessorConsulta;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCriar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JCheckBox jCheckBoxAerobico;
     private javax.swing.JCheckBox jCheckBoxCardio;
     private javax.swing.JCheckBox jCheckBoxEmagrecer;

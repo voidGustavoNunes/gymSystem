@@ -5,8 +5,11 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +20,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -33,7 +38,10 @@ public class Turma implements Serializable{
     @JoinColumn(name = "idAula")
     private Aulas aulas;
     
-    String horarios;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="idTurma")
+    private Horario horarios;
+    
     
     @Column (name = "nomeTurma", nullable = false)
     String nome;
@@ -71,14 +79,6 @@ public class Turma implements Serializable{
     }
     
 
-    public String getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -90,21 +90,24 @@ public class Turma implements Serializable{
     public Turma() {
     }
 
-    public Turma(int idTurma, Aulas aulas, String horarios, String nome) {
-        this.idTurma = idTurma;
+    public Turma(Aulas aulas, String nome, String segunda, String terca, String quarta, String quinta, String sexta, String sabado) {
         this.aulas = aulas;
-        this.horarios = horarios;
         this.nome = nome;
-        
+        this.horarios = new Horario(segunda, terca, quarta, quinta, sexta, sabado);
+        this.horarios.setTurma(this);
         
     }
 
-    public Turma(Aulas aulas, String horarios, String nome) {
-        this.aulas = aulas;
-        this.horarios = horarios;
-        this.nome = nome;
+    public Horario getHorarios() {
+        return horarios;
     }
-    
+
+    public void setHorarios(Horario horarios) {
+        this.horarios = horarios;
+    }
+
+
+
     
 
     

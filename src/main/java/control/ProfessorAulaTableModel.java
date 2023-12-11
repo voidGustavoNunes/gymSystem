@@ -86,4 +86,13 @@ public class ProfessorAulaTableModel extends AbstractTableModel {
     public ProfessorAulaTableModel() {
     }
 
+    public void limparValoresDasCelulas() {
+        List<Professor> professor = new ArrayList();
+
+        for (int row = 0; row < getRowCount(); row++) {
+            for (int col = 0; col < getColumnCount(); col++) {
+                setList(professor);
+            }
+        }
+    }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Aulas;
 import model.Professor;
 import org.hibernate.HibernateException;
 
@@ -366,8 +367,16 @@ public class DialogAulas extends javax.swing.JDialog {
         String nome = jTextFieldNomeAula.getText();
         String id = jTextFieldId.getText();
         int idInt = Integer.parseInt(id);
-        
-        gerDom.inserirAula(nome, idInt);
+
+        try {
+            gerDom.inserirAula(nome, idInt);
+            JOptionPane.showMessageDialog(this, "Aula cadastrada com sucesso!");
+            jTextFieldNomeAula.setText("");
+            jTextFieldId.setText("");
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO ao cadastrar", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jTextFieldNomeAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeAulaActionPerformed
@@ -376,6 +385,8 @@ public class DialogAulas extends javax.swing.JDialog {
 
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        jTextFieldNomeAula.setText("");
+        jTextFieldId.setText("");
         gerInter.fecharJanela(this);
 
 
@@ -477,6 +488,15 @@ public class DialogAulas extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public void preencherCampos(Aulas aula) {
+        int id = aula.getIdAula();
+        String idString = String.valueOf(id);
+
+        jTextFieldId.setText(idString);
+        jTextFieldNomeAula.setText(aula.getTipo());
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

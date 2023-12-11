@@ -7,6 +7,7 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Aluno;
 
 import model.AlunoProfessorExercicio;
 
@@ -71,6 +72,15 @@ public class AlunoProfessorExercicioTableModel extends AbstractTableModel {
     public void setList(List<AlunoProfessorExercicio> novaLista) {
         lista = novaLista;
         fireTableRowsInserted(0, lista.size() - 1);
+    }
+    
+        public void limparValoresDasCelulas() {
+        List<AlunoProfessorExercicio> alunoProfEx = new ArrayList();
+        for (int row = 0; row < getRowCount(); row++) {
+            for (int col = 0; col < getColumnCount(); col++) {
+                setList(alunoProfEx);
+            }
+        }
     }
 
 }

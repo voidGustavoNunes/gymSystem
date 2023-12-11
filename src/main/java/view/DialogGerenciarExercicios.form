@@ -425,7 +425,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonEditar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Excluir"/>
+        <Property name="text" type="java.lang.String" value="Remover"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarActionPerformed"/>
@@ -456,7 +456,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBoxAluno" pref="543" max="32767" attributes="0"/>
+                              <Component id="jComboBoxAluno" pref="544" max="32767" attributes="0"/>
                               <Component id="jComboBoxExercicio" max="32767" attributes="0"/>
                           </Group>
                       </Group>

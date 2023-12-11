@@ -5,6 +5,7 @@
 package control;
 
 import dao.AlunoDao;
+import dao.AlunoProfExercicioDao;
 import dao.AulasDao;
 import dao.ConexaoAjuda;
 import dao.ConexaoHibernate;
@@ -12,14 +13,17 @@ import dao.ExercicioDao;
 import dao.GenericDao;
 import dao.ProfessorDao;
 import dao.TurmaDao;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.swing.Icon;
 import model.Aluno;
 import model.AlunoProfessorExercicio;
 import model.Aulas;
 import model.Exercicio;
+import model.Horario;
 import model.Professor;
 import model.Turma;
 import org.hibernate.HibernateException;
@@ -36,6 +40,9 @@ public class GerenciadorDominio {
     private TurmaDao turmaDao;
     private ExercicioDao exDao;
     private ConexaoAjuda conAj;
+    private AlunoProfExercicioDao alProfExDao;
+
+    FuncoesUteis fun;
 
     GenericDao genDao = new GenericDao();
 
@@ -48,6 +55,8 @@ public class GerenciadorDominio {
         exDao = new ExercicioDao();
         conAj = new ConexaoAjuda();
         genDao = new GenericDao();
+        alProfExDao = new AlunoProfExercicioDao();
+        
     }
 
     public GenericDao getGenDao() {
@@ -79,8 +88,8 @@ public class GerenciadorDominio {
         return aluno.getId();
     }
 
-    public int inserirProfessor(String situacao, String numeroRegistro, String horarios, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, int id, int numero) throws HibernateException {
-        Professor professor = new Professor(situacao, numeroRegistro, horarios, usuarioMaster, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, id, numero);
+    public int inserirProfessor(String situacao, String numeroRegistro, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha, int id, int numero, String formacao, String instagram) throws HibernateException {
+        Professor professor = new Professor(situacao, numeroRegistro, usuarioMaster, nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, FuncoesUteis.IconToBytes(foto), dtCadastro, senha, id, numero, formacao, instagram);
 
         genDao.inserir(professor);
 
@@ -178,12 +187,12 @@ public class GerenciadorDominio {
         return lista;
     }
 
-    public List<Turma> pesquisarTurma() {
-        List<Turma> lista = null;
+    public Turma pesquisarTurma(String pesq) {
+        Turma turma = null;
 
-        lista = turmaDao.pesquisarNome();
+        turma = turmaDao.pesquisarNome(pesq);
 
-        return lista;
+        return turma;
 
     }
 
@@ -196,25 +205,113 @@ public class GerenciadorDominio {
 
     }
 
-    public List<Exercicio> pesquisarExercicio() {
+    public List<Exercicio> pesquisarNomeExercicio(String pesq) {
         List<Exercicio> lista = null;
 
-        lista = exDao.pesquisarNome();
+        lista = exDao.pesquisarNome(pesq);
 
         return lista;
 
     }
 
-    public int inserirTurma(Aulas aulas, String horarios, String nome) {
+    public int alterarExericio(AlunoProfessorExercicio ex) {
+        alProfExDao.alterar(ex);
 
-        Turma turma = new Turma(aulas, horarios, nome);
+        return ex.getChavePK().getExercicio().getId();
+    }
+
+    
+    
+
+    public List<Exercicio> pesquisar() {
+        List<Exercicio> lista = null;
+
+        lista = exDao.pesquisar();
+
+        return lista;
+    }
+
+    public int inserirTurma(Aulas aulas, String nome, String segunda, String terca, String quarta, String quinta, String sexta, String sabado) {
+
+        Turma turma = new Turma(aulas, nome, segunda, terca, quarta, quinta, sexta, sabado);
 
         genDao.inserir(turma);
 
         return turma.getIdTurma();
     }
 
+    public int alterarTurma(Turma turmaSelecionada, Aulas aula, String nome, String segunda, String terca, String quarta, String quinta, String sexta, String sabado) {
+        turmaSelecionada.setAulas(aula);
+        turmaSelecionada.setNome(nome);
+        turmaSelecionada.getHorarios().setSegunda(segunda);
+        turmaSelecionada.getHorarios().setTerca(terca);
+        turmaSelecionada.getHorarios().setQuarta(quarta);
+        turmaSelecionada.getHorarios().setQuinta(quinta);
+        turmaSelecionada.getHorarios().setSexta(sexta);
+        turmaSelecionada.getHorarios().setSabado(sabado);
 
+        turmaDao.alterar(turmaSelecionada);
 
+        return turmaSelecionada.getIdTurma();
 
+    }
+
+    public int alterarAluno(Aluno aluno, int id, String profissao, int diaVencimento, boolean indicacao,
+            String pessoaIndicacao, String nome, String cpf, Date dtNascimento, String endereco, String telefone,
+            String bairro, char genero, String cidade, String observacao, Icon foto, Date dtCadastro, String senha,
+            String situacao, int numero) {
+        aluno.setId(id);
+        aluno.setProfissao(profissao);
+        aluno.setDiaVencimento(diaVencimento);
+        aluno.setIndicacao(indicacao);
+        aluno.setPessoaIndicacao(pessoaIndicacao);
+        aluno.setNome(nome);
+        aluno.setCpf(cpf);
+        aluno.setDtNascimento(dtNascimento);
+        aluno.setEndereco(endereco);
+        aluno.setTelefone(telefone);
+        aluno.setBairro(bairro);
+        aluno.setGenero(genero);
+        aluno.setCidade(cidade);
+        aluno.setObservacao(observacao);
+        aluno.setFoto(FuncoesUteis.IconToBytes(foto));
+        aluno.setDtCadastro(dtCadastro);
+        aluno.setSenha(senha);
+        aluno.setSituacao(situacao);
+        aluno.setNumero(numero);
+
+        alunoDao.alterar(aluno);
+
+        return aluno.getId();
+    }
+
+    public int alterarProfessor(Professor professor, String situacao, String numeroRegistro, boolean usuarioMaster,
+            String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero,
+            String cidade, String observacao, Icon foto, Date dtCadastro, String senha, int id, int numero,
+            String formacao, String instagram) {
+
+        professor.setSituacao(situacao);
+        professor.setNumeroRegistro(numeroRegistro);
+        professor.setUsuarioMaster(usuarioMaster);
+        professor.setNome(nome);
+        professor.setCpf(cpf);
+        professor.setDtNascimento(dtNascimento);
+        professor.setEndereco(endereco);
+        professor.setTelefone(telefone);
+        professor.setBairro(bairro);
+        professor.setGenero(genero);
+        professor.setCidade(cidade);
+        professor.setObservacao(observacao);
+        professor.setFoto(FuncoesUteis.IconToBytes(foto));
+        professor.setDtCadastro(dtCadastro);
+        professor.setSenha(senha);
+        professor.setId(id);
+        professor.setNumero(numero);
+        professor.setFormacao(formacao);
+        professor.setInstagram(instagram);
+
+        professorDao.alterar(professor);
+
+        return professor.getId();
+    }
 }

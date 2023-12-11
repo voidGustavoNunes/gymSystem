@@ -177,7 +177,12 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.setText("Gerar Relatorio");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar2.setText("Cancelar");
         jButtonCancelar2.addActionListener(new java.awt.event.ActionListener() {
@@ -415,12 +420,14 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
         } catch (HibernateException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO pesquisar", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
+        jComboBoxPesquisaItens.setSelectedItem(ABORT);
+        jTextFieldPesquisa.setText("");
+        alunoTableModel.limparValoresDasCelulas();
         gerInterGrafica.fecharJanela(this);
 
 
@@ -439,7 +446,7 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
             }
         }
 
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void itemProfessorConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProfessorConsultaActionPerformed
@@ -501,28 +508,34 @@ public class DialogConsultaAluno extends javax.swing.JDialog {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         int linha = jTableAlunos.getSelectedRow();
-        
-        if ( linha >= 0) {
+
+        if (linha >= 0) {
             try {
                 // EXCLUIR
                 Aluno aluno = alunoTableModel.getAluno(linha);
-                if ( JOptionPane.showConfirmDialog(this,"Deseja excluir o aluno " + aluno.getNome() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION ) {             
-                    
+                if (JOptionPane.showConfirmDialog(this, "Deseja excluir o aluno " + aluno.getNome() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
                     gerInterGrafica.getInstance().getGerDom().excluir(aluno);
                     alunoTableModel.remover(linha);
                 }
             } catch (HibernateException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "ERRO excluir", JOptionPane.ERROR_MESSAGE);
         }
 
 
-
-
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+
+        jComboBoxPesquisaItens.setSelectedItem(ABORT);
+        jTextFieldPesquisa.setText("");
+        alunoTableModel.limparValoresDasCelulas();
+        gerInterGrafica.fecharJanela(this);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     /**
      * @param args the command line arguments

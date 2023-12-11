@@ -129,8 +129,6 @@ public class GerInterfaceGrafica {
 
     }
 
-    
-    
     //ABRIR DIALOG
     private JDialog abrirJanelaDiferente(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
@@ -146,7 +144,7 @@ public class GerInterfaceGrafica {
         return dlg;
 
     }
-    
+
     private JDialog abrirJanela(JDialog dlg, Class classe) {
         if (dlg == null) {
             try {
@@ -314,23 +312,48 @@ public class GerInterfaceGrafica {
 
     public void abreJanelaPreencheCampos(Object ob) {
         DialogCadastroAluno dialogAluno = null;
+        DialogCadastroProfessor dialogProfessor = null;
+        DialogTurma dialogTurma = null;
+        DialogAulas dialogAulas = null;
+        DialogCriarExercicio dialogEx = null;
         if (ob != null) {
             if (ob.getClass() == Aluno.class) {
                 aluno = (Aluno) ob;
-                dialogAluno = (DialogCadastroAluno) abrirJanelaDiferente(janPrinc,janCadAluno,  DialogCadastroAluno.class);
+                dialogAluno = (DialogCadastroAluno) abrirJanelaDiferente(janPrinc, janCadAluno, DialogCadastroAluno.class);
                 dialogAluno.preencherCampos(aluno);
                 dialogAluno.setVisible(true);
 
             } else if (ob.getClass() == Professor.class) {
                 professor = (Professor) ob;
+                dialogProfessor = (DialogCadastroProfessor) abrirJanelaDiferente(janPrinc, janCadProf, DialogCadastroProfessor.class);
+                dialogProfessor.preencherCampos(professor);
+                dialogProfessor.setVisible(true);
 
             } else if (ob.getClass() == Aulas.class) {
                 aula = (Aulas) ob;
 
+                dialogAulas = (DialogAulas) abrirJanelaDiferente(janPrinc, janAulas, DialogAulas.class);
+                dialogAulas.preencherCampos(aula);
+                dialogAulas.setVisible(true);
+                
+
             } else if (ob.getClass() == Turma.class) {
                 turma = (Turma) ob;
+
+                dialogTurma = (DialogTurma) abrirJanelaDiferente(janPrinc, janCadastroTurma, DialogTurma.class);
+                dialogTurma.preencherCampos(turma);
+                dialogTurma.tornaExcluirVisivel();
+                dialogTurma.setVisible(true);
+                
+
             } else if (ob.getClass() == Exercicio.class) {
                 ex = (Exercicio) ob;
+                
+                dialogEx = (DialogCriarExercicio) abrirJanelaDiferente(janPrinc, janCriaEx, DialogCriarExercicio.class);
+                dialogEx.preencherCampos(ex);
+                dialogEx.setaEnable();
+                dialogEx.setVisible(true);
+                
             }
 
         }

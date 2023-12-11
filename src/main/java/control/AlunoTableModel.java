@@ -13,14 +13,13 @@ import model.Aluno;
  *
  * @author Gustavo
  */
-public class AlunoTableModel extends AbstractTableModel{
+public class AlunoTableModel extends AbstractTableModel {
 
     public AlunoTableModel() {
     }
 
-     
     private List<Aluno> lista = new ArrayList();
-    
+
     @Override
     public int getRowCount() {
         return lista.size();
@@ -35,49 +34,62 @@ public class AlunoTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Aluno item = lista.get(rowIndex);
         return switch (columnIndex) {
-            case 0 -> item.getCpf();
-            case 1 -> item.getNome();
-            case 2 -> item.getId();
-            case 3 -> item.getDiaVencimento();
-            case 4 -> item.getTurmas();
-            default -> "";
+            case 0 ->
+                item.getCpf();
+            case 1 ->
+                item.getNome();
+            case 2 ->
+                item.getId();
+            case 3 ->
+                item.getDiaVencimento();
+            case 4 ->
+                item.getTurmas();
+            default ->
+                "";
         };
-         
+
     }
-    
-    
+
     @Override
-    public String getColumnName(int columnIndex ) {
+    public String getColumnName(int columnIndex) {
         String colunas[] = {"Cpf", "Nome", "ID", "Dia de Vencimento", "Turmas"};
         return colunas[columnIndex];
     }
-    
-    
+
     public void adicionar(Aluno aluno) {
         lista.add(aluno);
-        fireTableRowsInserted( lista.size() - 1 , lista.size() - 1);
+        fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
+
     public Aluno getAluno(int row) {
         return lista.get(row);
     }
 
-    
     public void remover(int row) {
         lista.remove(row);
-        fireTableRowsDeleted(lista.size() - 1 , lista.size() - 1);
+        fireTableRowsDeleted(lista.size() - 1, lista.size() - 1);
     }
-    
+
     public void removeAll() {
         lista.clear();
-        fireTableRowsDeleted(lista.size() - 1 , lista.size() - 1);
+        fireTableRowsDeleted(lista.size() - 1, lista.size() - 1);
     }
-        
+
     public void setList(List<Aluno> novaLista) {
         lista = novaLista;
-        fireTableRowsInserted( 0 , lista.size() - 1);
+        fireTableRowsInserted(0, lista.size() - 1);
     }
-    
+
     public List<Aluno> getList() {
         return lista;
+    }
+
+    public void limparValoresDasCelulas() {
+        List<Aluno> aluno = new ArrayList();
+        for (int row = 0; row < getRowCount(); row++) {
+            for (int col = 0; col < getColumnCount(); col++) {
+                setList(aluno);
+            }
+        }
     }
 }

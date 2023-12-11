@@ -6,6 +6,7 @@ package view;
 
 import control.GerInterfaceGrafica;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -20,8 +21,9 @@ public class DialogAjuda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,7 +152,12 @@ public class DialogAjuda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextFieldNome.setText("");
+        jFormattedTextFieldCPF.setText("");
+        jTextAreaDuvida.setText("");
+        jTextFieldEmail.setText("");
         gerInter.fecharJanela(this);
+
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -160,13 +167,20 @@ public class DialogAjuda extends javax.swing.JDialog {
         String cpf = jFormattedTextFieldCPF.getText();
         String duvida = jTextAreaDuvida.getText();
         String email = jTextFieldEmail.getText();
-        
-        gerInter.getGerDom().getConAj().conectar(cpf, nome, email, duvida);
-        JOptionPane.showMessageDialog(this," EMAIL ENVIADO COM SUCESSO! ");
 
-        
-        
-        
+        try {
+            gerInter.getGerDom().getConAj().conectar(cpf, nome, email, duvida);
+            JOptionPane.showMessageDialog(this, " EMAIL ENVIADO COM SUCESSO! ");
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        jTextFieldNome.setText("");
+        jFormattedTextFieldCPF.setText("");
+        jTextAreaDuvida.setText("");
+        jTextFieldEmail.setText("");
+        gerInter.fecharJanela(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jFormattedTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFActionPerformed

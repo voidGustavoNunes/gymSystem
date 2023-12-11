@@ -30,10 +30,27 @@ public class Professor extends Pessoa implements Serializable {
     @Column(nullable = false)
     String numeroRegistro;
 
-    @Column(columnDefinition = "TEXT")
-    String horarios;
-
     boolean usuarioMaster;
+    
+    String formacao;
+    
+    String instagram;
+
+    public String getFormacao() {
+        return formacao;
+    }
+
+    public void setFormacao(String formacao) {
+        this.formacao = formacao;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY)//TERMINAR
     @JoinTable(name = "Professor_Aulas",
@@ -63,13 +80,6 @@ public class Professor extends Pessoa implements Serializable {
         this.numeroRegistro = numeroRegistro;
     }
 
-    public String getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
 
     public boolean isUsuarioMaster() {
         return usuarioMaster;
@@ -98,11 +108,10 @@ public class Professor extends Pessoa implements Serializable {
     public Professor() {
     }
 
-    public Professor(String situacao, String numeroRegistro, String horarios, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id, int numero) {
+    public Professor(String situacao, String numeroRegistro, boolean usuarioMaster, String nome, String cpf, Date dtNascimento, String endereco, String telefone, String bairro, char genero, String cidade, String observacao, byte[] foto, Date dtCadastro, String senha, int id, int numero, String formacao, String instagram) {
         super(nome, cpf, dtNascimento, endereco, telefone, bairro, genero, cidade, observacao, foto, dtCadastro, senha, id, situacao, numero);
         this.situacao = situacao;
         this.numeroRegistro = numeroRegistro;
-        this.horarios = horarios;
         this.usuarioMaster = usuarioMaster;
     }
 

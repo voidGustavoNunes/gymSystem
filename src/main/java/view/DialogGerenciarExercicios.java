@@ -134,7 +134,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jButtonEditar.setText("Excluir");
+        jButtonEditar.setText("Remover");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditarActionPerformed(evt);
@@ -169,7 +169,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxAluno, 0, 543, Short.MAX_VALUE)
+                            .addComponent(jComboBoxAluno, 0, 544, Short.MAX_VALUE)
                             .addComponent(jComboBoxExercicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -465,16 +465,32 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
         }
 
-        gerInterGrafica.getGerDom().getGenDao().alterar(alProfEx);
+        try {
+            int id = gerInterGrafica.getGerDom().alterarExericio(alProfEx);
+            JOptionPane.showMessageDialog(this,  " Exercicio " + id + "alterado com sucesso!");
 
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO ao inserir", JOptionPane.ERROR_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCriarExercícioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarExercícioActionPerformed
+
         gerInterGrafica.janelaCriarExercicio();
     }//GEN-LAST:event_jButtonCriarExercícioActionPerformed
+    public void setaNull() {
+        jComboBoxExercicio.setSelectedItem(ABORT);
+        jComboBoxAluno.setSelectedItem(ABORT);
+        jComboBoxProfessor.setSelectedItem(ABORT);
+        exTable.limparValoresDasCelulas();
+    }
+
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        setaNull();
+
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

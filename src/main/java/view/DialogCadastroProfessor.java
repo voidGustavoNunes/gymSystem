@@ -4,20 +4,17 @@
  */
 package view;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.Icon;
-import javax.swing.table.TableModel;
+import javax.swing.JOptionPane;
+import model.Professor;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -58,14 +55,14 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         jLabelFoto = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableHorarios = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaObservacoes = new javax.swing.JTextArea();
         jTextFieldNumeroRegistro = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldFormacao = new javax.swing.JTextField();
+        jFormattedTextFieldInstagram = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
-        jTextFieldCodigo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -75,6 +72,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxUsuarioMaster = new javax.swing.JComboBox<>();
+        jFormattedTextFieldCodigo = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldNumero = new javax.swing.JTextField();
@@ -167,40 +165,13 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
 
         jLabel17.setText("Observações:");
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Horários"));
-
-        jTableHorarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableHorarios);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jTextAreaObservacoes.setColumns(20);
         jTextAreaObservacoes.setRows(5);
         jScrollPane2.setViewportView(jTextAreaObservacoes);
+
+        jLabel2.setText("Formação:");
+
+        jLabel4.setText("Instagram:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -208,48 +179,58 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel20)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addComponent(jLabel21)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBoxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jFormattedTextFieldNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addComponent(jLabel23)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextFieldNumeroRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextFieldNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumeroRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 168, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jFormattedTextFieldInstagram))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldFormacao, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(jComboBoxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,30 +246,29 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(jTextFieldNumeroRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldFormacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jFormattedTextFieldInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jLabel17)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Sistema"));
-
-        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodigoActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("Código:");
 
         jLabel13.setText("Senha:");
 
-        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Desligado", "Outro" }));
+        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Desligado", "Inativo" }));
 
         jLabel9.setText("Situação:");
 
@@ -309,6 +289,8 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
             }
         });
 
+        jFormattedTextFieldCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####"))));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -323,8 +305,8 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                         .addComponent(jLabel13)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(jTextFieldSenha))
+                    .addComponent(jTextFieldSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextFieldCodigo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -341,15 +323,15 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxUsuarioMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 103, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +423,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -449,11 +431,11 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -467,7 +449,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jButtonConfirmar.setText("Confirmar");
@@ -495,7 +477,7 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(39, 39, 39))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -512,11 +494,11 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addGap(8, 8, 8)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -534,15 +516,15 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCpfActionPerformed
 
-    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
-
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Suponha que o formato seja dia/mês/ano
 
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        String codigoText = jTextFieldCodigo.getText();
+
+        Professor professor = null;
+        int existente = 0;
+
+        String codigoText = jFormattedTextFieldCodigo.getText();
         int codigo = Integer.parseInt(codigoText);
         String senha = jTextFieldSenha.getText();
         Date dataCadastro = null;
@@ -580,40 +562,79 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         String numeroRegistro = jTextFieldNumeroRegistro.getText();
         String observacoes = jTextAreaObservacoes.getText();
         Icon foto = jLabelFoto.getIcon();
+        String instagram = jFormattedTextFieldInstagram.getText();
+        String formacao = jTextFieldFormacao.getText();
 
-        TableModel horarioTable = jTableHorarios.getModel();
-        // Criar uma estrutura para armazenar os horários
-        Map<String, Map<String, String>> horarios = new LinkedHashMap<>();
-
-        for (int i = 0; i < horarioTable.getRowCount(); i++) {
-            String horario = Objects.toString(horarioTable.getValueAt(i, 0), ""); // Supondo que a primeira coluna é o horário
-            Map<String, String> horariosPorDia = new LinkedHashMap<>();
-
-            for (int j = 1; j < horarioTable.getColumnCount(); j++) {
-                String dia = horarioTable.getColumnName(j);
-                Object valorCelulaObj = horarioTable.getValueAt(i, j);
-
-                String valorCelula = Objects.toString(valorCelulaObj, ""); // Tratando o valor nulo
-                horariosPorDia.put(dia, valorCelula);
+        List<Professor> professores = new ArrayList();
+        List<Object> professoresGeneric = gerInterGrafica.getGerDom().listar(Professor.class);
+        for (Object obj : professoresGeneric) {
+            if (obj instanceof Professor) {
+                professores.add((Professor) obj);
             }
-            horarios.put(horario, horariosPorDia);
-        }
-        // Converter para JSON usando Jackson ObjectMapper
-        ObjectMapper objectMapper = new ObjectMapper();
-        String horariosJSON = null;
-        try {
-            horariosJSON = objectMapper.writeValueAsString(horarios);
-
-            //gerDominio.inserirProfessor(, );
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(DialogCadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        gerDominio.inserirProfessor(situacao, numeroRegistro, horariosJSON, usuarioMaster, nome, cpf, dataNascimento, endereco, telefone, bairro, generoChar, cidade, observacoes, foto, dataCadastro, senha, codigo, numero);
+        for (Professor professorSel : professores) {
+            if (codigo == professorSel.getId()) {
+                professor = professorSel;
+                existente = 1;
+            }
+        }
+
+        if (existente == 0) {
+            if (codigoText == null || codigoText.equals("")) {
+                JOptionPane.showMessageDialog(this, "INSIRA UM CODIGO! ");
+            } else {
+                try {
+                    int id = gerDominio.inserirProfessor(situacao, numeroRegistro, usuarioMaster, nome, cpf, dataNascimento, endereco, telefone, bairro, generoChar, cidade, observacoes, foto, dataCadastro, senha, codigo, numero, instagram, formacao);
+                    setaNull();
+                    JOptionPane.showMessageDialog(this, "Professor " + id + " inserido com sucesso.");
+
+                } catch (HibernateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+
+                }
+            }
+        } else {
+            if (codigoText == null || codigoText.equals("")) {
+                JOptionPane.showMessageDialog(this, "INSIRA UM CODIGO! ");
+            } else {
+                try {
+                    int id = gerDominio.alterarProfessor(professor, situacao, numeroRegistro, usuarioMaster, nome, cpf, dataNascimento, endereco, telefone, bairro, generoChar, cidade, observacoes, foto, dataCadastro, senha, codigo, numero, instagram, formacao);
+                    setaNull();
+                    JOptionPane.showMessageDialog(this, "Professor " + id + " alterado com sucesso.");
+                } catch (HibernateException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+
+                }
+            }
+        }
+
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
+    public void setaNull() {
+        jFormattedTextFieldCodigo.setText("");
+
+        jTextFieldSenha.setText("");
+
+        jFormattedTextFieldDataCadastro.setText("");
+        jFormattedTextFieldTelefone.setText("");
+        jTextFieldEndereco.setText("");
+        jTextFieldNumero.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldNome.setText("");
+        jFormattedTextFieldNascimento.setText("");
+        jFormattedTextFieldCpf.setText("");
+        jTextFieldNumeroRegistro.setText("");
+        jTextFieldFormacao.setText("");
+        jFormattedTextFieldInstagram.setText("");
+        jTextAreaObservacoes.setText("");
+        jLabelFoto.setIcon(null);
+    }
+
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        setaNull();
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -668,14 +689,68 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
         });
     }
 
+    public void preencherCampos(Professor professor) {
+        jFormattedTextFieldCodigo.setValue(Integer.valueOf(professor.getId()));
+        jTextFieldSenha.setText(professor.getSenha());
+        jFormattedTextFieldDataCadastro.setValue(professor.getDtCadastro()); //vai dar problema
+
+        String situacao = professor.getSituacao();
+        if (situacao == "Desligado") {
+            jComboBoxSituacao.setSelectedIndex(1);
+
+        } else if (situacao == "Inativo") {
+            jComboBoxSituacao.setSelectedIndex(2);
+
+        }
+        boolean usuarioMaster = professor.isUsuarioMaster();
+        if (usuarioMaster = false) {
+            jComboBoxUsuarioMaster.setSelectedIndex(1);
+
+        }
+
+        jFormattedTextFieldTelefone.setText(professor.getTelefone());
+        jTextFieldEndereco.setText(professor.getEndereco());
+
+        int numero = professor.getNumero();
+        jTextFieldNumero.setText(String.valueOf(numero));
+        jTextFieldBairro.setText(professor.getBairro());
+        jTextFieldCidade.setText(professor.getCidade());
+        jTextFieldNome.setText(professor.getNome());
+        char genero = professor.getGenero();
+
+        if (genero == 'M') {
+            jComboBoxGenero.setSelectedIndex(0);
+        } else if (genero == 'F') {
+            jComboBoxGenero.setSelectedIndex(1);
+        } else {
+            jComboBoxGenero.setSelectedIndex(2);
+        }
+
+        jFormattedTextFieldNascimento.setValue(professor.getDtNascimento()); //vai dar problema
+        jFormattedTextFieldCpf.setText(professor.getCpf());
+        jTextFieldNumeroRegistro.setText(professor.getNumeroRegistro());
+
+        jTextAreaObservacoes.setText(professor.getObservacao());
+        byte[] foto = professor.getFoto();
+        Icon fotoIcon;
+        fotoIcon = gerInterGrafica.getFun().bytesToIcon(foto);
+
+        jLabelFoto.setIcon(fotoIcon);
+        jTextFieldFormacao.setText(professor.getFormacao());
+        jFormattedTextFieldInstagram.setText(professor.getInstagram());
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboBoxGenero;
     private javax.swing.JComboBox<String> jComboBoxSituacao;
     private javax.swing.JComboBox<String> jComboBoxUsuarioMaster;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCodigo;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpf;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
+    private javax.swing.JFormattedTextField jFormattedTextFieldInstagram;
     private javax.swing.JFormattedTextField jFormattedTextFieldNascimento;
     private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabel1;
@@ -684,12 +759,14 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -699,17 +776,14 @@ public class DialogCadastroProfessor extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableHorarios;
     private javax.swing.JTextArea jTextAreaObservacoes;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
-    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldEndereco;
+    private javax.swing.JTextField jTextFieldFormacao;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldNumeroRegistro;

@@ -27,10 +27,6 @@ public class DialogEdicao extends javax.swing.JDialog {
         initComponents();
     }
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
-    
-
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +45,6 @@ public class DialogEdicao extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jComboBoxNome = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -144,14 +139,12 @@ public class DialogEdicao extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonConfirmarActionPerformed(evt);
             }
         });
-
-        jButtonConfirmar.setText("Confirmar");
 
         jButtonEditar.setText("Editar");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +158,9 @@ public class DialogEdicao extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(22, 22, 22)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -179,8 +170,7 @@ public class DialogEdicao extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -458,55 +448,53 @@ public class DialogEdicao extends javax.swing.JDialog {
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        gerInterGrafica.fecharJanela(this);
-
-
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
     private void jComboBoxItensItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxItensItemStateChanged
         int i = jComboBoxItens.getSelectedIndex();
-
+        
         switch (i) {
             case 0:
-
+                
                 gerInterGrafica.getInstance().carregarCombo(Aluno.class, jComboBoxNome);
                 break;
             case 1:
                 gerInterGrafica.getInstance().carregarCombo(Professor.class, jComboBoxNome);
                 break;
-                
+            
             case 2:
                 gerInterGrafica.getInstance().carregarCombo(Turma.class, jComboBoxNome);
+                
                 break;
             
             case 3:
                 gerInterGrafica.getInstance().carregarCombo(Aulas.class, jComboBoxNome);
                 break;
-                
+            
             case 4:
                 gerInterGrafica.getInstance().carregarCombo(Exercicio.class, jComboBoxNome);
                 break;
-              
+            
         }
-
+        
 
     }//GEN-LAST:event_jComboBoxItensItemStateChanged
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         Object ob = jComboBoxNome.getSelectedItem();
         gerInterGrafica.abreJanelaPreencheCampos(ob);
-
-
-
         
 
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-
+        
         gerInterGrafica.carregarCombo(Aluno.class, jComboBoxNome);
     }//GEN-LAST:event_formComponentShown
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        jComboBoxNome.setSelectedItem(ABORT);
+        gerInterGrafica.fecharJanela(this);
+        
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,7 +547,6 @@ public class DialogEdicao extends javax.swing.JDialog {
     private javax.swing.JMenuItem itemAtividadeCadastros;
     private javax.swing.JMenuItem itemProfessorCadastros;
     private javax.swing.JMenuItem itemProfessorConsulta;
-    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JComboBox<String> jComboBoxItens;

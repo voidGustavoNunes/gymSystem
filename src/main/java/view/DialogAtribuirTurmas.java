@@ -15,6 +15,7 @@ import model.Aluno;
 import model.Aulas;
 import model.Professor;
 import model.Turma;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -57,6 +58,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jButtonAdicionar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jButtonRetiraProfessor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
@@ -165,8 +167,8 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jComboBoxTurma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -201,7 +203,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jComboBoxAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -226,6 +228,14 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonRetiraProfessor.setText("Retirar Alunos");
+        jButtonRetiraProfessor.setEnabled(false);
+        jButtonRetiraProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetiraProfessorActionPerformed(evt);
             }
         });
 
@@ -423,12 +433,15 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 438, Short.MAX_VALUE)
-                        .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButtonRetiraProfessor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -441,7 +454,9 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jButtonRetiraProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -456,9 +471,12 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+
+        jComboBoxTurma.setSelectedItem(ABORT);
+        jComboBoxAlunos.setSelectedItem(ABORT);
+        jComboBoxAlunos.setEnabled(false);
+        turma.limparValoresDasCelulas();
         gerInter.fecharJanela(this);
-
-
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboBoxTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTurmaMouseClicked
@@ -504,8 +522,18 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
 
         }
         turmaSelecionada.setAlunos(listaAlunosTable);
-        gerInter.getGerDom().getGenDao().alterar(turmaSelecionada);
+        try {
+            gerInter.getGerDom().getGenDao().alterar(turmaSelecionada);
+            JOptionPane.showMessageDialog(this, "Turma alterada com sucesso!");
+            jComboBoxTurma.setSelectedItem(ABORT);
+            jComboBoxAlunos.setSelectedItem(ABORT);
+            jComboBoxAlunos.setEnabled(false);
+            turma.limparValoresDasCelulas();
 
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO ao alterar", JOptionPane.ERROR_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_jButtonAtribuirActionPerformed
 
@@ -525,6 +553,13 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Não há alunos associados a esta turma.");
         }
         jComboBoxAlunos.setEnabled(true);
+
+        if (model.getRowCount() != 0) {
+            jButtonRetiraProfessor.setEnabled(true);
+        } else {
+            jButtonRetiraProfessor.setEnabled(false);
+
+        }
 
     }//GEN-LAST:event_jComboBoxTurmaItemStateChanged
 
@@ -562,11 +597,23 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxAlunosItemStateChanged
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTableAlunos.getModel();
+        Turma turmaSelecionada = (Turma) jComboBoxTurma.getSelectedItem();
 
-        int linha = jTableAlunos.getSelectedRow();
+        int id = turmaSelecionada.getIdTurma();
+        if (JOptionPane.showConfirmDialog(this, "Deseja excluir a turma de id " + id + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                gerInter.getGerDom().excluir(turma);
+                jComboBoxTurma.setSelectedItem(ABORT);
+                jComboBoxAlunos.setSelectedItem(ABORT);
+                jComboBoxAlunos.setEnabled(false);
+                turma.limparValoresDasCelulas();
+                JOptionPane.showMessageDialog(this, "Turma excluida com sucesso!");
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
 
-        model.removeRow(linha);
+            }
+        }
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
@@ -631,6 +678,14 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         gerInter.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jButtonRetiraProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetiraProfessorActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTableAlunos.getModel();
+
+        int linha = jTableAlunos.getSelectedRow();
+
+        model.removeRow(linha);
+    }//GEN-LAST:event_jButtonRetiraProfessorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -685,6 +740,7 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAtribuir;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonRetiraProfessor;
     private javax.swing.JComboBox<String> jComboBoxAlunos;
     private javax.swing.JComboBox<String> jComboBoxTurma;
     private javax.swing.JLabel jLabel1;

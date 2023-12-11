@@ -20,7 +20,7 @@
     <mapping class="model.Aulas"></mapping>
     <mapping class="model.AlunoProfessorExercicio"></mapping>
     <mapping class="model.AlunoEProfessorEExercicioPK"></mapping>
-
+    <mapping class="model.Horario"></mapping>
     
 
   </session-factory>

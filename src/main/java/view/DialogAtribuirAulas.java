@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Aulas;
 import model.Professor;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -55,6 +56,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         jButtonAtribuir = new javax.swing.JButton();
         jButtonAdicionar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jButtonRetiraProfessor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
@@ -142,7 +144,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,6 +179,14 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonRetiraProfessor.setText("Retirar Professor");
+        jButtonRetiraProfessor.setEnabled(false);
+        jButtonRetiraProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetiraProfessorActionPerformed(evt);
             }
         });
 
@@ -376,16 +386,19 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(394, Short.MAX_VALUE)
-                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButtonAtribuir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonRetiraProfessor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +414,9 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jComboBoxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jButtonRetiraProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -416,6 +431,10 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        jComboBoxAulas.setSelectedItem(ABORT);
+        jComboBoxProfessor.setSelectedItem(ABORT);
+        jComboBoxProfessor.setEnabled(false);
+        professorTable.limparValoresDasCelulas();
         gerInter.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -500,16 +519,39 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
         }
         aulaSelecionada.setProfessores(listaProfessoresTable);
-        gerInter.getGerDom().getGenDao().alterar(aulaSelecionada);
+        try {
+            gerInter.getGerDom().getGenDao().alterar(aulaSelecionada);
+            JOptionPane.showMessageDialog(this, "Aula alterada com sucesso!");
+            jComboBoxAulas.setSelectedItem(ABORT);
+            jComboBoxProfessor.setSelectedItem(ABORT);
+            jComboBoxProfessor.setEnabled(false);
+            professorTable.limparValoresDasCelulas();
+            
+
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO ao alterar", JOptionPane.ERROR_MESSAGE);
+
+        }
+
 
     }//GEN-LAST:event_jButtonAtribuirActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
+        Aulas aula = (Aulas) jComboBoxAulas.getSelectedItem();
+        int id = aula.getIdAula();
+        if (JOptionPane.showConfirmDialog(this, "Deseja excluir a aula de id " + id + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                gerInter.getGerDom().excluir(aula);
+                jComboBoxAulas.setSelectedItem(ABORT);
+                jComboBoxProfessor.setSelectedItem(ABORT);
+                jComboBoxProfessor.setEnabled(false);
+                professorTable.limparValoresDasCelulas();
+                JOptionPane.showMessageDialog(this, "Aula excluida com sucesso!");
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
 
-        int linha = jTableAulasProfessor.getSelectedRow();
-
-        model.removeRow(linha);
+            }
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jComboBoxAulasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAulasItemStateChanged
@@ -532,6 +574,12 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         }
         jComboBoxProfessor.setEnabled(true);
 
+        if (model.getRowCount() != 0) {
+            jButtonRetiraProfessor.setEnabled(true);
+        } else {
+            jButtonRetiraProfessor.setEnabled(false);
+
+        }
     }//GEN-LAST:event_jComboBoxAulasItemStateChanged
 
     private void jComboBoxProfessorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProfessorItemStateChanged
@@ -562,12 +610,16 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 //        for (Professor professor : professoresNaoAdicionados) {
 //            jComboBoxProfessor.addItem(professor.getNome()); // Adiciona apenas o nome do professor
 //        }
-        gerInter.carregarCombo(Professor.class, jComboBoxProfessor);
+        gerInter.carregarCombo(Professor.class,
+                jComboBoxProfessor);
     }//GEN-LAST:event_jComboBoxProfessorItemStateChanged
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        gerInter.getInstance().carregarCombo(Aulas.class, jComboBoxAulas);
-        gerInter.getInstance().carregarCombo(Professor.class, jComboBoxProfessor);
+        gerInter.getInstance().carregarCombo(Aulas.class,
+                jComboBoxAulas);
+        gerInter
+                .getInstance().carregarCombo(Professor.class,
+                        jComboBoxProfessor);
 
     }//GEN-LAST:event_formComponentShown
 
@@ -627,6 +679,14 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
         gerInter.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jButtonRetiraProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetiraProfessorActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTableAulasProfessor.getModel();
+
+        int linha = jTableAulasProfessor.getSelectedRow();
+
+        model.removeRow(linha);
+    }//GEN-LAST:event_jButtonRetiraProfessorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -643,6 +703,7 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAtribuir;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonRetiraProfessor;
     private javax.swing.JComboBox<String> jComboBoxAulas;
     private javax.swing.JComboBox<String> jComboBoxProfessor;
     private javax.swing.JLabel jLabel1;

@@ -4,20 +4,16 @@
  */
 package view;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
-import java.util.LinkedHashMap;
+import control.HorarioTableModel;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
-import model.Aluno;
+import javax.swing.JTextField;
 import model.Aulas;
+import model.Horario;
 import model.Turma;
 import org.hibernate.HibernateException;
 
@@ -38,6 +34,7 @@ public class DialogTurma extends javax.swing.JDialog {
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
     GerenciadorDominio gerDom = new GerenciadorDominio();
     Aulas aulas = new Aulas();
+    HorarioTableModel horTable = new HorarioTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,7 +57,8 @@ public class DialogTurma extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHorarios = new javax.swing.JTable();
         jButtonCancelar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonCadastrar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
@@ -84,6 +82,11 @@ public class DialogTurma extends javax.swing.JDialog {
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -154,17 +157,7 @@ public class DialogTurma extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Horários"));
 
-        jTableHorarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
-            }
-        ));
+        jTableHorarios.setModel(horTable);
         jScrollPane1.setViewportView(jTableHorarios);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -190,10 +183,18 @@ public class DialogTurma extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCadastrar.setText("Confirmar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setEnabled(false);
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
             }
         });
 
@@ -383,8 +384,10 @@ public class DialogTurma extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -405,7 +408,8 @@ public class DialogTurma extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -413,51 +417,95 @@ public class DialogTurma extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        jTextFieldNomeTurma.setText("");
+        jComboBoxAula.setSelectedItem(ABORT);
+        horTable.limparValoresDasCelulas();
         gerInter.fecharJanela(this);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    public void tornaExcluirVisivel() {
+        jButtonExcluir.setEnabled(true);
+
+    }
+
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         String nome = jTextFieldNomeTurma.getText();
+        Aulas aula = (Aulas) jComboBoxAula.getSelectedItem();
 
-        TableModel horarioTable = jTableHorarios.getModel();
-        // Criar uma estrutura para armazenar os horários
-        Map<String, Map<String, String>> horarios = new LinkedHashMap<>();
+        List<Turma> turmas = new ArrayList<>();
+        Turma turmaSelecionada = null;
+        List<Object> turmaGeneric = gerInter.getGerDom().listar(Turma.class);
 
-        for (int i = 0; i < horarioTable.getRowCount(); i++) {
-            String horario = Objects.toString(horarioTable.getValueAt(i, 0), ""); // Supondo que a primeira coluna é o horário
-            Map<String, String> horariosPorDia = new LinkedHashMap<>();
-
-            for (int j = 1; j < horarioTable.getColumnCount(); j++) {
-                String dia = horarioTable.getColumnName(j);
-                Object valorCelulaObj = horarioTable.getValueAt(i, j);
-
-                String valorCelula = Objects.toString(valorCelulaObj, ""); // Tratando o valor nulo
-                horariosPorDia.put(dia, valorCelula);
+        for (Object obj : turmaGeneric) {
+            if (obj instanceof Turma) {
+                turmas.add((Turma) obj);
             }
-            horarios.put(horario, horariosPorDia);
-        }
-        // Converter para JSON usando Jackson ObjectMapper
-        ObjectMapper objectMapper = new ObjectMapper();
-        String horariosJSON = null;
-        try {
-            horariosJSON = objectMapper.writeValueAsString(horarios);
-
-            //gerDominio.inserirProfessor(, );
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(DialogCadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            int id = gerDom.inserirTurma(aulas, horariosJSON, nome);
-            JOptionPane.showMessageDialog(this, "Turma " + id + " inserida com sucesso.");
-
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-
         }
 
+        String segunda = "";
+        String terca = "";
+        String quarta = "";
+        String quinta = "";
+        String sexta = "";
+        String sabado = "";
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int rowCount = horTable.getRowCount();
+        int columnCount = horTable.getColumnCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                Object valorCelula = horTable.getValueAt(i, j);
+
+                if (valorCelula != null && !valorCelula.toString().isEmpty()) {
+                    switch (j) {
+                        case 0:
+                            segunda += (segunda.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        case 1:
+                            terca += (terca.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        case 2:
+                            quarta += (quarta.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        case 3:
+                            quinta += (quinta.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        case 4:
+                            sexta += (sexta.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        case 5:
+                            sabado += (sabado.isEmpty() ? "" : ",") + valorCelula.toString();
+                            break;
+                        default:
+                            // Out of range
+                            break;
+                    }
+                }
+            }
+        }
+        int existente = 0;
+        for (Turma turma : turmas) {
+            if (nome.equals(turma.getNome())) {
+                turmaSelecionada = turma;
+                existente = 1;
+            }
+        }
+        if (existente == 1) {
+            int id = gerInter.getInstance().getGerDom().alterarTurma(turmaSelecionada, aula, nome, segunda, terca, quarta, quinta, sexta, sabado);
+            JOptionPane.showMessageDialog(this, "Turma com o id: " + id + " alterada com sucesso!");
+            jTextFieldNomeTurma.setText("");
+            jComboBoxAula.setSelectedItem(ABORT);
+            horTable.limparValoresDasCelulas();
+
+        } else {
+            int id = gerInter.getInstance().getGerDom().inserirTurma(aula, nome, segunda, terca, quarta, quinta, sexta, sabado);
+            JOptionPane.showMessageDialog(this, "Turma com o id: " + id + "  cadastrada com sucesso!");
+            jTextFieldNomeTurma.setText("");
+            jComboBoxAula.setSelectedItem(ABORT);
+            horTable.limparValoresDasCelulas();
+        }
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jComboBoxAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAulaActionPerformed
         Aulas aula = new Aulas();
@@ -475,12 +523,6 @@ public class DialogTurma extends javax.swing.JDialog {
 
 
     private void jComboBoxAulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAulaMouseClicked
-        List<Aulas> lista = retornaListaAula();
-        for (Aulas aula : lista) {
-            jComboBoxAula.addItem(aula.getTipo()); // Adiciona apenas o nome da aula
-        }
-        aulas = (Aulas) jComboBoxAula.getSelectedItem();
-
 
     }//GEN-LAST:event_jComboBoxAulaMouseClicked
 
@@ -540,6 +582,83 @@ public class DialogTurma extends javax.swing.JDialog {
         gerInter.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        gerInter.getInstance().carregarCombo(Aulas.class, jComboBoxAula);
+
+    }//GEN-LAST:event_formComponentShown
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        String turmaNome = jTextFieldNomeTurma.getText();
+        Turma turma = gerInter.getGerDom().pesquisarTurma(turmaNome);
+
+        try {
+            if (JOptionPane.showConfirmDialog(this, "Deseja excluir a turma " + turma.getNome() + "?", "Mensagem", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                gerInter.getGerDom().excluir(turma);
+                jTextFieldNomeTurma.setText("");
+                jComboBoxAula.setSelectedItem(ABORT);
+                horTable.limparValoresDasCelulas();
+                horTable.fireTableDataChanged(); // Notificar a tabela sobre a mudança nos dados
+                JOptionPane.showMessageDialog(this, "Turma excluida com sucesso!");
+
+            }
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO excluir", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+// Método para preencher a tabela com um objeto Horario específico
+    private void preencherTabelaComHorario(Horario horario) {
+        String segunda = horario.getSegunda();
+        String terca = horario.getTerca();
+        String quarta = horario.getQuarta();
+        String quinta = horario.getQuinta();
+        String sexta = horario.getSexta();
+        String sabado = horario.getSabado();
+
+        preencherTabela(segunda, 0); // Preencher segunda-feira na coluna 0
+        preencherTabela(terca, 1); // Preencher terça-feira na coluna 1
+        preencherTabela(quarta, 2); // Preencher quarta-feira na coluna 2
+        preencherTabela(quinta, 3); // Preencher quinta-feira na coluna 3
+        preencherTabela(sexta, 4); // Preencher sexta-feira na coluna 4
+        preencherTabela(sabado, 5); // Preencher sábado na coluna 5
+    }
+
+    private void preencherTabela(String horarios, int coluna) {
+        if (horarios != null && !horarios.isEmpty()) {
+            String[] horariosSeparados = horarios.split(","); // Separar os horários pela vírgula
+
+            // Preencher a tabela com os horários separados
+            for (int i = 0; i < horariosSeparados.length; i++) {
+                String horarioAtual = horariosSeparados[i].trim();
+                if (!horarioAtual.isEmpty()) {
+                    horTable.setValueAt(horarioAtual, i, coluna);
+                } else {
+                    horTable.setValueAt("N/A", i, coluna); // Ou utilize outro indicador de valor vazio
+                }
+            }
+        } else {
+            // Caso horarios seja nulo ou vazio, preencha a tabela com algum valor padrão
+            for (int i = 0; i < horTable.getRowCount(); i++) {
+                horTable.setValueAt("N/A", i, coluna); // Ou utilize outro indicador de valor vazio
+            }
+
+        }
+    }
+
+    public void preencherCampos(Turma turma) {
+        String nomeTurma = turma.getNome();
+        Aulas aula = turma.getAulas();
+        Horario horario = turma.getHorarios();
+
+        jTextFieldNomeTurma.setText(nomeTurma);
+        jComboBoxAula.setSelectedItem(aula);
+
+        preencherTabelaComHorario(horario);
+        horTable.fireTableDataChanged(); // Notificar a tabela sobre a mudança nos dados
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -591,8 +710,9 @@ public class DialogTurma extends javax.swing.JDialog {
     private javax.swing.JMenuItem itemAtividadeCadastros;
     private javax.swing.JMenuItem itemProfessorCadastros;
     private javax.swing.JMenuItem itemProfessorConsulta;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JComboBox<String> jComboBoxAula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
