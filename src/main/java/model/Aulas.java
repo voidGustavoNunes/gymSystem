@@ -27,7 +27,7 @@ public class Aulas implements Serializable{
     String tipo;
     
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(name="Professor_Aulas",
               joinColumns={@JoinColumn(name="idAula")},
               inverseJoinColumns={@JoinColumn(name="idProfessor")}
@@ -35,7 +35,7 @@ public class Aulas implements Serializable{
     List<Professor> professores = new ArrayList();
     
     
-    @OneToMany(mappedBy="aulas", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="aulas", fetch = FetchType.EAGER)
     List<Turma> turmas = new ArrayList();
     
     public Aulas(String tipo, List<Professor> professores) {

@@ -127,11 +127,6 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
                 jComboBoxProfessorItemStateChanged(evt);
             }
         });
-        jComboBoxProfessor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxProfessorActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores da Aula:"));
 
@@ -460,10 +455,6 @@ public class DialogAtribuirAulas extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
-
-    private void jComboBoxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProfessorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxProfessorActionPerformed
 
 
     private void jButtonAtribuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtribuirActionPerformed

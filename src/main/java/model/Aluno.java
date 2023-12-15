@@ -26,7 +26,7 @@ public class Aluno extends Pessoa implements Serializable{
 
 
     
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(name="Turma_Aluno",
               joinColumns={@JoinColumn(name="idAluno")},
               inverseJoinColumns={@JoinColumn(name="idTurma")}
@@ -131,7 +131,7 @@ public class Aluno extends Pessoa implements Serializable{
 
     @Override
     public String toString() {
-        return "Aluno{" + "profissao=" + profissao + '}';
+        return nome;
     }
 
     

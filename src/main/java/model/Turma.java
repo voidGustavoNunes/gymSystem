@@ -34,7 +34,7 @@ public class Turma implements Serializable{
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     int idTurma;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAula")
     private Aulas aulas;
     
@@ -46,7 +46,7 @@ public class Turma implements Serializable{
     @Column (name = "nomeTurma", nullable = false)
     String nome;
     
-    @ManyToMany (fetch = FetchType.LAZY)//TERMINAR
+    @ManyToMany (fetch = FetchType.EAGER)//TERMINAR
     @JoinTable(name="Turma_Aluno",
               joinColumns={@JoinColumn(name="idTurma")},
               inverseJoinColumns={@JoinColumn(name="idAluno")}
@@ -104,6 +104,11 @@ public class Turma implements Serializable{
 
     public void setHorarios(Horario horarios) {
         this.horarios = horarios;
+    }
+
+    @Override
+    public String toString() {
+        return "Turma{" + "nome=" + nome + '}';
     }
 
 

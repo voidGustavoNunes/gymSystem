@@ -9,9 +9,7 @@ import control.GerenciadorDominio;
 import control.HorarioTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import model.Aulas;
 import model.Horario;
 import model.Turma;
@@ -33,7 +31,6 @@ public class DialogTurma extends javax.swing.JDialog {
 
     GerInterfaceGrafica gerInter = new GerInterfaceGrafica();
     GerenciadorDominio gerDom = new GerenciadorDominio();
-    Aulas aulas = new Aulas();
     HorarioTableModel horTable = new HorarioTableModel();
 
     /**
@@ -118,11 +115,6 @@ public class DialogTurma extends javax.swing.JDialog {
         jComboBoxAula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxAulaMouseClicked(evt);
-            }
-        });
-        jComboBoxAula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAulaActionPerformed(evt);
             }
         });
 
@@ -507,20 +499,6 @@ public class DialogTurma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
-    private void jComboBoxAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAulaActionPerformed
-        Aulas aula = new Aulas();
-
-
-    }//GEN-LAST:event_jComboBoxAulaActionPerformed
-
-    public List<Aulas> retornaListaAula() {
-        Aulas aula = new Aulas();
-
-        List<Aulas> lista = gerInter.getInstance().getGerDom().pesquisarAulas();
-
-        return lista;
-    }
-
 
     private void jComboBoxAulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAulaMouseClicked
 
@@ -610,19 +588,24 @@ public class DialogTurma extends javax.swing.JDialog {
 
 // Método para preencher a tabela com um objeto Horario específico
     private void preencherTabelaComHorario(Horario horario) {
-        String segunda = horario.getSegunda();
-        String terca = horario.getTerca();
-        String quarta = horario.getQuarta();
-        String quinta = horario.getQuinta();
-        String sexta = horario.getSexta();
-        String sabado = horario.getSabado();
 
-        preencherTabela(segunda, 0); // Preencher segunda-feira na coluna 0
-        preencherTabela(terca, 1); // Preencher terça-feira na coluna 1
-        preencherTabela(quarta, 2); // Preencher quarta-feira na coluna 2
-        preencherTabela(quinta, 3); // Preencher quinta-feira na coluna 3
-        preencherTabela(sexta, 4); // Preencher sexta-feira na coluna 4
-        preencherTabela(sabado, 5); // Preencher sábado na coluna 5
+        String[] diasSemana = {
+            horario.getSegunda(),
+            horario.getTerca(),
+            horario.getQuarta(),
+            horario.getQuinta(),
+            horario.getSexta(),
+            horario.getSabado()
+        };
+
+        for (int i = 0; i < diasSemana.length; i++) {
+            if (diasSemana[i] == null && i == 0) {
+                preencherTabela("NULL", 5); // Se segunda for nulo, preenche sábado com "NULL"
+                break; // Encerra o loop após a condição ser satisfeita
+            } else {
+                preencherTabela(diasSemana[i], i); // Preenche a tabela normalmente
+            }
+        }
     }
 
     private void preencherTabela(String horarios, int coluna) {

@@ -7,7 +7,6 @@ package view;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Exercicio;
-import model.Turma;
 
 /**
  *
@@ -139,22 +137,11 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
 
         jLabel2.setText("Nome do Exercício:");
 
-        jTextFieldNomeExercício.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeExercícioActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Repetições por Série:");
 
         jLabel4.setText("Tipo: ");
 
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Braços", "Pernas", "Glúteos", "Panturrilha", "Antebraço", "Posterior", "Abdômem", "Peitoral", "Calcanhar", " " }));
-        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Séries:");
 
@@ -163,11 +150,6 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         jLabel6.setText("Idade Recomendada:");
 
         jComboBoxIdadeRecomendada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "De 14 a 18 anos", "De 18 a 40 anos", "De 40 a 60 anos", "60 +", "Todas", " " }));
-        jComboBoxIdadeRecomendada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxIdadeRecomendadaActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Função"));
 
@@ -601,18 +583,6 @@ public class DialogCriarExercicio extends javax.swing.JDialog {
         setaNull();
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTipoActionPerformed
-
-    private void jComboBoxIdadeRecomendadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIdadeRecomendadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxIdadeRecomendadaActionPerformed
-
-    private void jTextFieldNomeExercícioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeExercícioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeExercícioActionPerformed
 
     private void itemProfessorConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProfessorConsultaActionPerformed
         gerInterGrafica.janelaConsultaProfessor();

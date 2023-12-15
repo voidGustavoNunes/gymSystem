@@ -5,8 +5,6 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import java.util.List;
-import javax.swing.JOptionPane;
 import model.Aluno;
 import model.Aulas;
 import model.Exercicio;

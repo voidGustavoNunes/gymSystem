@@ -8,7 +8,6 @@ import control.GerInterfaceGrafica;
 import control.ProfessorAulaTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.Aluno;
 import model.Professor;
 import org.hibernate.HibernateException;
 

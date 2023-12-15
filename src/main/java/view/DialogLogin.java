@@ -5,6 +5,7 @@
 package view;
 
 import control.GerInterfaceGrafica;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,6 @@ public class DialogLogin extends javax.swing.JDialog {
         initComponents();
     }
     GerInterfaceGrafica gerInterGrafica = new GerInterfaceGrafica();
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,8 +122,14 @@ public class DialogLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_FieldPasswordActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        gerInterGrafica.fecharJanela(this);
-        gerInterGrafica.janelaFrmGerenciador();
+        if (!FieldLogin.getText().equals("voidGustavoNunes") || !new String(FieldPassword.getPassword()).equals("gustavo")) {
+            JOptionPane.showMessageDialog(this, "Login ou senha incorretos!");
+        } else {
+            gerInterGrafica.janelaFrmGerenciador();
+            gerInterGrafica.fecharJanela(this);
+        }
+
+
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

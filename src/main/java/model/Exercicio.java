@@ -126,6 +126,11 @@ public class Exercicio implements Serializable {
         this.repeticoesPorSerie = repeticoesPorSerie;
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Exercicio{" + "nome=" + nome + '}';
+    }
     
     
 }

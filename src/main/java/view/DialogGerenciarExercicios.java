@@ -5,10 +5,7 @@
 package view;
 
 import control.AlunoProfessorExercicioTableModel;
-import control.AlunoTableModel;
-import control.ExercicioTableModel;
 import control.GerInterfaceGrafica;
-import control.ProfessorAulaTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -50,7 +47,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableCronogramaExercicios = new javax.swing.JTable();
-        jButtonEditar = new javax.swing.JButton();
+        jButtonRemover = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -61,7 +58,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCriarExercício = new javax.swing.JButton();
-        jButtonPesquisar1 = new javax.swing.JButton();
+        jButtonAdicionar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConsultas = new javax.swing.JMenu();
         itemProfessorConsulta = new javax.swing.JMenuItem();
@@ -134,10 +131,10 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jButtonEditar.setText("Remover");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
+                jButtonRemoverActionPerformed(evt);
             }
         });
 
@@ -148,13 +145,29 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
         jLabel3.setText("Selecione o exercício:");
 
+        jComboBoxExercicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxExercicioActionPerformed(evt);
+            }
+        });
+
         jComboBoxProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jComboBoxProfessor.setEnabled(false);
+        jComboBoxProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProfessorActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Selecione o professor:");
 
         jComboBoxAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jComboBoxAluno.setEnabled(false);
+        jComboBoxAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAlunoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -169,7 +182,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxAluno, 0, 544, Short.MAX_VALUE)
+                            .addComponent(jComboBoxAluno, 0, 543, Short.MAX_VALUE)
                             .addComponent(jComboBoxExercicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -217,11 +230,11 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
             }
         });
 
-        jButtonPesquisar1.setText("Adicionar");
-        jButtonPesquisar1.setEnabled(false);
-        jButtonPesquisar1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.setEnabled(false);
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisar1ActionPerformed(evt);
+                jButtonAdicionarActionPerformed(evt);
             }
         });
 
@@ -408,7 +421,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(jButtonCriarExercício, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
@@ -423,7 +436,7 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonPesquisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -435,12 +448,12 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonPesquisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCriarExercício, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -452,27 +465,34 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
 
-        AlunoProfessorExercicioTableModel exercicioTable = new AlunoProfessorExercicioTableModel();
+        AlunoProfessorExercicioTableModel exercicioTable = (AlunoProfessorExercicioTableModel) jTableCronogramaExercicios.getModel();
+        
         AlunoProfessorExercicio alProfEx = new AlunoProfessorExercicio();
 
         List<AlunoProfessorExercicio> lista = new ArrayList();
 
         for (int i = 0; i < exercicioTable.getRowCount(); i++) {
-            lista.add(exercicioTable.get(i));
-            alProfEx.getChavePK().setAluno(lista.get(i).getChavePK().getAluno());
-            alProfEx.getChavePK().setProfessor(lista.get(i).getChavePK().getProfessor());
-            alProfEx.getChavePK().setExercicio(lista.get(i).getChavePK().getExercicio());
+            
+            alProfEx = exercicioTable.get(i);
+            
+            lista.add(alProfEx);
+            
+//            lista.add(exercicioTable.get(i));
+//            alProfEx.getChavePK().setAluno(lista.get(i).getChavePK().getAluno());
+//            alProfEx.getChavePK().setProfessor(lista.get(i).getChavePK().getProfessor());
+//            alProfEx.getChavePK().setExercicio(lista.get(i).getChavePK().getExercicio());
 
         }
 
         try {
             int id = gerInterGrafica.getGerDom().alterarExericio(alProfEx);
-            JOptionPane.showMessageDialog(this,  " Exercicio " + id + "alterado com sucesso!");
+            JOptionPane.showMessageDialog(this, " Exercicio " + id + "alterado com sucesso!");
 
         } catch (HibernateException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO ao inserir", JOptionPane.ERROR_MESSAGE);
 
         }
+
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -496,14 +516,20 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
-        gerInterGrafica.getInstance().carregarCombo(Exercicio.class, jComboBoxExercicio);
-        gerInterGrafica.getInstance().carregarCombo(Professor.class, jComboBoxProfessor);
-        gerInterGrafica.getInstance().carregarCombo(Aluno.class, jComboBoxAluno);
+        gerInterGrafica.getInstance().carregarCombo(Exercicio.class,
+                 jComboBoxExercicio);
+        gerInterGrafica
+                .getInstance().carregarCombo(Professor.class,
+                         jComboBoxProfessor);
+        gerInterGrafica
+                .getInstance().carregarCombo(Aluno.class,
+                         jComboBoxAluno);
 
 
     }//GEN-LAST:event_formComponentShown
 
-    private void jButtonPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisar1ActionPerformed
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+
         Professor professorSelecionado = null;
         Aluno alunoSelecionado = null;
         Exercicio exercicioSelecionado = null;
@@ -515,13 +541,12 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         exercicioSelecionado = (Exercicio) jComboBoxExercicio.getSelectedItem();
 
         AlunoProfessorExercicioTableModel model = (AlunoProfessorExercicioTableModel) jTableCronogramaExercicios.getModel();
-        int tamanho = model.getRowCount();
 
         AlunoProfessorExercicio a1 = new AlunoProfessorExercicio(professorSelecionado, alunoSelecionado, exercicioSelecionado);
         model.adicionar(a1);
 
 
-    }//GEN-LAST:event_jButtonPesquisar1ActionPerformed
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void itemProfessorConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemProfessorConsultaActionPerformed
         gerInterGrafica.janelaConsultaProfessor();
@@ -580,15 +605,32 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
         gerInterGrafica.fecharJanela(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTableCronogramaExercicios.getModel();
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        AlunoProfessorExercicioTableModel model = (AlunoProfessorExercicioTableModel) jTableCronogramaExercicios.getModel();
 
         int linha = jTableCronogramaExercicios.getSelectedRow();
 
-        model.removeRow(linha);
+        model.remover(linha);
 
 
-    }//GEN-LAST:event_jButtonEditarActionPerformed
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
+
+    private void jComboBoxExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxExercicioActionPerformed
+        jComboBoxAluno.setEnabled(true);
+
+
+    }//GEN-LAST:event_jComboBoxExercicioActionPerformed
+
+    private void jComboBoxAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAlunoActionPerformed
+
+        jComboBoxProfessor.setEnabled(true);
+    }//GEN-LAST:event_jComboBoxAlunoActionPerformed
+
+    private void jComboBoxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProfessorActionPerformed
+        jButtonAdicionar.setEnabled(true);
+
+
+    }//GEN-LAST:event_jComboBoxProfessorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -604,16 +646,24 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogGerenciarExercicios.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -644,11 +694,11 @@ public class DialogGerenciarExercicios extends javax.swing.JDialog {
     private javax.swing.JMenuItem itemAtividadeCadastros;
     private javax.swing.JMenuItem itemProfessorCadastros;
     private javax.swing.JMenuItem itemProfessorConsulta;
+    private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonCriarExercício;
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonPesquisar1;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JComboBox<String> jComboBoxAluno;
     private javax.swing.JComboBox<String> jComboBoxExercicio;
     private javax.swing.JComboBox<String> jComboBoxProfessor;

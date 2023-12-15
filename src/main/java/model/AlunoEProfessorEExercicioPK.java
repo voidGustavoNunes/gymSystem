@@ -17,16 +17,16 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class AlunoEProfessorEExercicioPK implements Serializable{
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAluno")
     private Aluno aluno;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProfessor")
     private Professor professor;
     
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idExercicio")
     private Exercicio exercicio;
 

@@ -65,6 +65,7 @@ public class GerInterfaceGrafica {
     private DialogAtribuirTurmas janAtrTurmas = null;
     private DialogEdicao janEdicao = null;
     private GerenciadorDominio gerDom;
+    private GerenciadorRelatorios gerRel;
 
     FuncoesUteis fun = new FuncoesUteis();
 
@@ -103,7 +104,14 @@ public class GerInterfaceGrafica {
 
     public GerInterfaceGrafica() {
         gerDom = new GerenciadorDominio();
+        gerRel = new GerenciadorRelatorios();
     }
+
+    public GerenciadorRelatorios getGerRel() {
+        return gerRel;
+    }
+    
+    
 
     public static GerInterfaceGrafica getInstance() {
         return unicaInstancia;

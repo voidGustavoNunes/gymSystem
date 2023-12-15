@@ -5,15 +5,12 @@
 package view;
 
 import control.GerInterfaceGrafica;
-import control.ProfessorAulaTableModel;
 import control.TurmaAlunoTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Aluno;
-import model.Aulas;
-import model.Professor;
 import model.Turma;
 import org.hibernate.HibernateException;
 
@@ -152,11 +149,6 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
                 jComboBoxTurmaItemStateChanged(evt);
             }
         });
-        jComboBoxTurma.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxTurmaMouseClicked(evt);
-            }
-        });
 
         jLabel2.setText("Turma:");
 
@@ -186,11 +178,6 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         jComboBoxAlunos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxAlunosItemStateChanged(evt);
-            }
-        });
-        jComboBoxAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxAlunosMouseClicked(evt);
             }
         });
 
@@ -478,16 +465,6 @@ public class DialogAtribuirTurmas extends javax.swing.JDialog {
         turma.limparValoresDasCelulas();
         gerInter.fecharJanela(this);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jComboBoxTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTurmaMouseClicked
-
-
-    }//GEN-LAST:event_jComboBoxTurmaMouseClicked
-
-    private void jComboBoxAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAlunosMouseClicked
-
-
-    }//GEN-LAST:event_jComboBoxAlunosMouseClicked
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
 

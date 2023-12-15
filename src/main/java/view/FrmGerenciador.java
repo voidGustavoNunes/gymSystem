@@ -5,6 +5,7 @@
 package view;
 
 import control.GerInterfaceGrafica;
+import java.util.List;
 
 /**
  *
@@ -55,7 +56,7 @@ public class FrmGerenciador extends javax.swing.JFrame {
         jMenuItemEdicao = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemGerRelAluno = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         Ajuda = new javax.swing.JMenuItem();
@@ -325,11 +326,16 @@ public class FrmGerenciador extends javax.swing.JFrame {
         jMenu1.setMnemonic('g');
         jMenu1.setText("Gerar Relatórios");
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/excercise.png"))); // NOI18N
-        jMenuItem3.setMnemonic('l');
-        jMenuItem3.setText("Alunos");
-        jMenu1.add(jMenuItem3);
+        jMenuItemGerRelAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemGerRelAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/excercise.png"))); // NOI18N
+        jMenuItemGerRelAluno.setMnemonic('l');
+        jMenuItemGerRelAluno.setText("Alunos");
+        jMenuItemGerRelAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGerRelAlunoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemGerRelAluno);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons16px/gym (2).png"))); // NOI18N
@@ -502,6 +508,14 @@ public class FrmGerenciador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItemEdicaoActionPerformed
 
+    private void jMenuItemGerRelAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerRelAlunoActionPerformed
+        List lista = gerInterGrafica.getInstance().getGerDom().pesquisarAluno();
+        
+        gerInterGrafica.getGerRel().relComLista(lista, "relAlunos.jasper");
+        
+        
+    }//GEN-LAST:event_jMenuItemGerRelAlunoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -560,12 +574,12 @@ public class FrmGerenciador extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemEdicao;
+    private javax.swing.JMenuItem jMenuItemGerRelAluno;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu.Separator jSeparator1;

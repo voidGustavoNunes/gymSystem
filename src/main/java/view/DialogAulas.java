@@ -7,14 +7,8 @@ package view;
 import control.GerInterfaceGrafica;
 import control.GerenciadorDominio;
 import control.ProfessorAulaTableModel;
-import dao.ProfessorDao;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import model.Aulas;
-import model.Professor;
 import org.hibernate.HibernateException;
 
 /**
@@ -100,12 +94,6 @@ public class DialogAulas extends javax.swing.JDialog {
         );
 
         jLabel2.setText("Nome da aula:");
-
-        jTextFieldNomeAula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeAulaActionPerformed(evt);
-            }
-        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -378,10 +366,6 @@ public class DialogAulas extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
-    private void jTextFieldNomeAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeAulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeAulaActionPerformed
 
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
